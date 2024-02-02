@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="panePrincipal" fx:id="anchorSFP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="839.0" prefWidth="1178.0" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.securityFactorPane">
+   <children>
+      <Pane id="drawArea" layoutX="563.0" layoutY="54.0" prefHeight="322.0" prefWidth="543.0" />
+      <Label layoutX="73.0" layoutY="13.0" text="Calcular factor de seguridad para:">
+         <font>
+            <Font size="18.0" />
+         </font>
+      </Label>
+      <Separator layoutX="73.0" layoutY="40.0" prefHeight="3.0" prefWidth="267.0" />
+      <GridPane layoutX="59.0" layoutY="54.0" prefHeight="369.0" prefWidth="543.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Label text="Ecuación">
+              
+            </Label>
+            <Label text="Tiempo:" GridPane.rowIndex="1" />
+            <ComboBox fx:id="formulaBox" prefHeight="29.0" prefWidth="168.0" promptText="Seleccionar" GridPane.columnIndex="1" />
+            <Spinner fx:id="timeSpinner" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+            <Spinner fx:id="highSpinner" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+            <Label text="Altura del terraplen:" GridPane.rowIndex="2" />
+            <Label text="Velocidad de desembalse:" GridPane.rowIndex="3" />
+            <Label text="Peso específico húmedo del suelo:" GridPane.rowIndex="4" />
+            <Label text="Cohesión:" GridPane.rowIndex="5" />
+            <Label text="Ángulo de fricción interna:" GridPane.rowIndex="6" />
+            <Label text="Permeabilidad saturada:" GridPane.rowIndex="7" />
+            <Label text="Contenido volumétrico de agua:" GridPane.rowIndex="8" />
+            <Label text="Índice de compresibilidad volumétrica:" GridPane.rowIndex="9" />
+            <Label text="Ancho de la corona:" GridPane.rowIndex="10" />
+            <Spinner fx:id="speedSpinner" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            <Spinner fx:id="poundSpinner" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            <Spinner fx:id="cohesionSpinner" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+            <Spinner fx:id="angleSpinner" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+            <Spinner fx:id="permeabilitySpinner" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+            <Spinner fx:id="volumeSpinner" GridPane.columnIndex="1" GridPane.rowIndex="8" />
+            <Spinner fx:id="compressibilitySpinner" GridPane.columnIndex="1" GridPane.rowIndex="9" />
+            <Spinner fx:id="crownSpinner" GridPane.columnIndex="1" GridPane.rowIndex="10" />
+         </children>
+      </GridPane>
+      <Button layoutX="1029.0" layoutY="397.0" mnemonicParsing="false" text="Calcular" />
+      <Button layoutX="932.0" layoutY="397.0" mnemonicParsing="false" text="Guardar" />
+      <ComboBox fx:id="registreSpinner" layoutX="829.0" layoutY="476.0" prefHeight="29.0" prefWidth="273.0" promptText="Seleccionar" />
+      <Separator layoutX="34.0" layoutY="445.0" prefHeight="3.0" prefWidth="1073.0" />
+      <ComboBox fx:id="phenomenonBox" layoutX="348.0" layoutY="15.0" prefHeight="28.0" prefWidth="144.0" promptText="Seleccionar" />
+      <Label layoutX="746.0" layoutY="481.0" text="Registros:" />
+      <LineChart fx:id="sFchart" layoutX="33.0" layoutY="466.0" prefHeight="303.0" prefWidth="677.0">
+        <xAxis>
+          <CategoryAxis side="BOTTOM" />
+        </xAxis>
+        <yAxis>
+          <NumberAxis side="LEFT" />
+        </yAxis>
+      </LineChart>
+      <TableView layoutX="746.0" layoutY="513.0" prefHeight="231.0" prefWidth="356.0" />
+      <Label layoutX="768.0" layoutY="31.0" text="Representación de la presa." />
+      <Label layoutX="570.0" layoutY="397.0" text="Resultado" />
+   </children>
+</AnchorPane>

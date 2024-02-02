@@ -1,0 +1,91 @@
+#button-bar {
+  /* -fx-background-color: rgb(171, 204, 171); */
+  -fx-arc-width: auto;
+  -fx-fill-height: auto;
+}
+
+#options-bar {
+  -fx-background-color: rgba(129, 204, 129, 0.3);
+}
+
+.buttonsBar {
+  -fx-background-color: rgb(142, 187, 142);
+  -fx-text-fill: white;
+}
+
+.buttonsBarExit {
+  -fx-background-color: rgb(142, 187, 142);
+  -fx-text-fill: white;
+}
+
+.buttonsBarExit:hover {
+  -fx-background-color: rgb(201, 104, 104);
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0, 0, 4);
+  -fx-text-fill: white;
+}
+
+.buttonsBar:hover {
+  -fx-background-color: rgb(238, 234, 223);
+  -fx-fill: black;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0, 0, 4);
+}
+
+.buttonsBarSelected {
+  -fx-background-color: rgb(238, 234, 223);
+  -fx-fill: black;
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.5), 10, 0, 0, 4);
+}
+
+#panePrincipal {
+  -fx-background-color: rgb(238, 234, 223);
+  -fx-font-family: Tahoma;
+  -fx-font-size: 14;
+}
+
+#drawArea {
+  -fx-background-color: rgb(160, 160, 160, 0.5);
+  -fx-background-radius: 15px;
+}
+
+#buttonSFP {
+  -fx-background-color: rgb(142, 187, 142);
+  -fx-background-radius: 20, 20, 20, 20;
+}
+
+.stackPane {
+  -fx-background-image: url(../images/logoGray.png);
+  -fx-background-repeat: no-repeat;
+  -fx-background-size: 490px 490px;
+  -fx-background-position: center;
+}
+
+.logo {
+  -fx-background-image: url(../images/logo.png);
+  -fx-background-repeat: no-repeat;
+  -fx-background-size: 190px 190px;
+  -fx-background-position: center;
+}
+
+#contentArea {
+  -fx-background-color: rgb(238, 234, 223);
+}
+
+.helpText {
+  -fx-font-family: Tahoma;
+  -fx-font-size: 18;
+}
+
+#loginPane {
+  -fx-background-color: rgb(238, 234, 223);
+  -fx-background-radius: 20, 20, 20, 20;
+  -fx-effect: dropshadow(
+    gaussian,
+    rgba(0, 0, 0, 0.5),
+    99999999999999999999999999,
+    0,
+    0,
+    8
+  );
+  -fx-font-family: Tahoma;
+  -fx-font-size: 14;
+}
