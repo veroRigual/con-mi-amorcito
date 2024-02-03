@@ -1,18 +1,33 @@
 package gui;
 
+import java.beans.EventHandler;
+import java.util.ArrayList;
+
+import javax.swing.Action;
+
+import dto.ValueDTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
-import javafx.scene.layout.AnchorPane;
-import util.Formula;
-import util.Phenomenon;;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TablePosition;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.util.converter.DoubleStringConverter;
+import logic.DamSystem;
+import logic.Variable;
+import util.EditableCell;
+import util.MyStringConverter;
+import util.Phenomenon;
 
 public class securityFactorPane {
-    securityFactorPane anchorSFP;
+    static securityFactorPane anchorSFP;
 
     @FXML Spinner timeSpinner;
     @FXML Spinner highSpinner;
@@ -27,11 +42,33 @@ public class securityFactorPane {
     @FXML ComboBox formulaBox;
     @FXML ComboBox phenomenonBox;
 
+    @FXML TableColumn variableColumn;
+    @FXML TableColumn valueColumn;
+    @FXML TableView<ValueDTO> valueTable;
+
+    @FXML Label infoLabel;
+    @FXML Label infoLabel1;
+    @FXML Label statusLabel;
+
+    private ObservableList<ValueDTO> list;
+
+
+    public ObservableList<ValueDTO> getList() {
+        return list;
+    }
 
     public void initialize(){
         anchorSFP = this;
         // loadSpinners();
         loadComboBoxes();
+    }
+
+    public static securityFactorPane getInstance(){
+        return anchorSFP;
+    }
+
+    public TableView<ValueDTO> getTable(){
+        return valueTable;
     }
 
     public void loadSpinners(){
@@ -102,12 +139,70 @@ public class securityFactorPane {
     }
 
     public void loadFormulaBox(){
-        ObservableList<Formula> list = FXCollections.observableArrayList(Formula.values());
+        ObservableList<logic.Formula> list = FXCollections.observableArrayList(DamSystem.getInstance().getFormList());
         formulaBox.setItems(list);
     }
 
-    public void loadPhenomenonBox(){
+    public <T> void loadPhenomenonBox(){
         ObservableList<Phenomenon> list = FXCollections.observableArrayList(Phenomenon.values());
         phenomenonBox.setItems(list);
+    }
+
+    public <T> void loadValueTable(){
+        logic.Formula aux = (logic.Formula)formulaBox.getSelectionModel().getSelectedItem();
+        ArrayList<Variable> vList = aux.getVariables();
+        ArrayList<ValueDTO> vaList = new ArrayList<ValueDTO>();
+        for(Variable l: vList){
+            vaList.add(new ValueDTO(0, l.getNomenclature(), l.getName()));
+        }
+        list = FXCollections.observableArrayList(vaList);
+        variableColumn.setCellValueFactory(new PropertyValueFactory<ValueDTO, String>("nomenclature"));
+        valueColumn.setCellValueFactory(new PropertyValueFactory<ValueDTO, T>("value"));
+        valueColumn.setEditable(true);
+        //valueColumn.setCellFactory(tc -> new EditableTableCell<ValueDTO, T>());
+        valueColumn.setCellFactory(param -> new EditableCell<>(new DoubleStringConverter()));
+        
+
+        update();
+    }
+
+    public void update(){
+        valueTable.setItems(list);
+    }
+
+    public void updateTable(TableColumn.CellEditEvent<ValueDTO, Double> event){
+        TablePosition<ValueDTO, Double> pos = event.getTablePosition();
+        Double newValue = event.getNewValue();
+        int row = pos.getRow();
+        ValueDTO rowData = event.getTableView().getItems().get(row);
+        rowData.setValue(newValue);
+    }
+
+    public void calculateButton(){
+        String nameFormula = formulaBox.getSelectionModel().getSelectedItem().toString();
+        ArrayList<ValueDTO> list = new ArrayList<ValueDTO>(valueTable.getItems());
+        double var = DamSystem.getInstance().securityFactor(nameFormula, list);
+        infoLabel.setText("Factor de seguridad: "+var);
+        if(var < 1){
+            infoLabel1.setText("Talud en posible fallo");
+            infoLabel1.getStyleClass().clear();
+            infoLabel1.getStyleClass().add("case 1");
+        }else if(var >= 1 && var < 1.5){
+            infoLabel1.setText("Talud estable");
+            infoLabel1.getStyleClass().clear();
+            infoLabel1.getStyleClass().add("case 2");
+        }
+        else if(var >= 1.5 && var <= 2){
+            infoLabel1.setText("Talud estable y seguro");
+            infoLabel1.getStyleClass().clear();
+            infoLabel1.getStyleClass().add("case 3");
+        }else if(var >2){
+            infoLabel1.setText("Talud estable y seguro pero antieconómico");
+            infoLabel1.getStyleClass().clear();
+            infoLabel1.getStyleClass().add("case 4");
+        }
+        infoLabel.setVisible(true);
+        infoLabel1.setVisible(true);
+        statusLabel.setVisible(true);
     }
 }

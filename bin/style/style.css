@@ -43,7 +43,9 @@
 }
 
 #drawArea {
-  -fx-background-color: rgb(160, 160, 160, 0.5);
+  /*rgb(160, 160, 160, 0.5);*/
+  -fx-background-color: rgba(129, 204, 129, 0.3);
+  -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 4);
   -fx-background-radius: 15px;
 }
 
@@ -88,4 +90,24 @@
   );
   -fx-font-family: Tahoma;
   -fx-font-size: 14;
+}
+
+.valueTable .cell {
+  -fx-alignment: center;
+}
+
+#statusLabel .case1 {
+  -fx-text-fill: rgb(211, 3, 3);
+}
+
+#statusLabel .case2 {
+  -fx-text-fill: rgb(4, 212, 14);
+}
+
+#statusLabel .case3 {
+  -fx-text-fill: rgb(4, 212, 14);
+}
+
+#statusLabel .case4 {
+  -fx-text-fill: rgb(221, 224, 3);
 }

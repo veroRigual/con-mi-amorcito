@@ -1,8 +1,12 @@
+import java.util.ArrayList;
+
+import dto.ValueDTO;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import util.Init;
 
 public class App extends Application{
     public static void main(String[] args) throws Exception {
@@ -17,5 +21,6 @@ public class App extends Application{
         stage.setFullScreen(true);
         stage.setScene(scene);
         stage.show();
+        Init.init();
     }
 }
