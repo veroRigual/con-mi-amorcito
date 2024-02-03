@@ -58,7 +58,7 @@ public class Menu {
    public void showHelpPane(){
     Parent fxml;
     try {
-        fxml = FXMLLoader.load(getClass().getResource("helpPane.fxml"));
+        fxml = FXMLLoader.load(getClass().getResource("AboutPane.fxml"));
         contentArea.getChildren().removeAll();
         contentArea.getChildren().setAll(fxml);
     } catch (IOException e) {

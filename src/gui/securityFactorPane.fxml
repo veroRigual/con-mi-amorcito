@@ -15,20 +15,23 @@
 
 <AnchorPane id="panePrincipal" fx:id="anchorSFP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="839.0" prefWidth="1178.0" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.securityFactorPane">
    <children>
-      <Pane id="drawArea" layoutX="553.0" layoutY="58.0" prefHeight="322.0" prefWidth="543.0" />
+      <Pane id="drawArea" layoutX="553.0" layoutY="58.0" prefHeight="310.0" prefWidth="543.0">
+         <children>
+            <Label layoutX="190.0" layoutY="142.0" text="Representación de la presa." />
+         </children></Pane>
       <Label layoutX="73.0" layoutY="13.0" text="Calcular factor de seguridad para:">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
       <Separator layoutX="73.0" layoutY="40.0" prefHeight="3.0" prefWidth="267.0" />
-      <Button layoutX="1029.0" layoutY="397.0" mnemonicParsing="false" text="Calcular" />
-      <Button layoutX="932.0" layoutY="397.0" mnemonicParsing="false" text="Guardar" />
-      <ComboBox fx:id="registreSpinner" layoutX="829.0" layoutY="476.0" prefHeight="29.0" prefWidth="273.0" promptText="Seleccionar" />
-      <Separator layoutX="34.0" layoutY="445.0" prefHeight="3.0" prefWidth="1073.0" />
-      <ComboBox fx:id="phenomenonBox" layoutX="348.0" layoutY="15.0" prefHeight="28.0" prefWidth="144.0" promptText="Seleccionar" />
-      <Label layoutX="746.0" layoutY="481.0" text="Registros:" />
-      <LineChart fx:id="sFchart" layoutX="33.0" layoutY="466.0" prefHeight="303.0" prefWidth="677.0">
+      <Button layoutX="1029.0" layoutY="387.0" mnemonicParsing="false" onAction="#calculateButton" text="Calcular" />
+      <Button layoutX="932.0" layoutY="387.0" mnemonicParsing="false" text="Guardar" />
+      <ComboBox fx:id="registreSpinner" layoutX="830.0" layoutY="467.0" prefHeight="29.0" prefWidth="273.0" promptText="Seleccionar" />
+      <Separator layoutX="34.0" layoutY="442.0" prefHeight="3.0" prefWidth="1073.0" />
+      <ComboBox fx:id="phenomenonBox" layoutX="348.0" layoutY="15.0" prefHeight="28.0" prefWidth="133.0" promptText="Seleccionar" />
+      <Label layoutX="746.0" layoutY="473.0" text="Registros:" />
+      <LineChart fx:id="sFchart" layoutX="33.0" layoutY="461.0" prefHeight="303.0" prefWidth="677.0">
         <xAxis>
           <CategoryAxis side="BOTTOM" />
         </xAxis>
@@ -36,18 +39,19 @@
           <NumberAxis side="LEFT" />
         </yAxis>
       </LineChart>
-      <TableView layoutX="746.0" layoutY="513.0" prefHeight="231.0" prefWidth="356.0" />
-      <Label layoutX="768.0" layoutY="31.0" text="Representación de la presa." />
-      <Label layoutX="570.0" layoutY="397.0" text="Resultado" />
-      <ComboBox fx:id="formulaBox" layoutX="142.0" layoutY="58.0" prefHeight="29.0" prefWidth="168.0" promptText="Seleccionar" />
+      <TableView layoutX="746.0" layoutY="506.0" prefHeight="231.0" prefWidth="356.0" />
+      <ComboBox fx:id="formulaBox" layoutX="142.0" layoutY="58.0" onAction="#loadValueTable" prefHeight="29.0" prefWidth="332.0" promptText="Seleccionar" />
       <Label layoutX="73.0" layoutY="63.0" text="Ecuación">
               
             </Label>
-      <TableView layoutX="73.0" layoutY="103.0" prefHeight="322.0" prefWidth="404.0">
+      <TableView fx:id="valueTable" editable="true" layoutX="73.0" layoutY="103.0" prefHeight="322.0" prefWidth="402.0" styleClass="valueTable">
         <columns>
-          <TableColumn prefWidth="207.0" text="Variables" />
-          <TableColumn prefWidth="196.0" text="Valores" />
+          <TableColumn fx:id="variableColumn" editable="false" prefWidth="200.0" sortable="false" text="Variables" />
+          <TableColumn fx:id="valueColumn" onEditCommit="#updateTable" prefWidth="200.0" sortable="false" text="Valores" />
         </columns>
       </TableView>
+      <Label id="resultLabel" fx:id="infoLabel" layoutX="553.0" layoutY="383.0" text="Factor de Seguridad:" visible="false" />
+      <Label id="statusLabel" fx:id="statusLabel" layoutX="553.0" layoutY="411.0" prefHeight="18.0" prefWidth="55.0" styleClass="case1" text="Estado:" visible="false" />
+      <Label id="statusLabel" fx:id="infoLabel1" layoutX="608.0" layoutY="411.0" text="resultado del estado" visible="false" />
    </children>
 </AnchorPane>

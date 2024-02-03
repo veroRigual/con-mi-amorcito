@@ -2,7 +2,11 @@ package logic;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+
+import org.lsmp.djep.djep.DJep;
 import org.nfunk.jep.JEP;
+
+import dto.ValueDTO;
 
 public class Formula {
 
@@ -11,11 +15,18 @@ public class Formula {
 	private JEP parsed;
 	private ArrayList<Variable> variables = new ArrayList<Variable>();
     
-    public Formula(String name, String function, JEP parsed, ArrayList<Variable> variables) {
+    public Formula(String name, String function, ArrayList<Variable> variables) {
         this.name = name;
         this.function = function;
-        this.parsed = parsed;
         this.variables = variables;
+        parsed = new JEP();
+        parsed.addStandardFunctions();
+        parsed.addStandardConstants();
+        parsed.addComplex();
+        parsed.setAllowUndeclared(true);
+        parsed.setAllowAssignment(true);
+        parsed.setImplicitMul(true);
+
     }
     public String getName() {
         return name;
@@ -40,6 +51,22 @@ public class Formula {
     }
     public void setVariables(ArrayList<Variable> variables) {
         this.variables = variables;
+    }
+
+    public double evaluate(ArrayList<ValueDTO> list){
+        double value;
+        String auxFuntion = function;
+        for(ValueDTO v: list){
+           auxFuntion = auxFuntion.replace(v.getNomenclature(), String.valueOf(v.getValue()));
+        }
+        auxFuntion = auxFuntion.replace(",", ".");
+        parsed.parseExpression(auxFuntion);
+        value = parsed.getValue();
+        return value;
+    }
+
+    public String toString(){
+        return name;
     }
 
 }

@@ -1,11 +1,16 @@
 package logic;
 
 public class Variable<T> {
+
     private String name;
     private String nomenclature;
     private String description;
-    private T value;
 
+    public Variable(String name, String nomenclature, String description) {
+        this.name = name;
+        this.nomenclature = nomenclature;
+        this.description = description;
+    }
     public String getName() {
         return name;
     }
@@ -24,11 +29,4 @@ public class Variable<T> {
     public void setDescription(String description) {
         this.description = description;
     }
-    public T getValue() {
-        return value;
-    }
-    public void setValue(T value) {
-        this.value = value;
-    }
-
 }

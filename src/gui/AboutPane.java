@@ -2,8 +2,8 @@ package gui;
 
 import javafx.scene.layout.AnchorPane;
 
-public class helpPane {
-    helpPane helpSFP;
+public class AboutPane {
+    AboutPane helpSFP;
 
     public void initialize(){
         helpSFP = this;
