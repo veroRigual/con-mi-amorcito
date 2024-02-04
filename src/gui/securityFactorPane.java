@@ -25,6 +25,7 @@ import logic.Variable;
 import util.EditableCell;
 import util.MyStringConverter;
 import util.Phenomenon;
+import util.Util;
 
 public class securityFactorPane {
     static securityFactorPane anchorSFP;
@@ -156,7 +157,7 @@ public class securityFactorPane {
             vaList.add(new ValueDTO(0, l.getNomenclature(), l.getName()));
         }
         list = FXCollections.observableArrayList(vaList);
-        variableColumn.setCellValueFactory(new PropertyValueFactory<ValueDTO, String>("nomenclature"));
+        variableColumn.setCellValueFactory(new PropertyValueFactory<ValueDTO, String>("name"));
         valueColumn.setCellValueFactory(new PropertyValueFactory<ValueDTO, T>("value"));
         valueColumn.setEditable(true);
         //valueColumn.setCellFactory(tc -> new EditableTableCell<ValueDTO, T>());

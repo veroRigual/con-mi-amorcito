@@ -46,7 +46,7 @@
             </Label>
       <TableView fx:id="valueTable" editable="true" layoutX="73.0" layoutY="103.0" prefHeight="322.0" prefWidth="402.0" styleClass="valueTable">
         <columns>
-          <TableColumn fx:id="variableColumn" editable="false" prefWidth="200.0" sortable="false" text="Variables" />
+          <TableColumn fx:id="variableColumn" editable="false" prefWidth="200.0" sortable="false" text="Datos" />
           <TableColumn fx:id="valueColumn" onEditCommit="#updateTable" prefWidth="200.0" sortable="false" text="Valores" />
         </columns>
       </TableView>
