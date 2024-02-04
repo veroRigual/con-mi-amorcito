@@ -31,6 +31,10 @@ public class DamSystem {
         formList.add(formula);
     }
 
+    public void deleteFormula(int index){
+        formList.remove(index);
+    }
+
     private Formula findForm(String name){
         Formula aux =  null;
         boolean stop = true;

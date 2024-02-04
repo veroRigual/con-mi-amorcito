@@ -46,12 +46,13 @@
             </Label>
       <TableView fx:id="valueTable" editable="true" layoutX="73.0" layoutY="103.0" prefHeight="322.0" prefWidth="402.0" styleClass="valueTable">
         <columns>
-          <TableColumn fx:id="variableColumn" editable="false" prefWidth="200.0" sortable="false" text="Variables" />
-          <TableColumn fx:id="valueColumn" onEditCommit="#updateTable" prefWidth="200.0" sortable="false" text="Valores" />
+          <TableColumn fx:id="variableColumn" editable="false" prefWidth="200.0" sortable="false" text="Variable" />
+          <TableColumn fx:id="valueColumn" onEditCommit="#updateTable" prefWidth="200.0" sortable="false" text="Valor" />
         </columns>
       </TableView>
       <Label id="resultLabel" fx:id="infoLabel" layoutX="553.0" layoutY="383.0" text="Factor de Seguridad:" visible="false" />
       <Label id="statusLabel" fx:id="statusLabel" layoutX="553.0" layoutY="411.0" prefHeight="18.0" prefWidth="55.0" styleClass="case1" text="Estado:" visible="false" />
       <Label id="statusLabel" fx:id="infoLabel1" layoutX="608.0" layoutY="411.0" text="resultado del estado" visible="false" />
+      <Button layoutX="1024.0" layoutY="13.0" mnemonicParsing="false" onAction="#showLogin" text="Gestionar" />
    </children>
 </AnchorPane>

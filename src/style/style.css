@@ -78,7 +78,22 @@
 }
 
 #loginPane {
-  -fx-background-color: rgb(238, 234, 223);
+  -fx-background-color: rgb(238, 234, 223, 0.8);
+  -fx-background-radius: 20, 20, 20, 20;
+  -fx-effect: dropshadow(
+    gaussian,
+    rgba(0, 0, 0, 0.5),
+    99999999999999999999999999,
+    0,
+    0,
+    8
+  );
+  -fx-font-family: Tahoma;
+  -fx-font-size: 14;
+}
+
+#managementPane {
+  -fx-background-color: rgb(238, 234, 223, 0.8);
   -fx-background-radius: 20, 20, 20, 20;
   -fx-effect: dropshadow(
     gaussian,

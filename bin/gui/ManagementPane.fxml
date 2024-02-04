@@ -1,17 +1,74 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Separator?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="panePrincipal" fx:id="anchorSFP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="878.0" prefWidth="1178.0" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ManagementPane">
+<AnchorPane id="managementPane" fx:id="anchorSFP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="729.0" prefWidth="838.0" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ManagementPane">
    <children>
-      <Label layoutX="73.0" layoutY="13.0" text="Gestionar aplicación">
+      <Label layoutX="325.0" layoutY="14.0" text="Gestionar ecuaciones">
          <font>
             <Font size="20.0" />
          </font>
       </Label>
-      <Separator layoutX="73.0" layoutY="40.0" prefHeight="0.0" prefWidth="179.0" />
+      <Separator layoutX="325.0" layoutY="43.0" prefHeight="3.0" prefWidth="188.0" />
+      <TableView fx:id="formulaTable" layoutX="63.0" layoutY="418.0" prefHeight="249.0" prefWidth="718.0">
+        <columns>
+          <TableColumn fx:id="nameColumn" prefWidth="341.0" text="Nombre" />
+          <TableColumn fx:id="expreColumn" maxWidth="513.0" minWidth="-1.0" prefWidth="375.0" text="Expresión" />
+        </columns>
+      </TableView>
+      <GridPane layoutX="433.0" layoutY="685.0" prefHeight="30.0" prefWidth="405.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+            <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button mnemonicParsing="false" onAction="#exitBtn" text="Salir" GridPane.columnIndex="3" />
+            <Button mnemonicParsing="false" onAction="#InsertBtn" text="Agregar" />
+            <Button mnemonicParsing="false" onAction="#ModifyBtn" text="Modificar" GridPane.columnIndex="1" />
+            <Button mnemonicParsing="false" onAction="#deleteBtn" text="Eliminar" GridPane.columnIndex="2" />
+         </children>
+      </GridPane>
+      <Label layoutX="62.0" layoutY="70.0" text="Nombre de la ecuación:" />
+      <Label layoutX="301.0" layoutY="70.0" text="Expresión:" />
+      <TextField fx:id="funtionNameText" layoutX="64.0" layoutY="98.0" prefHeight="28.0" prefWidth="158.0" />
+      <TextField fx:id="functionLabel" layoutX="302.0" layoutY="98.0" onKeyTyped="#updateVariableTable" prefHeight="28.0" prefWidth="475.0" />
+      <TextArea fx:id="descriptionText" layoutX="299.0" layoutY="183.0" onKeyTyped="#insertData" prefHeight="147.0" prefWidth="475.0" />
+      <TextField fx:id="variableNameText" layoutX="458.0" layoutY="145.0" onKeyTyped="#insertData" prefHeight="28.0" prefWidth="158.0" />
+      <Label layoutX="300.0" layoutY="150.0" text="nombre de la variable:" />
+      <Separator layoutX="66.0" layoutY="395.0" prefHeight="3.0" prefWidth="711.0" />
+      <GridPane layoutX="333.0" layoutY="350.0">
+        <columnConstraints>
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+        </columnConstraints>
+        <rowConstraints>
+          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+        </rowConstraints>
+         <children>
+            <Button mnemonicParsing="false" text="Cancelar" GridPane.columnIndex="1" />
+            <Button mnemonicParsing="false" onAction="#AceptBtn" text="Aceptar" />
+         </children>
+      </GridPane>
+      <TableView fx:id="variableTable" layoutX="62.0" layoutY="150.0" onMouseClicked="#selectVariable" prefHeight="184.0" prefWidth="200.0">
+        <columns>
+          <TableColumn fx:id="variableColumn" prefWidth="198.0" text="varible" />
+        </columns>
+      </TableView>
    </children>
 </AnchorPane>
