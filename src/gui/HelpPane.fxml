@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Separator?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+<?import javafx.scene.text.TextFlow?>
+
+<AnchorPane id="panePrincipal" fx:id="anchorSFP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="359.0" prefWidth="701.0" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.HelpPane">
+   <children>
+      <Label fx:id="nameLabel" layoutX="74.0" layoutY="14.0" text="nombre:">
+         <font>
+            <Font name="Tahoma" size="18.0" />
+         </font>
+      </Label>
+      <Separator layoutX="73.0" layoutY="38.0" prefHeight="0.0" prefWidth="85.0" />
+      <TextFlow cacheShape="false" layoutX="44.0" layoutY="47.0" lineSpacing="2.0" prefHeight="113.0" prefWidth="622.0" textAlignment="JUSTIFY">
+         <children>
+            <Text fx:id="descriptionLabel" strokeType="OUTSIDE" strokeWidth="0.0" text="descripcion" wrappingWidth="788.052734375">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+         </children>
+      </TextFlow>
+      <TextFlow fx:id="dataInfoLabel" layoutX="42.0" layoutY="200.0" lineSpacing="2.0" prefHeight="113.0" prefWidth="622.0" stylesheets="@../style/style.css" textAlignment="JUSTIFY">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="informacion de los datos" wrappingWidth="918.0009765625">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Text>
+         </children>
+      </TextFlow>
+      <Text layoutX="42.0" layoutY="182.0" strokeType="OUTSIDE" strokeWidth="0.0" text="datos válidos:" wrappingWidth="122.0009765625">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

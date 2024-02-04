@@ -1,6 +1,6 @@
 package logic;
 
-public class Variable<T> {
+public class Variable {
 
     private String name;
     private String nomenclature;
