@@ -10,6 +10,7 @@ import dto.ValueDTO;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -44,6 +45,9 @@ public class ManagementPane {
     @FXML TextField variableNameText;
     @FXML TextArea descriptionText;
 
+    @FXML Button aceptBtn;
+    @FXML Button cancelBtn;
+
     public void initialize(){
         helpSFP = this;
         loadTable();
@@ -75,7 +79,7 @@ public class ManagementPane {
     public void updateVariableTable(){
         ObservableList<Variable> list = FXCollections.observableList(funtionCheck(functionLabel.getText()));
         variableTable.setItems(list);
-        
+      //  checkFilds();
     }
 
     public LinkedList<Variable> funtionCheck(String funtion){
@@ -95,7 +99,6 @@ public class ManagementPane {
         ListIterator<Variable> it = variableTable.getItems().listIterator();
         while (it.hasNext() && value) {
             String aux = it.next().getNomenclature();
-           System.out.println(aux);
             if(aux.equals(character+""))
                 value = false;
         }
@@ -107,6 +110,7 @@ public class ManagementPane {
         int auxIndex = variableTable.getSelectionModel().getSelectedIndex();
         ((Variable)variableTable.getItems().get(auxIndex)).setDescription(descriptionText.getText());
         ((Variable)variableTable.getItems().get(auxIndex)).setName(variableNameText.getText());
+        checkFilds();
     }
 
     public void ModifyBtn(){
@@ -117,6 +121,25 @@ public class ManagementPane {
     public void InsertBtn(){
         if(!value)
             value = false;
+
+        funtionNameText.setDisable(false);
+        functionLabel.setDisable(false);
+        variableTable.setDisable(false);
+        cancelBtn.setDisable(false);
+    }
+
+    public void activateFields(){
+        variableNameText.setDisable(false);
+        descriptionText.setDisable(false);
+    }
+
+    public void checkFilds(){
+        if(!funtionNameText.getText().equals("") &&
+        !functionLabel.getText().equals("") && !variableNameText.getText().equals("")
+        && !descriptionText.getText().equals(""))
+            aceptBtn.setDisable(false);
+        else
+            aceptBtn.setDisable(true);
     }
 
     public void AceptBtn(){
@@ -124,9 +147,22 @@ public class ManagementPane {
             ArrayList<Variable> list = new ArrayList<Variable>(variableTable.getItems());
             DamSystem.getInstance().addFormula(funtionNameText.getText(), functionLabel.getText(), list);
             update();
-        }else{
+
+            funtionNameText.setText("");
+            functionLabel.setText("");
+            // variableNameText.setText("");
             
+        }else{
+
         }
+    }
+
+    public void cancelBtn(){
+        funtionNameText.setDisable(true);
+        functionLabel.setDisable(true);
+        variableNameText.setDisable(true);
+        variableTable.setDisable(true);
+        cancelBtn.setDisable(true);
     }
 
     public void deleteBtn(){
@@ -136,10 +172,12 @@ public class ManagementPane {
     }
 
     public void selectVariable(MouseEvent e){
+        activateFields();
         variableNameText.setText("");
         descriptionText.setText("");
         Variable aux = variableTable.getSelectionModel().getSelectedItem();
         descriptionText.setText(aux.getDescription());
         variableNameText.setText(aux.getName());
+        checkFilds();
     }
 }
