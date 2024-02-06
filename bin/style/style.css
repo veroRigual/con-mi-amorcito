@@ -47,6 +47,10 @@
   -fx-background-color: rgba(129, 204, 129, 0.3);
   -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 4);
   -fx-background-radius: 15px;
+  -fx-background-image: url(../images/modelo.png);
+  -fx-background-repeat: no-repeat;
+  -fx-background-size: 600px 290px;
+  -fx-background-position: center;
 }
 
 #buttonSFP {

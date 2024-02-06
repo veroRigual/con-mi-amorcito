@@ -27,6 +27,7 @@ public class Menu {
 
     public void initialize(){
         window = this;
+        //showSecurityFactorPane();
     }
 
     public static Menu getWindow(){

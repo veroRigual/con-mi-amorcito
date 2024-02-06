@@ -62,6 +62,8 @@ public class securityFactorPane {
     @FXML Label infoLabel;
     @FXML Label infoLabel1;
     @FXML Label statusLabel;
+    @FXML Label highValueLabel;
+    @FXML Label crownValueLabel;
 
     @FXML LineChart sFChart;
 
@@ -86,22 +88,22 @@ public class securityFactorPane {
     public Pane getAnchorSFP() {
         return anchorSFP;
     }
-    
+
     public TableView<ValueDTO> getTable(){
         return valueTable;
     }
 
-    public void loadSpinners(){
-        loadAngleSpinner();
-        loadCohesionSpinner();
-        loadCrownSpinner();
-        loadDayTimeSpinner();
-        loadHighSpinner();
-        loadPermeabilitySpinner();
-        loadPoundSpinner();
-        loadSpeedSpinner();
-        // loadVolumeSpinner();
-    }
+    // public void loadSpinners(){
+    //     loadAngleSpinner();
+    //     loadCohesionSpinner();
+    //     loadCrownSpinner();
+    //     loadDayTimeSpinner();
+    //     loadHighSpinner();
+    //     loadPermeabilitySpinner();
+    //     loadPoundSpinner();
+    //     loadSpeedSpinner();
+    //     // loadVolumeSpinner();
+    // }
 
     public void loadHighSpinner(){
         SpinnerValueFactory.IntegerSpinnerValueFactory highValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(15, 40, 1);
@@ -179,7 +181,7 @@ public class securityFactorPane {
         variableColumn.setCellValueFactory(new PropertyValueFactory<ValueDTO, String>("name"));
         valueColumn.setCellValueFactory(new PropertyValueFactory<ValueDTO, T>("value"));
         valueColumn.setEditable(true);
-        //valueColumn.setCellFactory(tc -> new EditableTableCell<ValueDTO, T>());
+        
         valueColumn.setCellFactory(param -> new EditableCell<>(new DoubleStringConverter()));
 
         update();
@@ -195,6 +197,7 @@ public class securityFactorPane {
         int row = pos.getRow();
         ValueDTO rowData = event.getTableView().getItems().get(row);
         rowData.setValue(newValue);
+        draw();
     }
 
     public void calculateButton(){
@@ -240,5 +243,13 @@ public class securityFactorPane {
     public void loadChart(){
         XYChart.Series<String,Double> series = new XYChart.Series<>();
 
+    }
+
+    public void draw(){
+        ValueDTO aux = valueTable.getSelectionModel().getSelectedItem();
+        if(aux.getName().equals("altura"))
+        highValueLabel.setText(String.valueOf(aux.getValue()));
+        if(aux.getName().equals("ancho de corona"))
+        crownValueLabel.setText(String.valueOf(aux.getValue()));
     }
 }
