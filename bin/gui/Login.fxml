@@ -9,10 +9,10 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane id="loginPane" fx:id="anchorLogin" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="354.0" prefWidth="413.0" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Login">
+<AnchorPane id="loginPane" fx:id="anchorLogin" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="373.0" prefWidth="413.0" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Login">
    <children>
-      <Label layoutX="10.0" layoutY="56.0" prefHeight="25.0" prefWidth="403.0" text="Para acceder a esta parte de la aplicacion necesita credenciales." />
-      <Label layoutX="101.0" layoutY="81.0" prefHeight="25.0" prefWidth="222.0" text="Por favor insertelas para continuar." />
+      <Label layoutX="10.0" layoutY="24.0" prefHeight="25.0" prefWidth="403.0" text="Para acceder a esta parte de la aplicacion necesita credenciales." />
+      <Label layoutX="101.0" layoutY="49.0" prefHeight="25.0" prefWidth="222.0" text="Por favor insertelas para continuar." />
       <GridPane layoutX="64.0" layoutY="130.0" prefHeight="95.0" prefWidth="286.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -29,18 +29,7 @@
             <PasswordField GridPane.columnIndex="1" GridPane.rowIndex="1" />
          </children>
       </GridPane>
-      <GridPane layoutX="123.0" layoutY="259.0">
-        <columnConstraints>
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-          <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-        </columnConstraints>
-        <rowConstraints>
-          <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-        </rowConstraints>
-         <children>
-            <Button mnemonicParsing="false" onAction="#authenticate" text="Aceptar" />
-            <Button mnemonicParsing="false" onAction="#exitBtn" text="Salir" GridPane.columnIndex="1" />
-         </children>
-      </GridPane>
+      <Button layoutX="174.0" layoutY="274.0" mnemonicParsing="false" onAction="#authenticate" text="Aceptar" />
+      <Label layoutX="151.0" layoutY="237.0" text="Mensajes de error" visible="false" />
    </children>
 </AnchorPane>

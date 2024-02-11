@@ -1,39 +1,35 @@
 package gui;
 
-import java.beans.EventHandler;
 import java.io.IOException;
 import java.util.ArrayList;
 
-import javax.swing.Action;
 
 import dto.ValueDTO;
+import exception.ActionNotPermitted;
+import exception.ErrorFieldException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.event.ActionEvent;
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.chart.LineChart;
 import javafx.scene.chart.XYChart;
+import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TablePosition;
-import javafx.scene.control.TableRow;
 import javafx.scene.control.TableView;
-import javafx.scene.control.Tooltip;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.util.converter.DoubleStringConverter;
 import logic.DamSystem;
 import logic.Variable;
 import util.EditableCell;
-import util.MyStringConverter;
 import util.Phenomenon;
-import util.Util;
+import util.TypeModel;
 
 public class securityFactorPane {
     static securityFactorPane window;
@@ -54,6 +50,7 @@ public class securityFactorPane {
 
     @FXML ComboBox formulaBox;
     @FXML ComboBox phenomenonBox;
+    @FXML ComboBox modelBox;
 
     @FXML TableColumn variableColumn;
     @FXML TableColumn valueColumn;
@@ -64,6 +61,10 @@ public class securityFactorPane {
     @FXML Label statusLabel;
     @FXML Label highValueLabel;
     @FXML Label crownValueLabel;
+
+    @FXML Button managementBtn;
+    @FXML Button calculateBtn;
+    @FXML Button saveBtn;
 
     @FXML LineChart sFChart;
 
@@ -93,98 +94,68 @@ public class securityFactorPane {
         return valueTable;
     }
 
-    // public void loadSpinners(){
-    //     loadAngleSpinner();
-    //     loadCohesionSpinner();
-    //     loadCrownSpinner();
-    //     loadDayTimeSpinner();
-    //     loadHighSpinner();
-    //     loadPermeabilitySpinner();
-    //     loadPoundSpinner();
-    //     loadSpeedSpinner();
-    //     // loadVolumeSpinner();
-    // }
-
-    public void loadHighSpinner(){
-        SpinnerValueFactory.IntegerSpinnerValueFactory highValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(15, 40, 1);
-        highSpinner.setValueFactory(highValueFactory);
-    }
-
-    public void loadSpeedSpinner(){
-        SpinnerValueFactory.DoubleSpinnerValueFactory speedValueFactory = new SpinnerValueFactory.DoubleSpinnerValueFactory(0.10, 0.30, 0.05);
-        speedSpinner.setValueFactory(speedValueFactory);
-    }
-
-    public void loadPoundSpinner(){
-        SpinnerValueFactory.DoubleSpinnerValueFactory poundValueFactory = new SpinnerValueFactory.DoubleSpinnerValueFactory(16.6, 19.4, 0.1);
-        poundSpinner.setValueFactory(poundValueFactory);
-    }
-
-    public void loadCohesionSpinner(){
-        SpinnerValueFactory.DoubleSpinnerValueFactory cohesionValueFactory = new SpinnerValueFactory.DoubleSpinnerValueFactory(13.8, 67.5, 0.1);
-        cohesionSpinner.setValueFactory(cohesionValueFactory);
-    }
-
-    public void loadAngleSpinner(){
-        SpinnerValueFactory.DoubleSpinnerValueFactory angleValueFactory = new SpinnerValueFactory.DoubleSpinnerValueFactory(12.6, 29.5, 0.1);
-        angleSpinner.setValueFactory(angleValueFactory);
-    }
-
-    public void loadPermeabilitySpinner(){ //revisar
-        SpinnerValueFactory.DoubleSpinnerValueFactory permeabilityvalueFactory = new SpinnerValueFactory.DoubleSpinnerValueFactory(12.6, 29.5, 0.1);
-        permeabilitySpinner.setValueFactory(permeabilityvalueFactory);
-    }
-
-    public void loadVolumeSpinner(){
-        SpinnerValueFactory.DoubleSpinnerValueFactory volumevalueFactory = new SpinnerValueFactory.DoubleSpinnerValueFactory(0.553, 0.378, 0.1);
-        volumeSpinner.setValueFactory(volumevalueFactory);
-    }
-
-    public void loadCrownSpinner(){
-        SpinnerValueFactory.DoubleSpinnerValueFactory crownValueFactory = new SpinnerValueFactory.DoubleSpinnerValueFactory(4.0, 6.0, 0.5);
-        crownSpinner.setValueFactory(crownValueFactory);
-    }
-
-    public void loadDayTimeSpinner(){
-        SpinnerValueFactory.IntegerSpinnerValueFactory timeValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 350, 1);
-        timeSpinner.setValueFactory(timeValueFactory);
-    }
-
-    public void loadPercentTimeSpinner(){
-        SpinnerValueFactory.IntegerSpinnerValueFactory percentValueFactory = new SpinnerValueFactory.IntegerSpinnerValueFactory(0, 100, 10);
-        timeSpinner.setValueFactory(percentValueFactory);
-    }
-
     public void loadComboBoxes(){
-        loadFormulaBox();
+      //  loadFormulaBox();
         loadPhenomenonBox();
     }
 
     public void loadFormulaBox(){
+        formulaBox.setDisable(false);
+        calculateBtn.setDisable(true);
+        saveBtn.setDisable(true);
+        if(modelBox.getSelectionModel().getSelectedIndex()==0){
         ObservableList<logic.Formula> list = FXCollections.observableArrayList(DamSystem.getInstance().getFormList());
         formulaBox.setItems(list);
+        // managementBtn.setVisible(true);
+        }else{
+            // managementBtn.setVisible(false);
+        }
     }
 
-    public <T> void loadPhenomenonBox(){
+    public void loadModelBox(){
+        calculateBtn.setDisable(true);
+        saveBtn.setDisable(true);
+        modelBox.setDisable(false);
+        ObservableList<TypeModel> list= null;
+        if(phenomenonBox.getSelectionModel().getSelectedIndex() == 0){
+            list = FXCollections.observableArrayList(TypeModel.values());
+            modelBox.setItems(list);
+            // managementBtn.setVisible(true);
+        }else{
+            list = FXCollections.observableArrayList(TypeModel.Redes_Neuronales);
+            modelBox.setItems(list);
+            // managementBtn.setVisible(false);
+        }
+    }
+
+    public void loadPhenomenonBox(){
         ObservableList<Phenomenon> list = FXCollections.observableArrayList(Phenomenon.values());
         phenomenonBox.setItems(list);
     }
 
     public <T> void loadValueTable(){
+        calculateBtn.setDisable(false);
+        saveBtn.setDisable(false);
         logic.Formula aux = (logic.Formula)formulaBox.getSelectionModel().getSelectedItem();
         ArrayList<Variable> vList = aux.getVariables();
         ArrayList<ValueDTO> vaList = new ArrayList<ValueDTO>();
         for(Variable l: vList){
-            vaList.add(new ValueDTO(0, l.getNomenclature(), l.getName()));
-        }
-        list = FXCollections.observableArrayList(vaList);
+            try {
+                vaList.add(new ValueDTO(l.getNomenclature(), l.getName(), l.getDownLimit(), l.getUpLimit()));
+                list = FXCollections.observableArrayList(vaList);
         variableColumn.setCellValueFactory(new PropertyValueFactory<ValueDTO, String>("name"));
         valueColumn.setCellValueFactory(new PropertyValueFactory<ValueDTO, T>("value"));
         valueColumn.setEditable(true);
-        
         valueColumn.setCellFactory(param -> new EditableCell<>(new DoubleStringConverter()));
 
         update();
+            } catch (ErrorFieldException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle("información");
+        alert.setHeaderText("Valor insertado no válido");
+        alert.setContentText(e.getMessage());
+        }
+    }
     }
 
     public void update(){
@@ -196,14 +167,35 @@ public class securityFactorPane {
         Double newValue = event.getNewValue();
         int row = pos.getRow();
         ValueDTO rowData = event.getTableView().getItems().get(row);
-        rowData.setValue(newValue);
+        try {
+            rowData.setValue(newValue);
+        } catch (ErrorFieldException e) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("información");
+            alert.setHeaderText("Valor insertado no válido");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+            draw();
+        } catch (Exception ne){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("información");
+            alert.setHeaderText("Valor insertado no válido");
+            alert.setContentText("Error: "+ne.getMessage());
+            alert.showAndWait();
+        }
         draw();
     }
 
     public void calculateButton(){
         String nameFormula = formulaBox.getSelectionModel().getSelectedItem().toString();
         ArrayList<ValueDTO> list = new ArrayList<ValueDTO>(valueTable.getItems());
-        double var = DamSystem.getInstance().securityFactor(nameFormula, list);
+        double var = 0;
+        try {
+            var = DamSystem.getInstance().securityFactor(nameFormula, list);
+        } catch (ActionNotPermitted e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
         infoLabel.setText("Factor de seguridad: "+var);
         if(var < 1){
             infoLabel1.setText("Talud en posible fallo");

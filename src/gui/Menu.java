@@ -8,6 +8,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.ButtonType;
+import javafx.scene.control.Label;
 import javafx.scene.control.TabPane;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -25,9 +26,14 @@ public class Menu {
     @FXML Pane ManagementButton;
     @FXML AnchorPane mainAnchorPane;
 
+    @FXML Label labelSFSelected;
+    @FXML Label labelSF;
+    @FXML Label labelAyudaSelected;
+    @FXML Label labelAyuda;
+
     public void initialize(){
         window = this;
-        //showSecurityFactorPane();
+        showSecurityFactorPane();
     }
 
     public static Menu getWindow(){
@@ -54,9 +60,13 @@ public class Menu {
     helpButton.getStyleClass().add("buttonsBar");
     ManagementButton.getStyleClass().clear();
     ManagementButton.getStyleClass().add("buttonsBar");
-   }
+    // labelSFSelected.setVisible(true);
+    // labelSF.setVisible(false);
+    // labelAyudaSelected.setVisible(false);
+    // labelAyuda.setVisible(true);
+    }
 
-   public void showHelpPane(){
+    public void showHelpPane(){
     Parent fxml;
     try {
         fxml = FXMLLoader.load(getClass().getResource("AboutPane.fxml"));
@@ -72,6 +82,11 @@ public class Menu {
     sfButton.getStyleClass().add("buttonsBar");
     ManagementButton.getStyleClass().clear();
     ManagementButton.getStyleClass().add("buttonsBar");
+
+    // labelSFSelected.setVisible(false);
+    // labelSF.setVisible(true);
+    // labelAyudaSelected.setVisible(true);
+    // labelAyuda.setVisible(false);
    }
 
    public void showManagementPane(){

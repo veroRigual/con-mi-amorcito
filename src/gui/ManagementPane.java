@@ -3,15 +3,22 @@ package gui;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.ListIterator;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.swing.text.html.HTMLDocument.Iterator;
 
 import dto.ValueDTO;
+import exception.ErrorFieldException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.Label;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
@@ -30,6 +37,7 @@ public class ManagementPane {
     ManagementPane helpSFP;
 
     public boolean value = true;
+    private int pos;
 
     @FXML AnchorPane anchorSFP;
 
@@ -47,16 +55,31 @@ public class ManagementPane {
 
     @FXML Button aceptBtn;
     @FXML Button cancelBtn;
+    @FXML Button deleteBtn;
+    @FXML Button modifyBtn;
+    @FXML Button addBtn;
+
+    @FXML Spinner<Double> downLimitSpinner;
+    @FXML Spinner<Double> upLimitSpinner;
+    
 
     public void initialize(){
         helpSFP = this;
         loadTable();
         loadVariableTable();
+        loadSpinner();
     }
 
     public void exitBtn(){
         securityFactorPane.getInstance().getAnchorSFP().getChildren().remove(anchorSFP);
         securityFactorPane.getInstance().loadComboBoxes();
+    }
+
+    public void loadSpinner(){
+        SpinnerValueFactory<Double> valueFactory =new SpinnerValueFactory.DoubleSpinnerValueFactory(Double.MIN_VALUE,Double.MAX_VALUE);
+        SpinnerValueFactory<Double> valueFactory1 =new SpinnerValueFactory.DoubleSpinnerValueFactory(Double.MIN_VALUE,Double.MAX_VALUE);
+        upLimitSpinner.setValueFactory(valueFactory);
+        downLimitSpinner.setValueFactory(valueFactory1);
     }
 
     public void loadTable(){
@@ -77,45 +100,85 @@ public class ManagementPane {
     }
 
     public void updateVariableTable(){
-        ObservableList<Variable> list = FXCollections.observableList(funtionCheck(functionLabel.getText()));
+        ObservableList<Variable> list = FXCollections.observableList(extractVariables(functionLabel.getText()));
         variableTable.setItems(list);
+        if(list.isEmpty()){
+            variableNameText.setDisable(true);
+            descriptionText.setDisable(true);
+            downLimitSpinner.setDisable(true);
+            upLimitSpinner.setDisable(true);
+            variableNameText.setText("");
+            descriptionText.setText("");
+            variableTable.setDisable(true);
+        }
+        else{
+            variableTable.setDisable(false);
+        }
       //  checkFilds();
     }
 
-    public LinkedList<Variable> funtionCheck(String funtion){
-        LinkedList<Variable> list = new LinkedList<Variable>();
-        for(int i = 0; i < funtion.length(); i++){
-            char aux = funtion.charAt(i);
-            if(Character.isAlphabetic(aux))
-                if(listCheck(aux))
-                    list.add(new Variable("", aux+"", ""));
-        }
-        return list;
+    public static ArrayList<Variable> extractVariables(String equation) {
+    ArrayList<String> variables = new ArrayList<>();
+    ArrayList<Variable> list = new ArrayList<>();
+    Pattern pattern = Pattern.compile("\\b([a-zA-Z_][a-zA-Z0-9_]*)\\b");
+    Matcher matcher = pattern.matcher(equation);
+
+    while (matcher.find()) {
+    String variable = matcher.group(1);
+    if (!variables.contains(variable)) {
+        variables.add(variable);
+    }
     }
 
-    public boolean listCheck(char character){
-        boolean value = true;
-        if(!variableTable.getItems().isEmpty()){
-        ListIterator<Variable> it = variableTable.getItems().listIterator();
-        while (it.hasNext() && value) {
-            String aux = it.next().getNomenclature();
-            if(aux.equals(character+""))
-                value = false;
+    for(String l:variables)
+        try {
+            list.add(new Variable("", l, "",0,0));
+        } catch (ErrorFieldException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
         }
-    }
-        return value;
+
+
+    return list;
     }
 
     public void insertData(){
         int auxIndex = variableTable.getSelectionModel().getSelectedIndex();
         ((Variable)variableTable.getItems().get(auxIndex)).setDescription(descriptionText.getText());
         ((Variable)variableTable.getItems().get(auxIndex)).setName(variableNameText.getText());
+
+        checkFilds();
+    }
+
+    public void insertDataSpinner(){
+        int auxIndex = variableTable.getSelectionModel().getSelectedIndex();
+        try{
+        ((Variable)variableTable.getItems().get(auxIndex)).setDownLimit(downLimitSpinner.getValue());
+        ((Variable)variableTable.getItems().get(auxIndex)).setUpLimit(upLimitSpinner.getValue());
+        }
+        catch(ErrorFieldException e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("información");
+            alert.setHeaderText("Valor insertado no válido");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+        }
         checkFilds();
     }
 
     public void ModifyBtn(){
+        Formula formula = (Formula) formulaTable.getSelectionModel().getSelectedItem();
+        if(formula != null){
         if(value)
             value = false;
+        funtionNameText.setDisable(false);
+        functionLabel.setDisable(false);
+        funtionNameText.setText(formula.getName());
+        functionLabel.setText(formula.getFunction());
+        pos = formulaTable.getSelectionModel().getSelectedIndex();
+        variableTable.setItems(FXCollections.observableArrayList(formula.getVariables()));
+        variableTable.setDisable(false);
+        }
     }
 
     public void InsertBtn(){
@@ -124,7 +187,7 @@ public class ManagementPane {
 
         funtionNameText.setDisable(false);
         functionLabel.setDisable(false);
-        variableTable.setDisable(false);
+        // variableTable.setDisable(false);
         cancelBtn.setDisable(false);
     }
 
@@ -147,13 +210,15 @@ public class ManagementPane {
             ArrayList<Variable> list = new ArrayList<Variable>(variableTable.getItems());
             DamSystem.getInstance().addFormula(funtionNameText.getText(), functionLabel.getText(), list);
             update();
-
             funtionNameText.setText("");
             functionLabel.setText("");
             // variableNameText.setText("");
-            
         }else{
-
+            ArrayList<Variable> list = new ArrayList<Variable>(variableTable.getItems());
+            DamSystem.getInstance().modifyFormula(pos, funtionNameText.getText(), functionLabel.getText(), list);
+            update();
+            funtionNameText.setText("");
+            functionLabel.setText("");
         }
     }
 
@@ -166,18 +231,42 @@ public class ManagementPane {
     }
 
     public void deleteBtn(){
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("informacion");
+        alert.setHeaderText("¿Seguro que decea eliminar el registro de la ecuación?");
+        alert.setContentText("Esta acción no podrá ser revertida y se perdera la información, por favor precione confirma si deseas continuar.");
+        ButtonType result = alert.showAndWait().orElse(ButtonType.CANCEL);
+        if (result == ButtonType.OK){
         int index = formulaTable.getSelectionModel().getSelectedIndex();
         DamSystem.getInstance().deleteFormula(index);
         update();
+            deleteBtn.setDisable(true);
+            modifyBtn.setDisable(true);
+        }
     }
 
     public void selectVariable(MouseEvent e){
-        activateFields();
-        variableNameText.setText("");
-        descriptionText.setText("");
-        Variable aux = variableTable.getSelectionModel().getSelectedItem();
-        descriptionText.setText(aux.getDescription());
-        variableNameText.setText(aux.getName());
-        checkFilds();
+        if(variableTable.getSelectionModel().getSelectedItem() != null){
+            activateFields();
+            variableNameText.setText("");
+            descriptionText.setText("");
+            Variable aux = variableTable.getSelectionModel().getSelectedItem();
+            descriptionText.setText(aux.getDescription());
+            variableNameText.setText(aux.getName());
+            downLimitSpinner.setDisable(false);
+            upLimitSpinner.setDisable(false);
+            checkFilds();
+        }
     }
+
+    public void clicTable(){
+        if(formulaTable.getSelectionModel().getSelectedItem() != null){
+            deleteBtn.setDisable(false);
+            modifyBtn.setDisable(false);
+        }else {
+            deleteBtn.setDisable(true);
+            modifyBtn.setDisable(true);
+        }
+    }
+
 }
