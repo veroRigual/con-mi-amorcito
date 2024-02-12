@@ -2,7 +2,7 @@ package util;
 
 import java.util.ArrayList;
 
-import dto.ValueDTO;
+import exception.ErrorFieldException;
 import logic.Variable;
 import logic.*;
 
@@ -11,25 +11,25 @@ import logic.*;
  */
 public class Init {
 
-    public static void init(){
+    public static void init() throws ErrorFieldException{
 
-        Variable v1 = new Variable("variable 1", "a", "prueba1");
-        Variable v2 = new Variable("variable 2", "b", "prueba2");
+        Variable v1 = new Variable("altura", "a", "prueba1",0,99);
+        Variable v2 = new Variable("ancho de corona", "b", "prueba2",0,99);
         ArrayList<Variable> list = new ArrayList<Variable>();
         list.add(v2);
         list.add(v1);
-        DamSystem.getInstance().addFormula("ecuación 1", "a+b", list);
+        DamSystem.getInstance().addFormula("formula 1", "a+b", list);
 
-        Variable v11 = new Variable("variable 11", "a", "prueba1");
-        Variable v12 = new Variable("variable 21", "b", "prueba2");
+        Variable v11 = new Variable("altura", "a", "prueba1",20,99);
+        Variable v12 = new Variable("ancho de corona", "b", "prueba2",20,99);
         // Variable v13 = new Variable("variable 31", "c", "prueba3");
-        Variable v14 = new Variable("variable 41", "d", "prueba4");
+        Variable v14 = new Variable("presión", "d", "prueba4",20,99);
         ArrayList<Variable> list3 = new ArrayList<Variable>();
         list3.add(v12);
         list3.add(v11);
         // list3.add(v13);
         list3.add(v14);
-        DamSystem.getInstance().addFormula("ecuación 2", "a+b-c", list3);
+        DamSystem.getInstance().addFormula("formula 2", "a+b-c", list3);
 
         // Formula f = new Formula();
         // ValueDTO va1 = new ValueDTO(4, "a", "p");

@@ -1,9 +1,9 @@
-
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import util.Init;
 
 public class App extends Application{
@@ -18,6 +18,7 @@ public class App extends Application{
         stage.setTitle("DamGuard");
         stage.setScene(scene);
         stage.setMaximized(true);
+        stage.initStyle(StageStyle.UNDECORATED);
         stage.show();
         Init.init();
     }

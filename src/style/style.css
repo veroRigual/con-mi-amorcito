@@ -1,11 +1,10 @@
 #button-bar {
-  /* -fx-background-color: rgb(171, 204, 171); */
   -fx-arc-width: auto;
   -fx-fill-height: auto;
 }
 
 #options-bar {
-  -fx-background-color: rgba(129, 204, 129, 0.3);
+  -fx-background-color: rgb(129, 204, 129, 0.3);
 }
 
 .buttonsBar {
@@ -44,7 +43,7 @@
 
 #drawArea {
   /*rgb(160, 160, 160, 0.5);*/
-  -fx-background-color: rgba(129, 204, 129, 0.3);
+  -fx-background-color: rgb(129, 204, 129, 0.3);
   -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0, 0, 4);
   -fx-background-radius: 15px;
   -fx-background-image: url(../images/modelo.png);
@@ -73,7 +72,10 @@
 }
 
 #contentArea {
-  -fx-background-color: rgb(238, 234, 223);
+  -fx-background-color: rgb(234, 223238);
+  -fx-background-color: rgb(238, 234, 223, 0.7);
+  -fx-font-family: Tahoma;
+  -fx-font-size: 14;
 }
 
 .helpText {
@@ -82,7 +84,7 @@
 }
 
 #loginPane {
-  -fx-background-color: rgb(238, 234, 223, 0.8);
+  -fx-background-color: rgb(238, 234, 223, 0.7);
   -fx-background-radius: 20, 20, 20, 20;
   -fx-effect: dropshadow(
     gaussian,
@@ -97,21 +99,29 @@
 }
 
 #managementPane {
-  -fx-background-color: rgb(238, 234, 223, 0.8);
-  -fx-background-radius: 20, 20, 20, 20;
-  -fx-effect: dropshadow(
+  -fx-background-color: rgb(238, 234, 223);
+  /* -fx-background-radius: 20, 20, 20, 20; */
+  /* -fx-effect: dropshadow(
     gaussian,
     rgba(0, 0, 0, 0.5),
     99999999999999999999999999,
     0,
     0,
     8
-  );
+  ); */
   -fx-font-family: Tahoma;
   -fx-font-size: 14;
 }
 
 .valueTable .cell {
+  -fx-alignment: center;
+}
+
+.variableTable .cell {
+  -fx-alignment: center;
+}
+
+.formulaTable .cell {
   -fx-alignment: center;
 }
 
