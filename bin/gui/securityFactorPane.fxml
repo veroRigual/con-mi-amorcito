@@ -17,8 +17,8 @@
    <children>
       <Pane id="drawArea" layoutX="484.0" layoutY="66.0" prefHeight="274.0" prefWidth="657.0">
          <children>
-            <Label fx:id="crownValueLabel" layoutX="332.0" layoutY="8.0" prefHeight="29.0" prefWidth="32.0" />
-            <Label fx:id="highValueLabel" layoutX="617.0" layoutY="95.0" prefHeight="29.0" prefWidth="39.0" />
+            <Label fx:id="crownValueLabel" layoutX="329.0" layoutY="7.0" prefHeight="29.0" prefWidth="60.0" />
+            <Label fx:id="highValueLabel" layoutX="617.0" layoutY="95.0" prefHeight="29.0" prefWidth="60.0" />
          </children></Pane>
       <Label layoutX="52.0" layoutY="14.0" text="Calcular factor de seguridad para:">
          <font>
@@ -27,11 +27,11 @@
       </Label>
       <Separator layoutX="52.0" layoutY="40.0" prefHeight="3.0" prefWidth="267.0" />
       <Button fx:id="calculateBtn" disable="true" layoutX="1073.0" layoutY="370.0" mnemonicParsing="false" onAction="#calculateButton" text="Calcular" />
-      <Button fx:id="saveBtn" disable="true" layoutX="981.0" layoutY="370.0" mnemonicParsing="false" text="Guardar" />
-      <ComboBox fx:id="registreSpinner" layoutX="827.0" layoutY="434.0" prefHeight="29.0" prefWidth="292.0" promptText="Seleccionar" />
+      <Button fx:id="saveBtn" disable="true" layoutX="918.0" layoutY="370.0" mnemonicParsing="false" text="Registrar resultado" />
+      <ComboBox fx:id="registreSpinner" layoutX="863.0" layoutY="431.0" prefHeight="29.0" prefWidth="267.0" promptText="Seleccionar" />
       <Separator layoutX="54.0" layoutY="415.0" prefHeight="3.0" prefWidth="1086.0" />
       <ComboBox fx:id="phenomenonBox" layoutX="329.0" layoutY="14.0" onAction="#loadModelBox" prefHeight="28.0" prefWidth="133.0" promptText="Seleccionar" />
-      <Label layoutX="748.0" layoutY="439.0" text="Registros:" />
+      <Label layoutX="789.0" layoutY="437.0" text="Registros:" />
       <LineChart fx:id="sFchart" layoutX="14.0" layoutY="434.0" prefHeight="274.0" prefWidth="706.0">
         <xAxis>
           <CategoryAxis side="BOTTOM" />
@@ -40,19 +40,19 @@
           <NumberAxis side="LEFT" />
         </yAxis>
       </LineChart>
-      <TableView layoutX="789.0" layoutY="484.0" prefHeight="253.0" prefWidth="303.0">
+      <TableView layoutX="820.0" layoutY="468.0" prefHeight="274.0" prefWidth="303.0">
          <columns>
             <TableColumn prefWidth="124.0" text="Tiempo" />
             <TableColumn prefWidth="181.0" text="Factor de seguridad" />
          </columns></TableView>
       <ComboBox fx:id="formulaBox" disable="true" layoutX="124.0" layoutY="61.0" onAction="#loadValueTable" prefHeight="29.0" prefWidth="332.0" promptText="Seleccionar" />
-      <Label layoutX="54.0" layoutY="66.0" text="Ecuación:">
+      <Label fx:id="modelLabel" layoutX="54.0" layoutY="66.0" text="Ecuación:" visible="false">
               
             </Label>
-      <TableView fx:id="valueTable" editable="true" layoutX="54.0" layoutY="107.0" prefHeight="274.0" prefWidth="402.0" styleClass="valueTable">
+      <TableView fx:id="valueTable" editable="true" layoutX="54.0" layoutY="107.0" prefHeight="294.0" prefWidth="402.0" styleClass="valueTable">
         <columns>
-          <TableColumn fx:id="variableColumn" editable="false" prefWidth="200.0" sortable="false" text="Variable" />
-          <TableColumn fx:id="valueColumn" onEditCommit="#updateTable" prefWidth="200.0" sortable="false" text="Valor" />
+          <TableColumn fx:id="variableColumn" editable="false" prefWidth="254.0" sortable="false" text="Variable" />
+          <TableColumn fx:id="valueColumn" onEditCommit="#updateTable" prefWidth="144.0" sortable="false" text="Valor" />
         </columns>
       </TableView>
       <Label id="resultLabel" fx:id="infoLabel" layoutX="515.0" layoutY="357.0" text="Factor de Seguridad:" visible="false" />

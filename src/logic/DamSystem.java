@@ -5,18 +5,21 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import dto.ValueDTO;
 import exception.ActionNotPermitted;
+import service.ModelLoader;
 
 public class DamSystem {
 
     private static DamSystem instance;
     private ArrayList<Formula> formList;
     private ArrayList<Result> resultsList;
+    private ArrayList<Model> modelsList;
     private File formulasFile;
     private File variableFile;
 
     private DamSystem() {
         this.formList = new ArrayList<Formula>();
         resultsList = new ArrayList<Result>();
+        modelsList = ModelLoader.loadModels();
     }
 
     public static DamSystem getInstance(){
@@ -27,6 +30,32 @@ public class DamSystem {
 
     public ArrayList<Formula> getFormList() {
         return formList;
+    }
+
+    public ArrayList<Model> getModelsList() {
+        return modelsList;
+    }
+
+    public ArrayList<Model> getDesemModelsList() {
+        ArrayList<Model> list = new ArrayList<Model>();
+        for(Model l: modelsList){
+            if(l.getPhenomenon().equalsIgnoreCase("desembalse"))
+                list.add(l);
+        }
+        return list;
+    }
+
+    public ArrayList<Model> getPreciModelsList() {
+        ArrayList<Model> list = new ArrayList<Model>();
+        for(Model l: modelsList){
+            if(l.getPhenomenon().equalsIgnoreCase("presipitacion"))
+                list.add(l);
+        }
+        return list;
+    }
+
+    public ArrayList<Result> getResultsList() {
+        return resultsList;
     }
 
     public void addFormula(String name, String function, ArrayList<Variable> list){

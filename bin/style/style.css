@@ -117,6 +117,14 @@
   -fx-alignment: center;
 }
 
+.variableTable .cell {
+  -fx-alignment: center;
+}
+
+.formulaTable .cell {
+  -fx-alignment: center;
+}
+
 #statusLabel .case1 {
   -fx-text-fill: rgb(211, 3, 3);
 }

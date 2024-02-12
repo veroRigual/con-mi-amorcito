@@ -22,13 +22,13 @@
          </font>
       </Label>
       <Separator layoutX="52.0" layoutY="40.0" prefHeight="3.0" prefWidth="188.0" />
-      <TableView fx:id="formulaTable" layoutX="113.0" layoutY="419.0" onMouseClicked="#clicTable" prefHeight="286.0" prefWidth="953.0">
+      <TableView fx:id="formulaTable" layoutX="113.0" layoutY="419.0" onMouseClicked="#clicTable" prefHeight="286.0" prefWidth="953.0" styleClass="formulaTable">
         <columns>
           <TableColumn fx:id="nameColumn" prefWidth="337.0" text="Nombre" />
           <TableColumn fx:id="expreColumn" maxWidth="712.0" minWidth="-1.0" prefWidth="614.0" text="Expresión" />
         </columns>
       </TableView>
-      <GridPane layoutX="750.0" layoutY="721.0" prefHeight="30.0" prefWidth="405.0">
+      <GridPane layoutX="797.0" layoutY="721.0" prefHeight="30.0" prefWidth="405.0">
         <columnConstraints>
           <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
             <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
@@ -51,7 +51,7 @@
       <TextField fx:id="functionLabel" disable="true" layoutX="556.0" layoutY="56.0" onKeyTyped="#updateVariableTable" prefHeight="28.0" prefWidth="475.0" />
       <TextArea fx:id="descriptionText" disable="true" layoutX="461.0" layoutY="168.0" onKeyTyped="#insertData" prefHeight="123.0" prefWidth="625.0" />
       <TextField fx:id="variableNameText" disable="true" layoutX="461.0" layoutY="126.0" onKeyTyped="#insertData" prefHeight="28.0" prefWidth="200.0" />
-      <Label layoutX="398.0" layoutY="131.0" text="Nombre:" />
+      <Label layoutX="379.0" layoutY="131.0" text="Nombre:" />
       <Separator layoutX="54.0" layoutY="396.0" prefHeight="3.0" prefWidth="1053.0" />
       <GridPane layoutX="461.0" layoutY="358.0">
         <columnConstraints>
@@ -66,7 +66,7 @@
             <Button fx:id="cancelBtn" disable="true" mnemonicParsing="false" onAction="#cancelBtn" text="Cancelar" GridPane.columnIndex="1" />
          </children>
       </GridPane>
-      <TableView fx:id="variableTable" disable="true" layoutX="98.0" layoutY="107.0" onMouseClicked="#selectVariable" prefHeight="242.0" prefWidth="200.0">
+      <TableView fx:id="variableTable" disable="true" layoutX="98.0" layoutY="107.0" onMouseClicked="#selectVariable" prefHeight="242.0" prefWidth="200.0" styleClass="variableTable">
         <columns>
           <TableColumn fx:id="variableColumn" prefWidth="198.0" text="Variable" />
         </columns>

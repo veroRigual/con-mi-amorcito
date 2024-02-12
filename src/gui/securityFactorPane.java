@@ -26,6 +26,7 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.util.converter.DoubleStringConverter;
 import logic.DamSystem;
+import logic.Model;
 import logic.Variable;
 import util.EditableCell;
 import util.Phenomenon;
@@ -35,8 +36,6 @@ public class securityFactorPane {
     static securityFactorPane window;
 
     @FXML Pane anchorSFP;
-
-   
 
     @FXML Spinner timeSpinner;
     @FXML Spinner highSpinner;
@@ -49,8 +48,8 @@ public class securityFactorPane {
     @FXML Spinner crownSpinner;
 
     @FXML ComboBox formulaBox;
-    @FXML ComboBox phenomenonBox;
-    @FXML ComboBox modelBox;
+    @FXML ComboBox<Phenomenon> phenomenonBox;
+    @FXML ComboBox<TypeModel> modelBox;
 
     @FXML TableColumn variableColumn;
     @FXML TableColumn valueColumn;
@@ -61,6 +60,7 @@ public class securityFactorPane {
     @FXML Label statusLabel;
     @FXML Label highValueLabel;
     @FXML Label crownValueLabel;
+    @FXML Label modelLabel;
 
     @FXML Button managementBtn;
     @FXML Button calculateBtn;
@@ -69,6 +69,7 @@ public class securityFactorPane {
     @FXML LineChart sFChart;
 
     private ObservableList<ValueDTO> list;
+
 
 
     public ObservableList<ValueDTO> getList() {
@@ -103,13 +104,25 @@ public class securityFactorPane {
         formulaBox.setDisable(false);
         calculateBtn.setDisable(true);
         saveBtn.setDisable(true);
-        if(modelBox.getSelectionModel().getSelectedIndex()==0){
+        if(phenomenonBox.getSelectionModel().getSelectedIndex() == 0){
+            if(modelBox.getSelectionModel().getSelectedIndex()==0){
         ObservableList<logic.Formula> list = FXCollections.observableArrayList(DamSystem.getInstance().getFormList());
         formulaBox.setItems(list);
+        modelLabel.setText("Ecuación:");
+                modelLabel.setVisible(true);
         // managementBtn.setVisible(true);
         }else{
-            // managementBtn.setVisible(false);
+            ObservableList<Model> list = FXCollections.observableArrayList(DamSystem.getInstance().getDesemModelsList());
+            formulaBox.setItems(list);
+            modelLabel.setText("Modelo:");
+                modelLabel.setVisible(true);
         }
+    }else{
+        ObservableList<Model> list = FXCollections.observableArrayList(DamSystem.getInstance().getPreciModelsList());
+        formulaBox.setItems(list);
+        modelLabel.setText("Modelo:");
+            modelLabel.setVisible(true);
+    }
     }
 
     public void loadModelBox(){
@@ -135,18 +148,50 @@ public class securityFactorPane {
 
     public <T> void loadValueTable(){
         calculateBtn.setDisable(false);
-        saveBtn.setDisable(false);
+        if(formulaBox.getSelectionModel().getSelectedItem() != null){
+            if(phenomenonBox.getSelectionModel().getSelectedItem().equals(Phenomenon.Desembalse)
+            && modelBox.getSelectionModel().getSelectedItem().equals(TypeModel.Regresión)){
+                loadRegression();
+            }else{
+                try {
+                    loadBayes();
+                } catch (ErrorFieldException e) {
+                    // TODO Auto-generated catch block
+                    e.printStackTrace();
+                }
+            }
+}
+    }
+
+    private void loadBayes() throws ErrorFieldException{
+        Model aux = (Model) formulaBox.getSelectionModel().getSelectedItem();
+        ArrayList<String> vList = aux.getVariables();
+        ArrayList<ValueDTO> vaList = new ArrayList<ValueDTO>();
+        variableColumn.setCellValueFactory(new PropertyValueFactory<ValueDTO, String>("name"));
+        valueColumn.setCellValueFactory(new PropertyValueFactory<ValueDTO, Double>("value"));
+        valueColumn.setEditable(true);
+        valueColumn.setCellFactory(param -> new EditableCell<>(new DoubleStringConverter()));
+        int i = 0;
+        for(String l: vList){
+            vaList.add(new ValueDTO("NO", vList.get(i), Double.MIN_VALUE, Double.MAX_VALUE));
+            i++;
+        }
+        list = FXCollections.observableArrayList(vaList);
+        update();
+    }
+
+    private void loadRegression(){
         logic.Formula aux = (logic.Formula)formulaBox.getSelectionModel().getSelectedItem();
         ArrayList<Variable> vList = aux.getVariables();
         ArrayList<ValueDTO> vaList = new ArrayList<ValueDTO>();
+        variableColumn.setCellValueFactory(new PropertyValueFactory<ValueDTO, String>("name"));
+        valueColumn.setCellValueFactory(new PropertyValueFactory<ValueDTO, Double>("value"));
+        valueColumn.setEditable(true);
+        valueColumn.setCellFactory(param -> new EditableCell<>(new DoubleStringConverter()));
         for(Variable l: vList){
             try {
                 vaList.add(new ValueDTO(l.getNomenclature(), l.getName(), l.getDownLimit(), l.getUpLimit()));
                 list = FXCollections.observableArrayList(vaList);
-        variableColumn.setCellValueFactory(new PropertyValueFactory<ValueDTO, String>("name"));
-        valueColumn.setCellValueFactory(new PropertyValueFactory<ValueDTO, T>("value"));
-        valueColumn.setEditable(true);
-        valueColumn.setCellFactory(param -> new EditableCell<>(new DoubleStringConverter()));
 
         update();
             } catch (ErrorFieldException e) {
@@ -189,14 +234,28 @@ public class securityFactorPane {
     public void calculateButton(){
         String nameFormula = formulaBox.getSelectionModel().getSelectedItem().toString();
         ArrayList<ValueDTO> list = new ArrayList<ValueDTO>(valueTable.getItems());
-        double var = 0;
+        double var = -1;
+        if(formulaBox.getSelectionModel().getSelectedItem() instanceof logic.Formula){
         try {
             var = DamSystem.getInstance().securityFactor(nameFormula, list);
         } catch (ActionNotPermitted e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
-        infoLabel.setText("Factor de seguridad: "+var);
+    }else{
+        try{
+        Model aux = (Model)formulaBox.getSelectionModel().getSelectedItem();
+        var = aux.evaluate(list);
+        }catch(Exception e){
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("información");
+            alert.setHeaderText("Error");
+            alert.setContentText(e.getMessage());
+            alert.showAndWait();
+        }
+    }
+    if(var != -1){
+        infoLabel.setText("Factor de seguridad: "+ String.format("%.3f", var));
         if(var < 1){
             infoLabel1.setText("Talud en posible fallo");
             infoLabel1.getStyleClass().clear();
@@ -218,6 +277,8 @@ public class securityFactorPane {
         infoLabel.setVisible(true);
         infoLabel1.setVisible(true);
         statusLabel.setVisible(true);
+        saveBtn.setDisable(false);
+    }
     }
 
     public void showLogin(){
@@ -239,9 +300,10 @@ public class securityFactorPane {
 
     public void draw(){
         ValueDTO aux = valueTable.getSelectionModel().getSelectedItem();
-        if(aux.getName().equals("altura"))
+        if(aux.getName().equalsIgnoreCase("altura")
+        || aux.getName().equals("Altura de terraplén"))
         highValueLabel.setText(String.valueOf(aux.getValue()));
-        if(aux.getName().equals("ancho de corona"))
+        if(aux.getName().equalsIgnoreCase("ancho de corona"))
         crownValueLabel.setText(String.valueOf(aux.getValue()));
     }
 }

@@ -105,7 +105,7 @@ public class Menu {
     helpButton.getStyleClass().add("buttonsBar");
     sfButton.getStyleClass().clear();
     sfButton.getStyleClass().add("buttonsBar");
-   }
+    }
 
    public void exitWindow(){
         Stage stage = (Stage) mainAnchorPane.getScene().getWindow();

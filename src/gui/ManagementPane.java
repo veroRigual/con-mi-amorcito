@@ -34,7 +34,7 @@ import logic.Variable;
 import util.EditableCell;
 
 public class ManagementPane {
-    ManagementPane helpSFP;
+    static ManagementPane helpSFP;
 
     public boolean value = true;
     private int pos;
@@ -62,6 +62,9 @@ public class ManagementPane {
     @FXML Spinner<Double> downLimitSpinner;
     @FXML Spinner<Double> upLimitSpinner;
     
+    public static ManagementPane getInstance(){
+        return helpSFP;
+    }
 
     public void initialize(){
         helpSFP = this;
@@ -178,6 +181,7 @@ public class ManagementPane {
         pos = formulaTable.getSelectionModel().getSelectedIndex();
         variableTable.setItems(FXCollections.observableArrayList(formula.getVariables()));
         variableTable.setDisable(false);
+        cancelBtn.setDisable(false);
         }
     }
 
@@ -209,25 +213,73 @@ public class ManagementPane {
         if(value){
             ArrayList<Variable> list = new ArrayList<Variable>(variableTable.getItems());
             DamSystem.getInstance().addFormula(funtionNameText.getText(), functionLabel.getText(), list);
+
             update();
+            
             funtionNameText.setText("");
             functionLabel.setText("");
-            // variableNameText.setText("");
+            descriptionText.setText("");
+            variableNameText.setText("");
+
+            funtionNameText.setDisable(true);
+            functionLabel.setDisable(true);
+            variableNameText.setDisable(true);
+            descriptionText.setDisable(true);
+            downLimitSpinner.setDisable(true);
+            upLimitSpinner.setDisable(true);
+            cancelBtn.setDisable(true);
+            cancelBtn.setDisable(true);
+            variableTable.getItems().clear();
+            variableTable.setDisable(true);
+            update();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("información");
+            alert.setHeaderText("Aviso");
+            alert.setContentText("La formula se ha registrado exitosamente");
+            alert.showAndWait();
         }else{
             ArrayList<Variable> list = new ArrayList<Variable>(variableTable.getItems());
             DamSystem.getInstance().modifyFormula(pos, funtionNameText.getText(), functionLabel.getText(), list);
             update();
             funtionNameText.setText("");
             functionLabel.setText("");
+            descriptionText.setText("");
+            variableNameText.setText("");
+
+            funtionNameText.setDisable(true);
+            functionLabel.setDisable(true);
+            variableNameText.setDisable(true);
+            descriptionText.setDisable(true);
+            downLimitSpinner.setDisable(true);
+            upLimitSpinner.setDisable(true);
+            cancelBtn.setDisable(true);
+            cancelBtn.setDisable(true);
+            variableTable.getItems().clear();
+            variableTable.setDisable(true);
+            update();
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("información");
+            alert.setHeaderText("Aviso");
+            alert.setContentText("La formula se ha modificado exitosamente");
+            alert.showAndWait();
         }
     }
 
     public void cancelBtn(){
-        funtionNameText.setDisable(true);
-        functionLabel.setDisable(true);
-        variableNameText.setDisable(true);
-        variableTable.setDisable(true);
-        cancelBtn.setDisable(true);
+        funtionNameText.setText("");
+            functionLabel.setText("");
+            descriptionText.setText("");
+            variableNameText.setText("");
+
+            funtionNameText.setDisable(true);
+            functionLabel.setDisable(true);
+            variableTable.setDisable(true);
+            variableNameText.setDisable(true);
+            descriptionText.setDisable(true);
+            downLimitSpinner.setDisable(true);
+            upLimitSpinner.setDisable(true);
+            cancelBtn.setDisable(true);
+            cancelBtn.setDisable(true);
     }
 
     public void deleteBtn(){
@@ -240,21 +292,28 @@ public class ManagementPane {
         int index = formulaTable.getSelectionModel().getSelectedIndex();
         DamSystem.getInstance().deleteFormula(index);
         update();
-            deleteBtn.setDisable(true);
-            modifyBtn.setDisable(true);
+        deleteBtn.setDisable(true);
+        modifyBtn.setDisable(true);
+        alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("información");
+        alert.setHeaderText("Aviso");
+        alert.setContentText("La formula se ha eliminado exitosamente");
+        alert.showAndWait();
         }
     }
 
     public void selectVariable(MouseEvent e){
-        if(variableTable.getSelectionModel().getSelectedItem() != null){
+        Variable aux = variableTable.getSelectionModel().getSelectedItem();
+        if(aux != null){
             activateFields();
             variableNameText.setText("");
             descriptionText.setText("");
-            Variable aux = variableTable.getSelectionModel().getSelectedItem();
             descriptionText.setText(aux.getDescription());
             variableNameText.setText(aux.getName());
             downLimitSpinner.setDisable(false);
             upLimitSpinner.setDisable(false);
+            downLimitSpinner.getValueFactory().setValue(aux.getDownLimit());
+            upLimitSpinner.getValueFactory().setValue(aux.getUpLimit());
             checkFilds();
         }
     }
