@@ -4,10 +4,10 @@
     <Application name="KNIME" version="4.7.1"/>
   </Header>
   <DataDictionary numberOfFields="14">
-    <DataField name="Altura de cortina" optype="continuous" dataType="integer">
+    <DataField name="Altura de cortina" optype="continuous" dataType="double">
       <Interval closure="closedClosed" leftMargin="15.0" rightMargin="40.0"/>
     </DataField>
-    <DataField name="Ancho de corona" optype="continuous" dataType="integer">
+    <DataField name="Ancho de corona" optype="continuous" dataType="double">
       <Interval closure="closedClosed" leftMargin="4.0" rightMargin="6.0"/>
     </DataField>
     <DataField name="Peso específico" optype="continuous" dataType="double">
