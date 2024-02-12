@@ -13,6 +13,7 @@ import javax.xml.parsers.ParserConfigurationException;
 
 import org.dmg.pmml.Array;
 import org.dmg.pmml.DataField;
+import org.dmg.pmml.DataType;
 import org.dmg.pmml.OutputField;
 import org.dmg.pmml.PMML;
 import org.jpmml.evaluator.Evaluator;
@@ -67,6 +68,7 @@ public class Model {
         for(DataField m: model.getDataDictionary().getDataFields()){
             if(!m.getName().equalsIgnoreCase("FS"))
             list.add(m.getName());
+            
         }
         
         return list;

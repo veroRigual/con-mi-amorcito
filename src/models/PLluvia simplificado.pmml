@@ -4,7 +4,7 @@
     <Application name="KNIME" version="4.7.1"/>
   </Header>
   <DataDictionary numberOfFields="7">
-    <DataField name="Altura de cortina" optype="continuous" dataType="integer">
+    <DataField name="Altura de cortina" optype="continuous" dataType="double">
       <Interval closure="closedClosed" leftMargin="15.0" rightMargin="40.0"/>
     </DataField>
     <DataField name="Peso específico" optype="continuous" dataType="double">
@@ -16,10 +16,10 @@
     <DataField name="Ángulo de fricción interna" optype="continuous" dataType="double">
       <Interval closure="closedClosed" leftMargin="12.5548" rightMargin="29.4595"/>
     </DataField>
-    <DataField name="Intensidad" optype="continuous" dataType="integer">
+    <DataField name="Intensidad" optype="continuous" dataType="double">
       <Interval closure="closedClosed" leftMargin="3.0" rightMargin="150.0"/>
     </DataField>
-    <DataField name="Tiempo" optype="continuous" dataType="integer">
+    <DataField name="Tiempo" optype="continuous" dataType="double">
       <Interval closure="closedClosed" leftMargin="0.0" rightMargin="24.0"/>
     </DataField>
     <DataField name="FS" optype="continuous" dataType="double">
