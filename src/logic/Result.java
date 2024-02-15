@@ -1,10 +1,13 @@
 package logic;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+
 public class Result {
 
     private String damName;
     private int days;
-    private double fsValue;
+    private LinkedList<Double> fsValue;
 
     public String getDamName() {
         return damName;
@@ -22,17 +25,17 @@ public class Result {
         this.days = days;
     }
 
-    public double getFsValue() {
+    public LinkedList<Double> getFsValue() {
         return fsValue;
     }
 
-    public void setFsValue(double fsValue) {
+    public void setFsValue(LinkedList<Double> fsValue) {
         this.fsValue = fsValue;
     }
 
-    public Result(String damName, int days, double fsValue) {
+    public Result(String damName, int days, LinkedList<Double> list) {
         this.damName = damName;
         this.days = days;
-        this.fsValue = fsValue;
+        this.fsValue = list;
     }
 }

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="loadingPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="341.0" prefWidth="491.0" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.LoadingPane">
+   <children>
+      <ProgressBar id="loadingBar" fx:id="loading" layoutY="315.0" prefHeight="26.0" prefWidth="491.0" progress="0.0" />
+      <Label layoutX="165.0" layoutY="14.0" text="DamGuard">
+         <font>
+            <Font name="System Bold" size="32.0" />
+         </font>
+      </Label>
+      <Label layoutX="441.0" layoutY="290.0" text="ver 1.0" />
+   </children>
+</AnchorPane>

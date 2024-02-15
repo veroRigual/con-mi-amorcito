@@ -140,3 +140,30 @@
 #statusLabel .case4 {
   -fx-text-fill: rgb(221, 224, 3);
 }
+
+#loadingPane {
+  -fx-background-color: rgb(238, 234, 223, 1);
+  -fx-background-image: url(../images/logo.png);
+  -fx-background-repeat: no-repeat;
+  -fx-background-size: 350px 350px;
+  -fx-background-position: center;
+}
+
+#loadingBar {
+  -fx-accent: #00d900;
+}
+
+#analysisPane {
+  -fx-background-color: rgb(238, 234, 223, 0.8);
+  -fx-background-radius: 20, 20, 20, 20;
+  -fx-effect: dropshadow(
+    gaussian,
+    rgba(0, 0, 0, 0.5),
+    99999999999999999999999999,
+    0,
+    0,
+    8
+  );
+  -fx-font-family: Tahoma;
+  -fx-font-size: 14;
+}

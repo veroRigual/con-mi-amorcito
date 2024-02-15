@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PMML version="4.2" xmlns="http://www.dmg.org/PMML-4_2" >
+  <Header copyright="Isi">
+    <Application name="KNIME" version="4.7.1"/>
+  </Header>
+  <DataDictionary numberOfFields="7">
+    <DataField name="Altura de terraplén" optype="continuous" dataType="double">
+      <Interval closure="closedClosed" leftMargin="15.0" rightMargin="40.0"/>
+    </DataField>
+    <DataField name="Peso específico" optype="continuous" dataType="double">
+      <Interval closure="closedClosed" leftMargin="16.5823" rightMargin="19.3898"/>
+    </DataField>
+    <DataField name="Cohesión" optype="continuous" dataType="double">
+      <Interval closure="closedClosed" leftMargin="13.8418" rightMargin="67.4528"/>
+    </DataField>
+    <DataField name="Ángulo de fricción interna" optype="continuous" dataType="double">
+      <Interval closure="closedClosed" leftMargin="12.5548" rightMargin="29.4595"/>
+    </DataField>
+    <DataField name="Velocidad" optype="continuous" dataType="double">
+      <Interval closure="closedClosed" leftMargin="0.1" rightMargin="0.3"/>
+    </DataField>
+    <DataField name="Tiempo" optype="continuous" dataType="double">
+      <Interval closure="closedClosed" leftMargin="0.0" rightMargin="350.0"/>
+    </DataField>
+    <DataField name="FS" optype="continuous" dataType="double">
+      <Interval closure="closedClosed" leftMargin="0.11169939" rightMargin="5.6632962"/>
+    </DataField>
+  </DataDictionary>
+  <TransformationDictionary>
+    <DerivedField displayName="FS" name="FS*" optype="continuous" dataType="double">
+      <Extension name="summary" extender="KNIME" value="Min/Max (0.0, 1) normalization on 1 column(s)"/>
+      <NormContinuous field="FS">
+        <LinearNorm orig="0.0" norm="-0.020120227354911244"/>
+        <LinearNorm orig="1.0" norm="0.16000812746342075"/>
+      </NormContinuous>
+    </DerivedField>
+  </TransformationDictionary>
+</PMML>

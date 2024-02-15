@@ -2,6 +2,7 @@ package logic;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ import org.jpmml.evaluator.ModelEvaluator;
 import org.jpmml.evaluator.ModelEvaluatorBuilder;
 import org.jpmml.evaluator.ModelEvaluatorFactory;
 import org.jpmml.model.PMMLUtil;
+import org.jpmml.model.visitors.VisitorBattery;
 import org.xml.sax.SAXException;
 
 import dto.ValueDTO;
@@ -78,18 +80,12 @@ public class Model {
         return phenomenon;
     }
 
-    public double evaluate(List<ValueDTO> list){
+    public double evaluate(List<ValueDTO> list) throws ParserConfigurationException, SAXException, JAXBException, IOException{
         double value = 0;
         Evaluator evaluator = new ModelEvaluatorBuilder(model).build();
         Map<String, Number> arguments = new LinkedHashMap<>();
         for(ValueDTO l: list)
         arguments.put(l.getName(), l.getValue());
-        // arguments.put(list.get(0).getName(), 9.0);
-        // arguments.put(list.get(1).getName(), 9.0);
-        // arguments.put(list.get(2).getName(), 9.0);
-        // arguments.put(list.get(3).getName(), 9.0);
-        // arguments.put(list.get(4).getName(), 9.0);
-        // arguments.put(list.get(5).getName(), 9);
         Map<String, ?> results = evaluator.evaluate(arguments);
         value =  (Double) results.get("FS");
         return value;

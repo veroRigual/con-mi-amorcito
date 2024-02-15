@@ -42,7 +42,7 @@
    <children>
       <Pane id="options-bar" prefHeight="801.0" prefWidth="200.0" stylesheets="@../style/style.css">
          <children>
-            <Pane fx:id="sfButton" layoutY="217.0" onMouseClicked="#showSecurityFactorPane" prefHeight="59.0" prefWidth="200.0" styleClass="buttonsBar">
+            <Pane fx:id="sfButton" layoutY="222.0" onMouseClicked="#showSecurityFactorPane" prefHeight="59.0" prefWidth="200.0" styleClass="buttonsBar">
                <children>
                   <Label fx:id="labelSFSelected" layoutX="15.0" layoutY="19.0" styleClass="buttonBarLabel" text="FACTOR DE SEGURIDAD">
                      <font>
@@ -51,7 +51,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="ManagementButton" layoutY="306.0" onMouseClicked="#showManagementPane" prefHeight="59.0" prefWidth="200.0" styleClass="buttonsBar">
+            <Pane fx:id="ManagementButton" layoutY="311.0" onMouseClicked="#showManagementPane" prefHeight="59.0" prefWidth="200.0" styleClass="buttonsBar">
                <children>
                   <Label layoutX="58.0" layoutY="19.0" text="GESTIONAR">
                      <font>
@@ -60,7 +60,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="helpButton" layoutY="395.0" onMouseClicked="#showHelpPane" prefHeight="59.0" prefWidth="200.0" styleClass="buttonsBar">
+            <Pane fx:id="helpButton" layoutY="400.0" onMouseClicked="#showHelpPane" prefHeight="59.0" prefWidth="200.0" styleClass="buttonsBar">
                <children>
                   <Label fx:id="labelAyudaSelected" layoutX="74.0" layoutY="19.0" text="AYUDA">
                      <font>
@@ -69,7 +69,7 @@
                   </Label>
                </children>
             </Pane>
-            <Pane fx:id="exitButton" layoutY="484.0" onMouseClicked="#exitWindow" prefHeight="59.0" prefWidth="200.0" styleClass="buttonsBarExit">
+            <Pane fx:id="exitButton" layoutY="489.0" onMouseClicked="#exitWindow" prefHeight="59.0" prefWidth="200.0" styleClass="buttonsBarExit">
                <children>
                   <Label layoutX="79.0" layoutY="19.0" text="SALIR">
                      <font>
