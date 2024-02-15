@@ -2,30 +2,41 @@ package gui;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Optional;
 
+import javax.xml.parsers.ParserConfigurationException;
+
+import org.xml.sax.SAXException;
 
 import dto.ValueDTO;
 import exception.ActionNotPermitted;
 import exception.ErrorFieldException;
+import jakarta.xml.bind.JAXBException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
+import javafx.scene.chart.CategoryAxis;
 import javafx.scene.chart.LineChart;
+import javafx.scene.chart.NumberAxis;
 import javafx.scene.chart.XYChart;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.Pane;
 import javafx.util.converter.DoubleStringConverter;
 import logic.DamSystem;
+import logic.Formula;
 import logic.Model;
 import logic.Variable;
 import util.EditableCell;
@@ -35,17 +46,28 @@ import util.TypeModel;
 public class securityFactorPane {
     static securityFactorPane window;
 
+    private String variableAnalysis;
+    
+
+    public void setVariableAnalysis(String variableAnalysis) {
+        this.variableAnalysis = variableAnalysis;
+    }
+
     @FXML Pane anchorSFP;
 
-    @FXML Spinner timeSpinner;
-    @FXML Spinner highSpinner;
+    // @FXML Spinner timeSpinner;
+    // @FXML Spinner highSpinner;
     @FXML Spinner speedSpinner;
-    @FXML Spinner poundSpinner;
-    @FXML Spinner cohesionSpinner;
-    @FXML Spinner angleSpinner;
-    @FXML Spinner permeabilitySpinner;
-    @FXML Spinner volumeSpinner;
-    @FXML Spinner crownSpinner;
+    // @FXML Spinner poundSpinner;
+    // @FXML Spinner cohesionSpinner;
+    // @FXML Spinner angleSpinner;
+    // @FXML Spinner permeabilitySpinner;
+    // @FXML Spinner volumeSpinner;
+    // @FXML Spinner crownSpinner;
+
+    public Spinner getSpeedSpinner() {
+        return speedSpinner;
+    }
 
     @FXML ComboBox formulaBox;
     @FXML ComboBox<Phenomenon> phenomenonBox;
@@ -61,12 +83,21 @@ public class securityFactorPane {
     @FXML Label highValueLabel;
     @FXML Label crownValueLabel;
     @FXML Label modelLabel;
+    @FXML Label variableLabel;
+
+    public Label getVariableLabel() {
+        return variableLabel;
+    }
 
     @FXML Button managementBtn;
     @FXML Button calculateBtn;
     @FXML Button saveBtn;
 
-    @FXML LineChart sFChart;
+    @FXML LineChart<String,Double> sFchart;
+    @FXML
+    private CategoryAxis xAxis;
+    @FXML
+    private NumberAxis yAxis;
 
     private ObservableList<ValueDTO> list;
 
@@ -78,9 +109,7 @@ public class securityFactorPane {
 
     public void initialize(){
         window = this;
-        // loadSpinners();
         loadComboBoxes();
-        loadChart();
     }
 
     public static securityFactorPane getInstance(){
@@ -173,7 +202,7 @@ public class securityFactorPane {
         valueColumn.setCellFactory(param -> new EditableCell<>(new DoubleStringConverter()));
         int i = 0;
         for(String l: vList){
-            vaList.add(new ValueDTO("NO", vList.get(i), Double.MIN_VALUE, Double.MAX_VALUE));
+            vaList.add(new ValueDTO("NO", vList.get(i), -9999999999999999.0, 9999999999999999.0));
             i++;
         }
         list = FXCollections.observableArrayList(vaList);
@@ -232,14 +261,16 @@ public class securityFactorPane {
     }
 
     public void calculateButton(){
-        String nameFormula = formulaBox.getSelectionModel().getSelectedItem().toString();
+        Object formula = formulaBox.getSelectionModel().getSelectedItem();
         ArrayList<ValueDTO> list = new ArrayList<ValueDTO>(valueTable.getItems());
         double var = -1;
         if(formulaBox.getSelectionModel().getSelectedItem() instanceof logic.Formula){
         try {
-            var = DamSystem.getInstance().securityFactor(nameFormula, list);
+            var = DamSystem.getInstance().securityFactor(formula, list);
         } catch (ActionNotPermitted e) {
             // TODO Auto-generated catch block
+            e.printStackTrace();
+        } catch (Exception e){
             e.printStackTrace();
         }
     }else{
@@ -247,6 +278,7 @@ public class securityFactorPane {
         Model aux = (Model)formulaBox.getSelectionModel().getSelectedItem();
         var = aux.evaluate(list);
         }catch(Exception e){
+            e.printStackTrace();
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("información");
             alert.setHeaderText("Error");
@@ -293,17 +325,76 @@ public class securityFactorPane {
         }
     }
 
-    public void loadChart(){
-        XYChart.Series<String,Double> series = new XYChart.Series<>();
-
-    }
-
     public void draw(){
         ValueDTO aux = valueTable.getSelectionModel().getSelectedItem();
         if(aux.getName().equalsIgnoreCase("altura")
-        || aux.getName().equals("Altura de terraplén"))
+        || aux.getName().equalsIgnoreCase("Altura de terraplén")
+        || aux.getName().equalsIgnoreCase("Altura de cortina")
+        || aux.getName().equalsIgnoreCase("Altura del terraplén")
+        || aux.getName().equalsIgnoreCase("Altura del cortina"))
         highValueLabel.setText(String.valueOf(aux.getValue()));
         if(aux.getName().equalsIgnoreCase("ancho de corona"))
         crownValueLabel.setText(String.valueOf(aux.getValue()));
     }
+
+    public void loadChart(LinkedList<Double> list){
+        XYChart.Series<String,Double> series = new XYChart.Series<>();
+        for (int i = 0; i < list.size(); i++) {
+            series.getData().add(new XYChart.Data<String,Double>(""+i, list.get(i)));
+        }
+        sFchart.getData().add(series);
+    }
+
+    public void bookBtn() throws ActionNotPermitted, ErrorFieldException, ParserConfigurationException, SAXException, JAXBException, IOException{
+        TextInputDialog dialogo = new TextInputDialog();
+        dialogo.setHeaderText("Ingrese un identificador para los datos:");
+        dialogo.setContentText("Identificador:");
+        Optional<String> text = dialogo.showAndWait();
+        
+           // 
+            DamSystem.getInstance().saveResults();
+        
+    }
+
+
+    public void graph(){
+        
+        Object o = formulaBox.getSelectionModel().getSelectedItem();
+        LinkedList<Double> list = new LinkedList<Double>();
+        
+            list = new LinkedList<Double>();
+            try {
+                list = DamSystem.getInstance().securityFactorList(o, new ArrayList<ValueDTO>(valueTable.getItems()));
+                // DamSystem.getInstance().addResult(, list);
+            } catch (ActionNotPermitted | ErrorFieldException | ParserConfigurationException | SAXException
+                    | JAXBException | IOException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        
+            loadChart(list);
+    }
+
+    public void clearChartData(){
+        sFchart.getData().clear();
+    }
+
+    public void showAnalysisPane(){
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("../gui/AnalysisPane.fxml"));
+            root.setLayoutX(300);
+            root.setLayoutY(200);
+            anchorSFP.getChildren().add(root);
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+    }
+
+    public void loadSpinnerSpeed(String name, double value) throws ActionNotPermitted, ErrorFieldException, ParserConfigurationException, SAXException, JAXBException, IOException{
+        LinkedList<Double> list = DamSystem.getInstance().securityFactorAnalysisList(formulaBox.getSelectionModel().getSelectedItem(), new ArrayList<>(valueTable.getItems()), value, name);
+        loadChart(list);
 }
+}
+
+

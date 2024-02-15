@@ -20,10 +20,10 @@ public class Init {
         list.add(v1);
         DamSystem.getInstance().addFormula("formula 1", "a+b", list);
 
-        Variable v11 = new Variable("altura", "a", "prueba1",20,99);
-        Variable v12 = new Variable("ancho de corona", "b", "prueba2",20,99);
+        Variable v11 = new Variable("altura", "a", "prueba1",19,25);
+        Variable v12 = new Variable("ancho de corona", "b", "prueba2",23,99);
         // Variable v13 = new Variable("variable 31", "c", "prueba3");
-        Variable v14 = new Variable("presión", "d", "prueba4",20,99);
+        Variable v14 = new Variable("tiempo", "c", "prueba4",0,100);
         ArrayList<Variable> list3 = new ArrayList<Variable>();
         list3.add(v12);
         list3.add(v11);

@@ -3,6 +3,7 @@
   <Header copyright="Isi">
     <Application name="KNIME" version="4.7.1"/>
   </Header>
+  
   <DataDictionary numberOfFields="7">
     <DataField name="Altura de terraplén" optype="continuous" dataType="double">
       <Interval closure="closedClosed" leftMargin="15.0" rightMargin="40.0"/>

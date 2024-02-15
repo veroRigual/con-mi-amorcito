@@ -1,25 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.chart.CategoryAxis?>
+<?import javafx.scene.chart.LineChart?>
+<?import javafx.scene.chart.NumberAxis?>
+<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.control.Separator?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Font?>
 
-<AnchorPane id="panePrincipal" fx:id="anchorSFP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="878.0" prefWidth="1178.0" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ManagementPane">
+<AnchorPane id="panePrincipal" fx:id="anchorSFP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="449.0" prefWidth="1347.0" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ManagementPane">
    <children>
-      <Label layoutX="73.0" layoutY="13.0" text="Gestionar aplicación">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
-      <Separator layoutX="73.0" layoutY="40.0" prefHeight="0.0" prefWidth="179.0" />
-      <TableView layoutX="66.0" layoutY="86.0" prefHeight="385.0" prefWidth="1047.0">
-        <columns>
-          <TableColumn prefWidth="505.0" text="Nombre" />
-          <TableColumn maxWidth="698.0" minWidth="-1.0" prefWidth="541.0" text="Expresión" />
-        </columns>
-      </TableView>
+      
+      <ComboBox fx:id="registreSpinner" layoutX="1008.0" layoutY="53.0" prefHeight="29.0" prefWidth="267.0" promptText="Seleccionar" />
+      <Label layoutX="936.0" layoutY="59.0" text="Registros:" />
    </children>
 </AnchorPane>
