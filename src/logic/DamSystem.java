@@ -125,16 +125,14 @@ public class DamSystem {
     }
 
     public double securityFactor(Object o, ArrayList<ValueDTO> list) throws ActionNotPermitted, ParserConfigurationException, SAXException, JAXBException, IOException{
-        double value = 0;
         if(!list.isEmpty()){
-       // Formula auxF = findForm(name);
-       // if(auxF != null)
-            value = o instanceof Model ? ((Model) o).evaluate(list) : ((Formula) o).evaluate(list);
-        //else
-//throw new ActionNotPermitted("La formula solicitada no se encuentra en el sistema");
+            if(o != null){
+            double value = o instanceof Model ? ((Model) o).evaluate(list) : ((Formula) o).evaluate(list);
+            return value;
+            }else
+                throw new ActionNotPermitted("Debe escoger algun metodo para realizar el FS");
         }else
-            throw new ActionNotPermitted("Para calcular el Factor de Seguridad debe los valores de las variables los datos a las variables");
-        return value;
+            throw new ActionNotPermitted("Para predecir el Factor de Seguridad debe los valores de las variables los datos a las variables");
     }
 
     public LinkedList<Double> securityFactorList(String name, ArrayList<ValueDTO> list) throws ActionNotPermitted, ErrorFieldException{
@@ -170,44 +168,50 @@ public class DamSystem {
         if(!list.isEmpty()){
         boolean found = true;
         double aux = 0;
+        double aux1 = 0;
         int pos = 0;
         for (int i = 0; i < list.size() && found; i++) {
             if(list.get(i).getName().equalsIgnoreCase("Tiempo")){
                 found = false;
                 aux = list.get(i).getValue();
+                aux1 = list.get(i).getValue();
                 pos = i;
             }
         }
-        while(aux > 0){
+        while(aux > -1){
             auxl.get(pos).setValue(aux);
             values.add(o instanceof Model ? ((Model) o).evaluate(auxl):((Formula) o).evaluate(auxl));
             --aux;
         }
+        list.get(pos).setValue(aux1);
         }else
             throw new ActionNotPermitted("Para calcular el Factor de Seguridad debe los valores de las variables los datos a las variables");
         return values;
     }
 
-    public LinkedList<Double> securityFactorAnalysisList(Object o, ArrayList<ValueDTO> list, double value, String var) throws ActionNotPermitted, ErrorFieldException, ParserConfigurationException, SAXException, JAXBException, IOException{
+    public LinkedList<Double> securityFactorAnalysisList(Object o, ArrayList<ValueDTO> list, double step, String var) throws ActionNotPermitted, ErrorFieldException, ParserConfigurationException, SAXException, JAXBException, IOException{
         LinkedList<Double> values = new LinkedList<Double>();
-        ArrayList<ValueDTO> auxl = list;
         if(!list.isEmpty()){
+            ArrayList<ValueDTO> auxList = list;
         boolean found = true;
         double aux = 0;
+        double aux1 = 0;
         int pos = 0;
-        
         for (int i = 0; i < list.size() && found; i++) {
             if(list.get(i).getName().equalsIgnoreCase(var)){
                 found = false;
                 aux = list.get(i).getDownLimit();
+                aux1 = list.get(i).getValue();
                 pos = i;
             }
         }
-        while(aux < auxl.get(pos).getUpLimit()){
-            auxl.get(pos).setValue(aux);
-            values.add(o instanceof Model ? ((Model) o).evaluate(auxl):((Formula) o).evaluate(auxl));
-            aux += value;
+        values.add(aux);
+        while(aux <= auxList.get(pos).getUpLimit()){
+            auxList.get(pos).setValue(aux);
+            values.add(o instanceof Model ? ((Model) o).evaluate(auxList):((Formula) o).evaluate(auxList));
+            aux += step;
         }
+        list.get(pos).setValue(aux1);
         }else
             throw new ActionNotPermitted("Para calcular el Factor de Seguridad debe los valores de las variables los datos a las variables");
         return values;

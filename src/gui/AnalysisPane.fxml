@@ -10,17 +10,17 @@
 
 <AnchorPane id="analysisPane" fx:id="analysisAnchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="298.0" prefWidth="400.0" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.AnalysisPane">
    <children>
-      <Label layoutX="123.0" layoutY="14.0" text="Análicis de sencibilidad">
+      <Label layoutX="123.0" layoutY="14.0" text="Análisis de sensibilidad">
          <font>
             <Font size="18.0" />
          </font>
       </Label>
       <Separator layoutX="123.0" layoutY="38.0" prefHeight="0.0" prefWidth="184.0" />
       <Button layoutX="215.0" layoutY="230.0" mnemonicParsing="false" onAction="#cancelBtn" text="Cancelar" />
-      <Button layoutX="118.0" layoutY="230.0" mnemonicParsing="false" onAction="#aceptBtn" text="Aceptar" />
+      <Button fx:id="acept" disable="true" layoutX="118.0" layoutY="230.0" mnemonicParsing="false" onAction="#aceptBtn" text="Aceptar" />
       <ComboBox fx:id="comboVariable" layoutX="182.0" layoutY="95.0" onAction="#selectCombo" prefHeight="28.0" prefWidth="174.0" promptText="Seleccionar" />
       <Label layoutX="111.0" layoutY="100.0" text="Variable:" />
       <Label layoutX="74.0" layoutY="152.0" text="Defina un paso:" />
-      <Spinner fx:id="passedSpinner" layoutX="182.0" layoutY="147.0" prefHeight="28.0" prefWidth="144.0" />
+      <Spinner fx:id="passedSpinner" disable="true" layoutX="182.0" layoutY="147.0" prefHeight="28.0" prefWidth="144.0" />
    </children>
 </AnchorPane>

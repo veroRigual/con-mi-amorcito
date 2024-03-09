@@ -14,10 +14,10 @@ import service.ModelLoader;
 public class Main {
 
     public static void main(String[] args) {
-        for(Model m: DamSystem.getInstance().getModelsList()){
-            int i = 0;
-            System.out.println(m.getModel().getDataDictionary().getDataFields().get(i).getName());
-            i++;
-        }
+        // for(Model m: DamSystem.getInstance().getModelsList()){
+        //     int i = 0;
+        //     System.out.println(m.getModel().getDataDictionary());
+        //     i++;
+        // }
     }
 }

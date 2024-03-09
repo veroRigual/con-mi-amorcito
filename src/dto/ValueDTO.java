@@ -23,7 +23,11 @@ public class ValueDTO {
     }
     public void setValue(double value) throws ErrorFieldException {
         if(value >= downLimit && value <= upLimit){
+            try{
             this.value = value;
+            } catch (NumberFormatException e) {
+                throw new ErrorFieldException("Valor insertado para la variable un valor no permitido.");
+            }
         }else{
             this.value = downLimit;
         throw new ErrorFieldException("Valor insertado para la variable no se encuentra entre el rango de valores permidos.\n"

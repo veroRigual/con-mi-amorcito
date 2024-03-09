@@ -15,6 +15,7 @@ import jakarta.xml.bind.JAXBException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
@@ -28,6 +29,8 @@ public class AnalysisPane {
     @FXML private AnchorPane analysisAnchor;
     @FXML private ComboBox<String> comboVariable;
     @FXML private Spinner<Double> passedSpinner;
+
+    @FXML Button acept;
 
     private ArrayList<ValueDTO> l;
 
@@ -43,7 +46,7 @@ public class AnalysisPane {
     public void loadCombo(){
         ArrayList<String> list = new ArrayList<>();
         for (ValueDTO l : l) {
-            if(!l.getName().equalsIgnoreCase("tiempo"))
+            // if(!l.getName().equalsIgnoreCase(""))
                 list.add(l.getName());
         }
         ObservableList<String> l = FXCollections.observableArrayList(list);
@@ -52,20 +55,22 @@ public class AnalysisPane {
 
     public void selectCombo(){
         loadSpinner();
+        acept.setDisable(false);
+        passedSpinner.setDisable(false);
     }
 
     public void loadSpinner(){
-        SpinnerValueFactory<Double> valueFactory =new SpinnerValueFactory.DoubleSpinnerValueFactory(0.0,9999.0,0.5);
+        SpinnerValueFactory<Double> valueFactory =new SpinnerValueFactory.DoubleSpinnerValueFactory(0.1,9999.0,0.1,0.1);
         passedSpinner.setValueFactory(valueFactory);
 
     }
 
     public void aceptBtn() throws ActionNotPermitted, ErrorFieldException, ParserConfigurationException, SAXException, JAXBException, IOException{
         String aux = comboVariable.getSelectionModel().getSelectedItem();
-        securityFactorPane.getInstance().getVariableLabel().setText("Variable analizada: " + aux);
         securityFactorPane.getInstance().setVariableAnalysis(aux);
         securityFactorPane.getInstance().loadSpinnerSpeed(aux, passedSpinner.getValue());
         securityFactorPane.getInstance().getAnchorSFP().getChildren().remove(analysisAnchor);
+        securityFactorPane.getInstance().getCleanBtn().setDisable(false);
     }
 
     public void cancelBtn(){

@@ -21,4 +21,9 @@ public class Util {
 
         return resultado;
     }
+
+    public static double denormalize(double yNormalized, double yMin, double yMax) {
+        return yNormalized * (yMax - yMin) + yMin;
+    }
+
 }
