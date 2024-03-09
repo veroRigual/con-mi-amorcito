@@ -33,6 +33,7 @@ import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.converter.DoubleStringConverter;
 import logic.DamSystem;
@@ -84,6 +85,10 @@ public class securityFactorPane {
     @FXML Label crownValueLabel;
     @FXML Label modelLabel;
     @FXML Label variableLabel;
+    @FXML Label weightValue;
+    @FXML Label cohesionLabel;
+    @FXML Label angleLabel;
+    @FXML Label noDataLabel;
 
     public Label getVariableLabel() {
         return variableLabel;
@@ -92,12 +97,16 @@ public class securityFactorPane {
     @FXML Button managementBtn;
     @FXML Button calculateBtn;
     @FXML Button saveBtn;
+    @FXML Button anlysisBtn;
+    @FXML  Button cleanBtn;
 
-    @FXML LineChart<String,Double> sFchart;
-    @FXML
-    private CategoryAxis xAxis;
-    @FXML
-    private NumberAxis yAxis;
+    public Button getCleanBtn() {
+        return cleanBtn;
+    }
+
+    @FXML LineChart<?,?> sFchart;
+    @FXML private CategoryAxis xAxis;
+    @FXML private NumberAxis yAxis;
 
     private ObservableList<ValueDTO> list;
 
@@ -110,6 +119,11 @@ public class securityFactorPane {
     public void initialize(){
         window = this;
         loadComboBoxes();
+        //xAxis = new CategoryAxis();
+        sFchart.getYAxis().setLabel("FS");
+        sFchart.getXAxis().setLabel("Dominio de la variable");
+        // yAxis.setLabel("FS");
+        // xAxis.setLabel("Dominio de la variable");
     }
 
     public static securityFactorPane getInstance(){
@@ -130,32 +144,62 @@ public class securityFactorPane {
     }
 
     public void loadFormulaBox(){
-        formulaBox.setDisable(false);
-        calculateBtn.setDisable(true);
-        saveBtn.setDisable(true);
+        
         if(phenomenonBox.getSelectionModel().getSelectedIndex() == 0){
             if(modelBox.getSelectionModel().getSelectedIndex()==0){
         ObservableList<logic.Formula> list = FXCollections.observableArrayList(DamSystem.getInstance().getFormList());
+        if(!list.isEmpty()){
+            valueTable.setDisable(false);
+            formulaBox.setDisable(false);
+            calculateBtn.setDisable(true);
+            anlysisBtn.setDisable(true);
+            // cleanBtn.setDisable(true);
+            saveBtn.setDisable(true);
+
         formulaBox.setItems(list);
         modelLabel.setText("Ecuación:");
                 modelLabel.setVisible(true);
         // managementBtn.setVisible(true);
+        noDataLabel.setVisible(false);
         }else{
+            noDataLabel.setVisible(true);
+            valueTable.setDisable(true);
+            formulaBox.setDisable(true);
+        }
+        }else{
+
+            formulaBox.setDisable(false);
+            calculateBtn.setDisable(true);
+            anlysisBtn.setDisable(true);
+            // cleanBtn.setDisable(true);
+            saveBtn.setDisable(true);
+
             ObservableList<Model> list = FXCollections.observableArrayList(DamSystem.getInstance().getDesemModelsList());
             formulaBox.setItems(list);
             modelLabel.setText("Modelo:");
                 modelLabel.setVisible(true);
+                valueTable.setDisable(false);
         }
     }else{
+
+        formulaBox.setDisable(false);
+        calculateBtn.setDisable(true);
+        anlysisBtn.setDisable(true);
+        // cleanBtn.setDisable(true);
+        saveBtn.setDisable(true);
+
         ObservableList<Model> list = FXCollections.observableArrayList(DamSystem.getInstance().getPreciModelsList());
         formulaBox.setItems(list);
         modelLabel.setText("Modelo:");
             modelLabel.setVisible(true);
+            valueTable.setDisable(false);
     }
     }
 
     public void loadModelBox(){
         calculateBtn.setDisable(true);
+        anlysisBtn.setDisable(true);
+        // cleanBtn.setDisable(true);
         saveBtn.setDisable(true);
         modelBox.setDisable(false);
         ObservableList<TypeModel> list= null;
@@ -164,7 +208,7 @@ public class securityFactorPane {
             modelBox.setItems(list);
             // managementBtn.setVisible(true);
         }else{
-            list = FXCollections.observableArrayList(TypeModel.Redes_Neuronales);
+            list = FXCollections.observableArrayList(TypeModel.RNA);
             modelBox.setItems(list);
             // managementBtn.setVisible(false);
         }
@@ -177,6 +221,8 @@ public class securityFactorPane {
 
     public <T> void loadValueTable(){
         calculateBtn.setDisable(false);
+        anlysisBtn.setDisable(false);
+        // cleanBtn.setDisable(false);
         if(formulaBox.getSelectionModel().getSelectedItem() != null){
             if(phenomenonBox.getSelectionModel().getSelectedItem().equals(Phenomenon.Desembalse)
             && modelBox.getSelectionModel().getSelectedItem().equals(TypeModel.Regresión)){
@@ -202,7 +248,7 @@ public class securityFactorPane {
         valueColumn.setCellFactory(param -> new EditableCell<>(new DoubleStringConverter()));
         int i = 0;
         for(String l: vList){
-            vaList.add(new ValueDTO("NO", vList.get(i), -9999999999999999.0, 9999999999999999.0));
+            vaList.add(new ValueDTO("NO", vList.get(i), 0, 200));
             i++;
         }
         list = FXCollections.observableArrayList(vaList);
@@ -236,12 +282,26 @@ public class securityFactorPane {
         valueTable.setItems(list);
     }
 
+    // public void checkValue(KeyEvent e){
+    //     String aux = e.getText();
+    //     for (int i = 0; i < aux.length(); i++) {
+    //         if(Character.isAlphabetic(i)){
+    //         Alert alert = new Alert(Alert.AlertType.ERROR);
+    //         alert.setTitle("información");
+    //         alert.setHeaderText("Valor insertado no válido");
+    //         // alert.setContentText(e.getMessage());
+    //         alert.showAndWait();
+    //         }
+    //     }
+    // }
+
     public void updateTable(TableColumn.CellEditEvent<ValueDTO, Double> event){
-        TablePosition<ValueDTO, Double> pos = event.getTablePosition();
-        Double newValue = event.getNewValue();
+        
+        try {
+            TablePosition<ValueDTO, Double> pos = event.getTablePosition();
         int row = pos.getRow();
         ValueDTO rowData = event.getTableView().getItems().get(row);
-        try {
+            Double newValue = event.getNewValue();
             rowData.setValue(newValue);
         } catch (ErrorFieldException e) {
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -250,7 +310,7 @@ public class securityFactorPane {
             alert.setContentText(e.getMessage());
             alert.showAndWait();
             draw();
-        } catch (Exception ne){
+        } catch(Exception ne){
             Alert alert = new Alert(Alert.AlertType.ERROR);
             alert.setTitle("información");
             alert.setHeaderText("Valor insertado no válido");
@@ -308,7 +368,7 @@ public class securityFactorPane {
         }
         infoLabel.setVisible(true);
         infoLabel1.setVisible(true);
-        statusLabel.setVisible(true);
+        //statusLabel.setVisible(true);
         saveBtn.setDisable(false);
     }
     }
@@ -327,21 +387,41 @@ public class securityFactorPane {
 
     public void draw(){
         ValueDTO aux = valueTable.getSelectionModel().getSelectedItem();
-        if(aux.getName().equalsIgnoreCase("altura")
-        || aux.getName().equalsIgnoreCase("Altura de terraplén")
-        || aux.getName().equalsIgnoreCase("Altura de cortina")
-        || aux.getName().equalsIgnoreCase("Altura del terraplén")
-        || aux.getName().equalsIgnoreCase("Altura del cortina"))
+        if(aux.getName().contains("ltura")){
         highValueLabel.setText(String.valueOf(aux.getValue()));
-        if(aux.getName().equalsIgnoreCase("ancho de corona"))
+        highValueLabel.setVisible(true);
+        }
+        if(aux.getName().contains("orona")){
         crownValueLabel.setText(String.valueOf(aux.getValue()));
+        crownValueLabel.setVisible(true);
+        }
+        if(aux.getName().contains("gulo")){
+        angleLabel.setText(String.valueOf(aux.getValue()));
+        angleLabel.setVisible(true);
+        }
+        if(aux.getName().contains("ohes")){
+        cohesionLabel.setText(String.valueOf(aux.getValue()));
+        cohesionLabel.setVisible(true);
+        }
+        if(aux.getName().contains("eso")){
+        weightValue.setText(String.valueOf(aux.getValue()));
+        weightValue.setVisible(true);
+        }
     }
 
-    public void loadChart(LinkedList<Double> list){
-        XYChart.Series<String,Double> series = new XYChart.Series<>();
-        for (int i = 0; i < list.size(); i++) {
-            series.getData().add(new XYChart.Data<String,Double>(""+i, list.get(i)));
+    public void loadChart(LinkedList<Double> list, double value){
+        XYChart.Series series = new XYChart.Series<>();
+        // yAxis.setLowerBound(0);
+        // yAxis.setUpperBound(5);
+        
+        //yAxis.setTickUnit(1);
+        xAxis.setTickLength(10);
+        double var = list.get(0);
+        for (int i = 1; i < list.size(); i++) {
+            series.getData().add(new XYChart.Data<String,Double>(String.valueOf(var), list.get(i)));
+            var += value;
         }
+        series.setName(variableAnalysis);
         sFchart.getData().add(series);
     }
 
@@ -350,19 +430,14 @@ public class securityFactorPane {
         dialogo.setHeaderText("Ingrese un identificador para los datos:");
         dialogo.setContentText("Identificador:");
         Optional<String> text = dialogo.showAndWait();
-        
-           // 
             DamSystem.getInstance().saveResults();
-        
     }
 
 
     public void graph(){
-        
         Object o = formulaBox.getSelectionModel().getSelectedItem();
         LinkedList<Double> list = new LinkedList<Double>();
-        
-            list = new LinkedList<Double>();
+            // list = new LinkedList<Double>();
             try {
                 list = DamSystem.getInstance().securityFactorList(o, new ArrayList<ValueDTO>(valueTable.getItems()));
                 // DamSystem.getInstance().addResult(, list);
@@ -371,12 +446,12 @@ public class securityFactorPane {
                 // TODO Auto-generated catch block
                 e.printStackTrace();
             }
-        
-            loadChart(list);
+            // loadChart(list);
     }
 
     public void clearChartData(){
         sFchart.getData().clear();
+        cleanBtn.setDisable(true);
     }
 
     public void showAnalysisPane(){
@@ -393,7 +468,7 @@ public class securityFactorPane {
 
     public void loadSpinnerSpeed(String name, double value) throws ActionNotPermitted, ErrorFieldException, ParserConfigurationException, SAXException, JAXBException, IOException{
         LinkedList<Double> list = DamSystem.getInstance().securityFactorAnalysisList(formulaBox.getSelectionModel().getSelectedItem(), new ArrayList<>(valueTable.getItems()), value, name);
-        loadChart(list);
+        loadChart(list, value);
 }
 }
 

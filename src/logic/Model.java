@@ -28,6 +28,7 @@ import org.xml.sax.SAXException;
 
 import dto.ValueDTO;
 import jakarta.xml.bind.JAXBException;
+import util.Util;
 
 public class Model {
 
@@ -70,9 +71,7 @@ public class Model {
         for(DataField m: model.getDataDictionary().getDataFields()){
             if(!m.getName().equalsIgnoreCase("FS"))
             list.add(m.getName());
-            
         }
-        
         return list;
     }
 
@@ -88,7 +87,13 @@ public class Model {
         arguments.put(l.getName(), l.getValue());
         Map<String, ?> results = evaluator.evaluate(arguments);
         value =  (Double) results.get("FS");
-        return value;
+        // File file = new File(new File("").getAbsolutePath()+ "/src/models/DDesembalse simplificado tiempo en días  (1).pmml");
+        // Model aux = new Model(file, "desnomalizador");
+        // evaluator = new ModelEvaluatorBuilder(aux.getModel()).build();
+        // Map<String, Number> arguments1 = new LinkedHashMap<>();
+        // arguments1.put("FS", value);
+        // Map<String, ?> results1 = evaluator.evaluate(arguments);
+        return Util.denormalize(value, 0, 5);
     }
 
     public String toString(){

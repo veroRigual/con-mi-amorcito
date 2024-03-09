@@ -79,10 +79,16 @@ public class ManagementPane {
     }
 
     public void loadSpinner(){
-        SpinnerValueFactory<Double> valueFactory =new SpinnerValueFactory.DoubleSpinnerValueFactory(Double.MIN_VALUE,Double.MAX_VALUE);
-        SpinnerValueFactory<Double> valueFactory1 =new SpinnerValueFactory.DoubleSpinnerValueFactory(Double.MIN_VALUE,Double.MAX_VALUE);
+        SpinnerValueFactory<Double> valueFactory =new SpinnerValueFactory.DoubleSpinnerValueFactory(0,Double.MAX_VALUE,0,0.1);
+        SpinnerValueFactory<Double> valueFactory1 =new SpinnerValueFactory.DoubleSpinnerValueFactory(0,Double.MAX_VALUE,0.1,0.1);
         upLimitSpinner.setValueFactory(valueFactory);
         downLimitSpinner.setValueFactory(valueFactory1);
+    }
+
+    public void loadUpLimitSpinner(){
+        double value = downLimitSpinner.getValue() + 0.1;
+        SpinnerValueFactory<Double> valueFactory1 =new SpinnerValueFactory.DoubleSpinnerValueFactory(value,Double.MAX_VALUE,value,0.1);
+        upLimitSpinner.setValueFactory(valueFactory1);
     }
 
     public void loadTable(){
@@ -166,6 +172,7 @@ public class ManagementPane {
             alert.setContentText(e.getMessage());
             alert.showAndWait();
         }
+        
         checkFilds();
     }
 
@@ -213,8 +220,8 @@ public class ManagementPane {
         if(value){
             ArrayList<Variable> list = new ArrayList<Variable>(variableTable.getItems());
             DamSystem.getInstance().addFormula(funtionNameText.getText(), functionLabel.getText(), list);
-
-            update();
+            insertDataSpinner();
+           // update();
             
             funtionNameText.setText("");
             functionLabel.setText("");
@@ -231,6 +238,7 @@ public class ManagementPane {
             cancelBtn.setDisable(true);
             variableTable.getItems().clear();
             variableTable.setDisable(true);
+            aceptBtn.setDisable(true);
             update();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("información");
@@ -240,7 +248,8 @@ public class ManagementPane {
         }else{
             ArrayList<Variable> list = new ArrayList<Variable>(variableTable.getItems());
             DamSystem.getInstance().modifyFormula(pos, funtionNameText.getText(), functionLabel.getText(), list);
-            update();
+            //update();
+            insertDataSpinner();
             funtionNameText.setText("");
             functionLabel.setText("");
             descriptionText.setText("");
@@ -256,6 +265,7 @@ public class ManagementPane {
             cancelBtn.setDisable(true);
             variableTable.getItems().clear();
             variableTable.setDisable(true);
+            aceptBtn.setDisable(true);
             update();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("información");
@@ -297,7 +307,7 @@ public class ManagementPane {
         alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("información");
         alert.setHeaderText("Aviso");
-        alert.setContentText("La formula se ha eliminado exitosamente");
+        alert.setContentText("La fórmula ha sido eliminada exitosamente");
         alert.showAndWait();
         }
     }

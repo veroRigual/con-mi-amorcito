@@ -24,8 +24,8 @@
       <Separator layoutX="52.0" layoutY="40.0" prefHeight="3.0" prefWidth="188.0" />
       <TableView fx:id="formulaTable" layoutX="113.0" layoutY="419.0" onMouseClicked="#clicTable" prefHeight="286.0" prefWidth="953.0" styleClass="formulaTable">
         <columns>
-          <TableColumn fx:id="nameColumn" prefWidth="337.0" text="Nombre" />
-          <TableColumn fx:id="expreColumn" maxWidth="712.0" minWidth="-1.0" prefWidth="614.0" text="Expresión" />
+          <TableColumn fx:id="nameColumn" prefWidth="275.0" text="Nombre" />
+          <TableColumn fx:id="expreColumn" maxWidth="712.0" minWidth="-1.0" prefWidth="658.0" text="Expresión" />
         </columns>
       </TableView>
       <GridPane layoutX="797.0" layoutY="721.0" prefHeight="30.0" prefWidth="405.0">
@@ -78,8 +78,8 @@
       <Label layoutX="373.0" layoutY="313.0" text="Límites de los valores que puede tomar:" />
       <Label layoutX="904.0" layoutY="313.0" text="Superior:" />
       <Label layoutX="661.0" layoutY="313.0" text="Inferior:" />
-      <Spinner fx:id="downLimitSpinner" disable="true" layoutX="720.0" layoutY="308.0" onMouseClicked="#insertDataSpinner" prefHeight="28.0" prefWidth="117.0" />
-      <Spinner fx:id="upLimitSpinner" disable="true" layoutX="970.0" layoutY="308.0" onMouseClicked="#insertDataSpinner" prefHeight="28.0" prefWidth="117.0" />
+      <Spinner fx:id="downLimitSpinner" disable="true" layoutX="720.0" layoutY="308.0" onMouseClicked="#loadUpLimitSpinner" prefHeight="28.0" prefWidth="117.0" />
+      <Spinner fx:id="upLimitSpinner" disable="true" layoutX="970.0" layoutY="308.0" prefHeight="28.0" prefWidth="117.0" />
       <Separator layoutX="1103.0" layoutY="107.0" orientation="VERTICAL" prefHeight="242.0" prefWidth="6.0" />
       <Label layoutX="398.0" layoutY="100.0" text="Datos de la variable:" />
       <Label layoutX="379.0" layoutY="169.0" text="Descripción:" />

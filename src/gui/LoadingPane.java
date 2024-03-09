@@ -15,7 +15,7 @@ public class LoadingPane {
 
     public void initialize(){
         window = this;
-        // loading.setStyle("-fx-accent: green;");
+        
     }
 
     public static LoadingPane getInstance(){

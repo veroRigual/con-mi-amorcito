@@ -16,7 +16,6 @@ public class MyStringConverter<T> extends StringConverter<T> {
 
     @Override
     public T fromString(String string) {
-        // Adaptar la lógica según la clase T proporcionada
         if (String.class.isAssignableFrom(clazz)) {
             return (T) string;
         } else if (Integer.class.isAssignableFrom(clazz)) {
