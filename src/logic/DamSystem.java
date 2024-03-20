@@ -34,6 +34,7 @@ public class DamSystem {
         resultsList = new ArrayList<Result>();
         modelsList = ModelLoader.loadModels();
         resultsFile = new File("src/files/resultsFile.dvs");
+        formulasFile = new File("src/files/formulasFile.csv");
     }
 
     public static DamSystem getInstance(){
@@ -241,5 +242,9 @@ public class DamSystem {
     public void addResult(String name, LinkedList<Double> list){
         Result aux = new Result(name, 0, list);
         resultsList.add(aux);
+    }
+
+    public File getFormulasFile() {
+      return formulasFile;
     }
 }

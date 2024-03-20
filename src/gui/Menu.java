@@ -15,7 +15,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
-
+import util.FilesManagement;
+import logic.DamSystem;
+ 
 public class Menu {
 
     static Menu window;
@@ -110,5 +112,6 @@ public class Menu {
    public void exitWindow(){
         Stage stage = (Stage) mainAnchorPane.getScene().getWindow();
         stage.close();
+        //FilesManagement.WriteFormulaToFile(DamSystem.getInstance().getFormulasFile());
     }
 }

@@ -32,6 +32,7 @@ import logic.DamSystem;
 import logic.Formula;
 import logic.Variable;
 import util.EditableCell;
+import util.FilesManagement;
 
 public class ManagementPane {
     static ManagementPane helpSFP;
@@ -220,6 +221,7 @@ public class ManagementPane {
         if(value){
             ArrayList<Variable> list = new ArrayList<Variable>(variableTable.getItems());
             DamSystem.getInstance().addFormula(funtionNameText.getText(), functionLabel.getText(), list);
+            FilesManagement.WriteOneFormulaToFile(DamSystem.getInstance().getFormulasFile(),funtionNameText.getText(), functionLabel.getText(), list);
             insertDataSpinner();
            // update();
             

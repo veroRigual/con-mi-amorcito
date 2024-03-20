@@ -1,3 +1,4 @@
+import java.io.File;
 import java.io.IOException;
 import exception.ErrorFieldException;
 import gui.LoadingPane;
@@ -9,6 +10,9 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import util.Init;
+import util.FilesManagement;
+import util.FilesManagement;
+import logic.DamSystem;
 
 public class App extends Application{
     public static void main(String[] args) throws Exception {
@@ -24,8 +28,8 @@ public class App extends Application{
         loadingStage.setTitle("DamGuard");
         loadingStage.show();
         new Thread(() -> {
-            try {
-                Init.init();
+            // Init.init();
+              FilesManagement.CargandoFormulas(DamSystem.getInstance().getFormulasFile(), DamSystem.getInstance().getFormList());
                 LoadingPane.getInstance().load();
                 Platform.runLater(() -> {
                     loadingStage.close();
@@ -39,10 +43,6 @@ public class App extends Application{
                         e.printStackTrace();
                     }
                 });
-            } catch (ErrorFieldException e1) {
-                // TODO Auto-generated catch block
-                e1.printStackTrace();
-            }
         }).start();
     }
 

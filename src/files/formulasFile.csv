@@ -1,0 +1,2 @@
+Name;Equation;Variables
+Fórmula en días simplificada;-0,0976*H+3,528*B+0,0402*C+0,0382*L-1,9453*V-0,03*t+0,0012*(H^2)-0,0984*(B^2)-0,0001*(C^2)+0,0003*(L^2)+3,1424(V^2)+0,0002*(t^2)-28,8314;Altura del terraplén;H;Altura desde el centro de la corona hasta el límite inferior del terraplén,medida en metros;0.0;0.0;Peso específico húmedo del suelo;B;Obtenido a partir del ensayo Proctor Estándar o de las volumétricas y gravimétricas de los suelos, es el peso de suelo por volumen unitari ;0.0;0.0;sdf;C;f;0.0;0.0;wefrw;L;fs;0.0;0.0;sdfs;V;ef;0.0;0.0;efr;t;fdf;0.0;0.0;
