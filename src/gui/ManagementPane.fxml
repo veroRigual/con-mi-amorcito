@@ -14,7 +14,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="managementPane" fx:id="anchorSFP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="798.0" prefWidth="1178.0" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ManagementPane">
+<AnchorPane id="managementPane" fx:id="anchorSFP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.ManagementPane">
    <children>
       <Label layoutX="52.0" layoutY="14.0" text="Gestionar ecuaciones">
          <font>

@@ -13,7 +13,7 @@
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="panePrincipal" fx:id="anchorSFP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="790.0" prefWidth="1178.0" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.securityFactorPane">
+<AnchorPane id="panePrincipal" fx:id="anchorSFP" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.securityFactorPane">
    <children>
       <Pane id="drawArea" layoutX="457.0" layoutY="64.0" prefHeight="274.0" prefWidth="700.0">
          <children>

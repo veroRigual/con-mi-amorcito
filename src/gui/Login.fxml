@@ -9,9 +9,9 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane id="loginPane" fx:id="anchorLogin" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="373.0" prefWidth="413.0" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Login">
+<AnchorPane id="loginPane" fx:id="anchorLogin" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="373.0" prefWidth="430.0" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Login">
    <children>
-      <Label layoutX="10.0" layoutY="24.0" prefHeight="25.0" prefWidth="403.0" text="Para acceder a esta parte de la aplicacion necesita credenciales." />
+      <Label layoutX="10.0" layoutY="24.0" prefHeight="25.0" prefWidth="403.0" text="Para acceder a esta parte de la aplicación necesita credenciales." />
       <Label layoutX="101.0" layoutY="49.0" prefHeight="25.0" prefWidth="222.0" text="Por favor insertelas para continuar." />
       <GridPane layoutX="64.0" layoutY="130.0" prefHeight="95.0" prefWidth="286.0">
         <columnConstraints>

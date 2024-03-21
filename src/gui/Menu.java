@@ -121,4 +121,8 @@ public class Menu {
         languageOptionsPane.setVisible(true);
 
 }
+    public void hideLangPane(){
+        languageOptionsPane.setVisible(false);
+
+    }
 }
