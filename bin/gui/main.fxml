@@ -40,7 +40,7 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="panePrincipal" fx:id="mainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="801.0" prefWidth="1378.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Menu">
+<AnchorPane id="panePrincipal" fx:id="mainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="801.0" prefWidth="1378.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Menu">
    <children>
       <Pane id="options-bar" prefHeight="801.0" prefWidth="200.0" stylesheets="@../style/style.css">
          <children>
@@ -101,7 +101,7 @@
                     <items>
                       <AnchorPane id="EngLanguage" minHeight="0.0" minWidth="0.0" prefHeight="55.0" prefWidth="203.0" styleClass="buttonsBarExit">
                            <children>
-                              <Label layoutX="17.0" layoutY="14.0" prefHeight="30.0" prefWidth="158.0" text="ENG   Inglés(Estados Unidos)" textAlignment="CENTER" />
+                              <Label fx:id="btn_eng" layoutX="17.0" layoutY="14.0" prefHeight="30.0" prefWidth="158.0" text="ENG   Inglés(Estados Unidos)" textAlignment="CENTER" />
                            </children>
                            <opaqueInsets>
                               <Insets bottom="8.0" />

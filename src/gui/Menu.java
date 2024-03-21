@@ -27,6 +27,8 @@ public class Menu {
     @FXML Pane helpButton;
     @FXML Pane ManagementButton;
     @FXML AnchorPane mainAnchorPane;
+    @FXML Pane LanguageButton;
+    @FXML Pane languageOptionsPane;
 
     @FXML Label labelSFSelected;
     @FXML Label labelSF;
@@ -114,4 +116,9 @@ public class Menu {
         stage.close();
         //FilesManagement.WriteFormulaToFile(DamSystem.getInstance().getFormulasFile());
     }
+
+    public void showLangPane(){
+        languageOptionsPane.setVisible(true);
+
+}
 }
