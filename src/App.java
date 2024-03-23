@@ -11,7 +11,6 @@ import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import util.Init;
 import util.FilesManagement;
-import util.FilesManagement;
 import logic.DamSystem;
 
 public class App extends Application{

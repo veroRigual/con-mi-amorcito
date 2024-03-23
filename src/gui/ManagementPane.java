@@ -245,12 +245,13 @@ public class ManagementPane {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("información");
             alert.setHeaderText("Aviso");
-            alert.setContentText("La formula se ha registrado exitosamente");
+            alert.setContentText("La fórmula se ha registrado exitosamente");
             alert.showAndWait();
         }else{
             ArrayList<Variable> list = new ArrayList<Variable>(variableTable.getItems());
             DamSystem.getInstance().modifyFormula(pos, funtionNameText.getText(), functionLabel.getText(), list);
             //update();
+            FilesManagement.WriteOneFormulaToFile(DamSystem.getInstance().getFormulasFile(),funtionNameText.getText(), functionLabel.getText(), list);
             insertDataSpinner();
             funtionNameText.setText("");
             functionLabel.setText("");
