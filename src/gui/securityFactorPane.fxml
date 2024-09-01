@@ -17,11 +17,11 @@
    <children>
       <Pane id="drawArea" layoutX="457.0" layoutY="64.0" prefHeight="274.0" prefWidth="700.0">
          <children>
-            <Label fx:id="crownValueLabel" layoutX="347.0" layoutY="14.0" prefHeight="27.0" prefWidth="39.0" />
-            <Label fx:id="highValueLabel" layoutX="667.0" layoutY="93.0" prefHeight="29.0" prefWidth="39.0" />
-            <Label fx:id="weightValue" layoutX="351.0" layoutY="79.0" prefHeight="18.0" prefWidth="39.0" text="peso" visible="false" />
-            <Label fx:id="cohesionLabel" layoutX="351.0" layoutY="100.0" text="cohesion" visible="false" />
-            <Label fx:id="angleLabel" layoutX="351.0" layoutY="123.0" text="angulo" visible="false" />
+            <Label fx:id="corona" layoutX="347.0" layoutY="14.0" prefHeight="27.0" prefWidth="39.0" />
+            <Label fx:id="altura" layoutX="667.0" layoutY="93.0" prefHeight="29.0" prefWidth="39.0" />
+            <Label fx:id="pesoo" layoutX="351.0" layoutY="79.0" prefHeight="18.0" prefWidth="39.0" text="peso" visible="false" />
+            <Label fx:id="cohesionn" layoutX="351.0" layoutY="100.0" text="cohesion" visible="false" />
+            <Label fx:id="angulo" layoutX="351.0" layoutY="123.0" text="angulo" visible="false" />
          </children></Pane>
       <Label layoutX="33.0" layoutY="13.0" text="Calcular factor de seguridad para:">
          <font>
@@ -74,10 +74,12 @@
          </font>
       </Label>
       <Separator layoutX="457.0" layoutY="39.0" prefHeight="3.0" prefWidth="77.0" />
-      <ComboBox fx:id="modelBox" disable="true" layoutX="548.0" layoutY="13.0" onAction="#loadFormulaBox" prefHeight="28.0" prefWidth="169.0" promptText="Seleccionar" />
       <Button fx:id="cleanBtn" disable="true" layoutX="950.0" layoutY="362.0" mnemonicParsing="false" onAction="#clearChartData" text="Limpiar gráfico" />
       <Button fx:id="anlysisBtn" disable="true" layoutX="775.0" layoutY="362.0" mnemonicParsing="false" onAction="#showAnalysisPane" text="Análisis de sensibilidad" />
-      <Button layoutX="844.0" layoutY="361.0" mnemonicParsing="false" onAction="#graph" text="Graficar" visible="false" />
-      <Label fx:id="noDataLabel" layoutX="42.0" layoutY="384.0" prefHeight="18.0" prefWidth="388.0" text="no hay datos en el sistema para utilizar la opción seleccionada" textFill="RED" visible="false" />
+
+      <Label fx:id="no_hay_datos_en_el_sistema_para_utilizar_la_opcion_seleccionada" layoutX="42.0" layoutY="384.0" prefHeight="18.0" prefWidth="388.0" text="no hay datos en el sistema para utilizar la opción seleccionada" textFill="RED" visible="false" />
+
+      <ComboBox fx:id="seleccionar" disable="true" layoutX="548.0" layoutY="13.0" onAction="#loadFormulaBox" prefHeight="28.0" prefWidth="169.0" promptText="Seleccionar" />
+
    </children>
 </AnchorPane>

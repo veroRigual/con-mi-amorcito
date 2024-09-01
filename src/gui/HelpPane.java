@@ -1,7 +1,9 @@
 package gui;
 
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Label;
+import util.FilesManagement;
 
 public class HelpPane {
 
@@ -12,6 +14,7 @@ public class HelpPane {
 
     public void initialize(){
         window = this;
+
     }
 
     public HelpPane getInstance(){

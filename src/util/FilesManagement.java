@@ -2,8 +2,17 @@ package util;
 
 import java.io.File;
 import java.io.FileWriter;
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.*;
+
+import Properties.Propiedad;
+import com.sun.javafx.scene.control.skin.TableColumnHeader;
+import javafx.scene.Node;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 import logic.DamSystem;
 import logic.Formula;
 import logic.Variable;
@@ -49,6 +58,7 @@ try {
 
 } catch (Exception e) {
   System.out.println("No se pudo guardar el fichero");
+  System.out.println(e.getMessage());
 }
 
     }
@@ -127,4 +137,31 @@ try {
                                             }
                                            
                                         }
-                                    }
+    public static void SetearTextos(List<Node> list,String idioma){
+        Propiedad p = new Propiedad("ENGLISH");
+        Button button = new Button("");
+       // TableColumn<?,?> tableColumn =new TableColumn<?,?>() ;
+        for (Node l:list) {
+            if(l instanceof Label )
+            ((Label)l).setText(p.getProperty(l.getId()));
+            if (l instanceof Button)
+                ((Button)l).setText(p.getProperty(l.getId()));
+            if(l instanceof Text )
+                ((Text)l).setText(p.getProperty(l.getId()));
+
+            /*if(l instanceof TableColumn){
+                TableColumn<?,?> tableColumn =(TableColumn<?,?> ) l;
+                ((TableColumn)l).setText(p.getProperty(l.getId()));
+
+        } */}
+
+    }
+    public static void SetearTextosIndependiente(Label l,String idioma){
+        Propiedad p = new Propiedad("ENGLISH");
+        if(l instanceof Label )
+            ((Label)l).setText(p.getProperty(l.getId()));
+       /* if (l instanceof Button)
+            ((Button)l).setText(p.getProperty(l.getId()));*/
+
+    }
+}

@@ -2,8 +2,15 @@ package gui;
 
 import java.io.IOException;
 import java.sql.SQLException;
+import java.util.*;
+import java.util.Properties;
+import java.util.Locale;
+import java.util.ResourceBundle;
+import Properties.Propiedad;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -17,10 +24,13 @@ import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 import util.FilesManagement;
 import logic.DamSystem;
- 
+
+import static util.FilesManagement.*;
+
 public class Menu {
 
     static Menu window;
+    @FXML Pane panel_opciones;
 
     @FXML StackPane contentArea;
     @FXML Pane sfButton;
@@ -30,14 +40,16 @@ public class Menu {
     @FXML Pane LanguageButton;
     @FXML Pane languageOptionsPane;
 
-    @FXML Label labelSFSelected;
-    @FXML Label labelSF;
-    @FXML Label labelAyudaSelected;
-    @FXML Label labelAyuda;
+    @FXML Label FACTOR_DE_SEGURIDAD;
+    @FXML Label GESTIONAR;
+    @FXML Label AYUDA;
+    @FXML Label SALIR;
+    @FXML Label changingLanguageButton;
 
     public void initialize(){
         window = this;
-        showSecurityFactorPane();
+        showHelpPane();
+        //showSecurityFactorPane();
     }
 
     public static Menu getWindow(){
@@ -123,6 +135,37 @@ public class Menu {
 }
     public void hideLangPane(){
         languageOptionsPane.setVisible(false);
-
     }
-}
+    public  void HacerCambio(){
+        hideLangPane();
+      if(AboutPane.getInstance()!= null){
+      SetearTextos(AboutPane.getInstance().anchorSFP.getChildren(), "ENGLISH");
+          SetearTextosIndependiente(this.FACTOR_DE_SEGURIDAD,"ENGLISH");
+          SetearTextosIndependiente(this.GESTIONAR,"ENGLISH");
+          SetearTextosIndependiente(this.AYUDA,"ENGLISH");
+          SetearTextosIndependiente(this.SALIR,"ENGLISH");}
+        SetearTextosIndependiente(this.changingLanguageButton,"ENGLISH");
+       if(Login.getInstance()!= null) {
+            SetearTextos(Login.getInstance().anchorLogin.getChildren(), "ENGLISH");}
+        if(ManagementPane.getInstance()!= null) {
+        SetearTextos(ManagementPane.getInstance().getSonsManagementPane(), "ENGLISH");
+        }
+      if(securityFactorPane.getInstance()!= null) {
+           SetearTextos (securityFactorPane.getInstance().getAnchorSFP().getChildren(), "ENGLISH");
+        }
+       if(AnalysisPane.getInstance()!= null) {
+            SetearTextos (AnalysisPane.getInstance().getSonsAnalysisPane(), "ENGLISH");
+        }
+    }}
+
+    //REVISAR
+    //cargar idioma
+    //String idiomaSeleccionado ="es";
+    //ResourceBundle bundle = ResourceBundle.getBundle("E",new Locale(idiomaSeleccionado));
+
+     /* public void cargarIdioma(String idioma){
+            Properties propiedades = new Propiedades(idioma);
+          labelAyudaSelected.setText(propiedades.getProperty("AYUDA"));
+        }
+*/
+

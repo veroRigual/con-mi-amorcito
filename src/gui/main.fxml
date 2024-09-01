@@ -42,11 +42,11 @@
 
 <AnchorPane id="panePrincipal" fx:id="mainAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="768.0" prefWidth="1366.0" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.Menu">
    <children>
-      <Pane id="options-bar" prefHeight="801.0" prefWidth="200.0" stylesheets="@../style/style.css">
+      <Pane id="options-bar" fx:id="panel_opciones" prefHeight="768.0" prefWidth="200.0" stylesheets="@../style/style.css">
          <children>
             <Pane fx:id="sfButton" layoutY="222.0" onMouseClicked="#showSecurityFactorPane" prefHeight="59.0" prefWidth="200.0" styleClass="buttonsBar">
                <children>
-                  <Label fx:id="labelSFSelected" layoutX="15.0" layoutY="19.0" styleClass="buttonBarLabel" text="FACTOR DE SEGURIDAD">
+                  <Label fx:id="FACTOR_DE_SEGURIDAD" layoutX="15.0" layoutY="19.0" styleClass="buttonBarLabel" text="FACTOR DE SEGURIDAD">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -55,7 +55,7 @@
             </Pane>
             <Pane fx:id="ManagementButton" layoutY="311.0" onMouseClicked="#showManagementPane" prefHeight="59.0" prefWidth="200.0" styleClass="buttonsBar">
                <children>
-                  <Label layoutX="58.0" layoutY="19.0" text="GESTIONAR">
+                  <Label fx:id="GESTIONAR" layoutX="58.0" layoutY="19.0" text="GESTIONAR">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -64,7 +64,7 @@
             </Pane>
             <Pane fx:id="helpButton" layoutY="400.0" onMouseClicked="#showHelpPane" prefHeight="59.0" prefWidth="200.0" styleClass="buttonsBar">
                <children>
-                  <Label fx:id="labelAyudaSelected" layoutX="74.0" layoutY="19.0" text="AYUDA">
+                  <Label fx:id="AYUDA" layoutX="74.0" layoutY="19.0" text="AYUDA">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -73,7 +73,7 @@
             </Pane>
             <Pane fx:id="exitButton" layoutY="489.0" onMouseClicked="#exitWindow" prefHeight="59.0" prefWidth="200.0" styleClass="buttonsBarExit">
                <children>
-                  <Label layoutX="79.0" layoutY="19.0" text="SALIR">
+                  <Label fx:id="SALIR" layoutX="79.0" layoutY="19.0" text="SALIR">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -95,30 +95,21 @@
                   </Label>
                </children>
             </Pane>
-            <Pane id="LanguageOptions" fx:id="languageOptionsPane" layoutX="15.0" layoutY="606.0" prefHeight="118.0" prefWidth="189.0" visible="false">
+            <Pane id="LanguageOptions" fx:id="languageOptionsPane" layoutX="15.0" layoutY="637.0" prefHeight="87.0" prefWidth="189.0" visible="false">
                <children>
-                  <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="118.0" prefWidth="187.0">
+                  <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="87.0" prefWidth="189.0">
                      <items>
-                        <AnchorPane id="EngLanguage" minHeight="0.0" minWidth="0.0" onMouseClicked="#hideLangPane" prefHeight="55.0" prefWidth="203.0" styleClass="buttonsBar">
+                        <AnchorPane id="EngLanguage" minHeight="0.0" minWidth="0.0" onMouseClicked="#HacerCambio" prefHeight="55.0" prefWidth="203.0" styleClass="buttonsBar">
                            <children>
-                              <Label fx:id="btn_eng" layoutX="17.0" layoutY="14.0"   prefHeight="30.0" prefWidth="158.0" text="ENG   Inglés(Estados Unidos)" textAlignment="CENTER" />
-                              <Pane fx:id="helpButton1" layoutX="10.0" layoutY="410.0" onMouseClicked="#showHelpPane" prefHeight="59.0" prefWidth="200.0" styleClass="buttonsBar">
-                                 <children>
-                                    <Label fx:id="labelAyudaSelected1" layoutX="74.0" layoutY="19.0" text="AYUDA">
-                                       <font>
-                                          <Font name="System Bold" size="15.0" />
-                                       </font>
-                                    </Label>
-                                 </children>
-                              </Pane>
+                              <Label fx:id="btn_eng" layoutX="8.0" prefHeight="30.0" prefWidth="179.0" text="ENG   Inglés(Estados Unidos)" textAlignment="CENTER" />
                            </children>
                            <opaqueInsets>
                               <Insets bottom="8.0" />
                            </opaqueInsets>
                         </AnchorPane>
-                        <AnchorPane id="EspLanguage" minHeight="0.0" minWidth="0.0" onMouseClicked="#hideLangPane" prefHeight="100.0" prefWidth="160.0" styleClass="buttonsBar">
+                        <AnchorPane id="EspLanguage" minHeight="0.0" minWidth="0.0" onMouseClicked="#HacerCambio" prefHeight="55.0" prefWidth="187.0" styleClass="buttonsBar">
                            <children>
-                              <Label fx:id="btn_esp" layoutX="20.0" layoutY="19.0"  prefHeight="17.0" prefWidth="158.0" text="ESP  Español (España)" />
+                              <Label fx:id="btn_esp" layoutX="8.0" prefHeight="39.0" prefWidth="179.0" text="ESP  Español (España)" />
                            </children>
                         </AnchorPane>
                      </items>

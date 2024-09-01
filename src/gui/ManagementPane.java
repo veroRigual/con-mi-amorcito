@@ -2,6 +2,7 @@ package gui;
 
 import java.util.ArrayList;
 import java.util.LinkedList;
+import java.util.List;
 import java.util.ListIterator;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -13,6 +14,7 @@ import exception.ErrorFieldException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
@@ -43,8 +45,8 @@ public class ManagementPane {
     @FXML AnchorPane anchorSFP;
 
     @FXML TableView formulaTable;
-    @FXML TableColumn expreColumn;
-    @FXML TableColumn nameColumn;
+    @FXML TableColumn Expresion;
+    @FXML TableColumn Nombre;
 
     @FXML TableView<Variable> variableTable;
     @FXML TableColumn variableColumn;
@@ -54,11 +56,11 @@ public class ManagementPane {
     @FXML TextField variableNameText;
     @FXML TextArea descriptionText;
 
-    @FXML Button aceptBtn;
-    @FXML Button cancelBtn;
-    @FXML Button deleteBtn;
-    @FXML Button modifyBtn;
-    @FXML Button addBtn;
+    @FXML Button Aceptar;
+    @FXML Button Cancelar;
+    @FXML Button Eliminar;
+    @FXML Button Modificar;
+    @FXML Button Agregar;
 
     @FXML Spinner<Double> downLimitSpinner;
     @FXML Spinner<Double> upLimitSpinner;
@@ -93,8 +95,8 @@ public class ManagementPane {
     }
 
     public void loadTable(){
-        nameColumn.setCellValueFactory(new PropertyValueFactory<Formula, String>("name"));
-        expreColumn.setCellValueFactory(new PropertyValueFactory<Formula, String>("function"));
+       Nombre.setCellValueFactory(new PropertyValueFactory<Formula, String>("name"));
+        Expresion.setCellValueFactory(new PropertyValueFactory<Formula, String>("function"));
 
         update();
     }
@@ -180,7 +182,7 @@ public class ManagementPane {
     public void ModifyBtn(){
         Formula formula = (Formula) formulaTable.getSelectionModel().getSelectedItem();
         if(formula != null){
-        if(value)
+       // if(value)
             value = false;
         funtionNameText.setDisable(false);
         functionLabel.setDisable(false);
@@ -189,18 +191,18 @@ public class ManagementPane {
         pos = formulaTable.getSelectionModel().getSelectedIndex();
         variableTable.setItems(FXCollections.observableArrayList(formula.getVariables()));
         variableTable.setDisable(false);
-        cancelBtn.setDisable(false);
+        Cancelar.setDisable(false);
         }
     }
 
     public void InsertBtn(){
-        if(!value)
-            value = false;
+     //   if(!value)
+            value = true;
 
         funtionNameText.setDisable(false);
         functionLabel.setDisable(false);
         // variableTable.setDisable(false);
-        cancelBtn.setDisable(false);
+        Cancelar.setDisable(false);
     }
 
     public void activateFields(){
@@ -212,16 +214,16 @@ public class ManagementPane {
         if(!funtionNameText.getText().equals("") &&
         !functionLabel.getText().equals("") && !variableNameText.getText().equals("")
         && !descriptionText.getText().equals(""))
-            aceptBtn.setDisable(false);
+            Aceptar.setDisable(false);
         else
-            aceptBtn.setDisable(true);
+            Aceptar.setDisable(true);
     }
 
     public void AceptBtn(){
         if(value){
             ArrayList<Variable> list = new ArrayList<Variable>(variableTable.getItems());
             DamSystem.getInstance().addFormula(funtionNameText.getText(), functionLabel.getText(), list);
-            FilesManagement.WriteOneFormulaToFile(DamSystem.getInstance().getFormulasFile(),funtionNameText.getText(), functionLabel.getText(), list);
+            FilesManagement.WriteFormulaToFile(DamSystem.getInstance().getFormulasFile());
             insertDataSpinner();
            // update();
             
@@ -236,11 +238,11 @@ public class ManagementPane {
             descriptionText.setDisable(true);
             downLimitSpinner.setDisable(true);
             upLimitSpinner.setDisable(true);
-            cancelBtn.setDisable(true);
-            cancelBtn.setDisable(true);
+            Cancelar.setDisable(true);
+            Cancelar.setDisable(true);
             variableTable.getItems().clear();
             variableTable.setDisable(true);
-            aceptBtn.setDisable(true);
+            Aceptar.setDisable(true);
             update();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("información");
@@ -251,7 +253,7 @@ public class ManagementPane {
             ArrayList<Variable> list = new ArrayList<Variable>(variableTable.getItems());
             DamSystem.getInstance().modifyFormula(pos, funtionNameText.getText(), functionLabel.getText(), list);
             //update();
-            FilesManagement.WriteOneFormulaToFile(DamSystem.getInstance().getFormulasFile(),funtionNameText.getText(), functionLabel.getText(), list);
+            FilesManagement.WriteFormulaToFile(DamSystem.getInstance().getFormulasFile());
             insertDataSpinner();
             funtionNameText.setText("");
             functionLabel.setText("");
@@ -264,11 +266,11 @@ public class ManagementPane {
             descriptionText.setDisable(true);
             downLimitSpinner.setDisable(true);
             upLimitSpinner.setDisable(true);
-            cancelBtn.setDisable(true);
-            cancelBtn.setDisable(true);
+            Cancelar.setDisable(true);
+            Cancelar.setDisable(true);
             variableTable.getItems().clear();
             variableTable.setDisable(true);
-            aceptBtn.setDisable(true);
+            Aceptar.setDisable(true);
             update();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("información");
@@ -291,8 +293,8 @@ public class ManagementPane {
             descriptionText.setDisable(true);
             downLimitSpinner.setDisable(true);
             upLimitSpinner.setDisable(true);
-            cancelBtn.setDisable(true);
-            cancelBtn.setDisable(true);
+        Cancelar.setDisable(true);
+        Cancelar.setDisable(true);
     }
 
     public void deleteBtn(){
@@ -305,8 +307,8 @@ public class ManagementPane {
         int index = formulaTable.getSelectionModel().getSelectedIndex();
         DamSystem.getInstance().deleteFormula(index);
         update();
-        deleteBtn.setDisable(true);
-        modifyBtn.setDisable(true);
+        Eliminar.setDisable(true);
+        Modificar.setDisable(true);
         alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("información");
         alert.setHeaderText("Aviso");
@@ -333,12 +335,20 @@ public class ManagementPane {
 
     public void clicTable(){
         if(formulaTable.getSelectionModel().getSelectedItem() != null){
-            deleteBtn.setDisable(false);
-            modifyBtn.setDisable(false);
+            Eliminar.setDisable(false);
+            Modificar.setDisable(false);
         }else {
-            deleteBtn.setDisable(true);
-            modifyBtn.setDisable(true);
+            Eliminar.setDisable(true);
+            Modificar.setDisable(true);
         }
     }
 
+    public List<Node> getSonsManagementPane(){
+        return anchorSFP.getChildren();
+    }
+
+   /* public Node getSonsManagementPaneL(){
+        return anchorSFP.getChildren().get(2);
+    }
+System.out.println();*/
 }

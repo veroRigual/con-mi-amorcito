@@ -27,17 +27,14 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.Spinner;
-import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TablePosition;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextInputDialog;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.Pane;
 import javafx.util.converter.DoubleStringConverter;
 import logic.DamSystem;
-import logic.Formula;
 import logic.Model;
 import logic.Variable;
 import util.EditableCell;
@@ -46,6 +43,8 @@ import util.TypeModel;
 
 public class securityFactorPane {
     static securityFactorPane window;
+
+
 
     private String variableAnalysis;
     
@@ -72,7 +71,7 @@ public class securityFactorPane {
 
     @FXML ComboBox formulaBox;
     @FXML ComboBox<Phenomenon> phenomenonBox;
-    @FXML ComboBox<TypeModel> modelBox;
+    @FXML ComboBox<TypeModel> seleccionar;
 
     @FXML TableColumn variableColumn;
     @FXML TableColumn valueColumn;
@@ -81,14 +80,15 @@ public class securityFactorPane {
     @FXML Label infoLabel;
     @FXML Label infoLabel1;
     @FXML Label statusLabel;
-    @FXML Label highValueLabel;
-    @FXML Label crownValueLabel;
+    @FXML Label altura;
+    @FXML Label corona;
+
     @FXML Label modelLabel;
     @FXML Label variableLabel;
-    @FXML Label weightValue;
-    @FXML Label cohesionLabel;
-    @FXML Label angleLabel;
-    @FXML Label noDataLabel;
+    @FXML Label pesoo;
+    @FXML Label cohesionn;
+    @FXML Label angulo;
+    @FXML Label no_hay_datos_en_el_sistema_para_utilizar_la_opcion_seleccionada;
 
     public Label getVariableLabel() {
         return variableLabel;
@@ -146,7 +146,7 @@ public class securityFactorPane {
     public void loadFormulaBox(){
         
         if(phenomenonBox.getSelectionModel().getSelectedIndex() == 0){
-            if(modelBox.getSelectionModel().getSelectedIndex()==0){
+            if(seleccionar.getSelectionModel().getSelectedIndex()==0){
         ObservableList<logic.Formula> list = FXCollections.observableArrayList(DamSystem.getInstance().getFormList());
         if(!list.isEmpty()){
             valueTable.setDisable(false);
@@ -160,9 +160,9 @@ public class securityFactorPane {
         modelLabel.setText("Ecuación:");
                 modelLabel.setVisible(true);
         // managementBtn.setVisible(true);
-        noDataLabel.setVisible(false);
+        no_hay_datos_en_el_sistema_para_utilizar_la_opcion_seleccionada.setVisible(false);
         }else{
-            noDataLabel.setVisible(true);
+            no_hay_datos_en_el_sistema_para_utilizar_la_opcion_seleccionada.setVisible(true);
             valueTable.setDisable(true);
             formulaBox.setDisable(true);
         }
@@ -201,15 +201,15 @@ public class securityFactorPane {
         anlysisBtn.setDisable(true);
         // cleanBtn.setDisable(true);
         saveBtn.setDisable(true);
-        modelBox.setDisable(false);
+        seleccionar.setDisable(false);
         ObservableList<TypeModel> list= null;
         if(phenomenonBox.getSelectionModel().getSelectedIndex() == 0){
             list = FXCollections.observableArrayList(TypeModel.values());
-            modelBox.setItems(list);
+            seleccionar.setItems(list);
             // managementBtn.setVisible(true);
         }else{
             list = FXCollections.observableArrayList(TypeModel.RNA);
-            modelBox.setItems(list);
+            seleccionar.setItems(list);
             // managementBtn.setVisible(false);
         }
     }
@@ -225,7 +225,7 @@ public class securityFactorPane {
         // cleanBtn.setDisable(false);
         if(formulaBox.getSelectionModel().getSelectedItem() != null){
             if(phenomenonBox.getSelectionModel().getSelectedItem().equals(Phenomenon.Desembalse)
-            && modelBox.getSelectionModel().getSelectedItem().equals(TypeModel.Regresión)){
+            && seleccionar.getSelectionModel().getSelectedItem().equals(TypeModel.Regresión)){
                 loadRegression();
             }else{
                 try {
@@ -388,24 +388,24 @@ public class securityFactorPane {
     public void draw(){
         ValueDTO aux = valueTable.getSelectionModel().getSelectedItem();
         if(aux.getName().contains("ltura")){
-        highValueLabel.setText(String.valueOf(aux.getValue()));
-        highValueLabel.setVisible(true);
+        altura.setText(String.valueOf(aux.getValue()));
+        altura.setVisible(true);
         }
         if(aux.getName().contains("orona")){
-        crownValueLabel.setText(String.valueOf(aux.getValue()));
-        crownValueLabel.setVisible(true);
+        corona.setText(String.valueOf(aux.getValue()));
+        corona.setVisible(true);
         }
         if(aux.getName().contains("gulo")){
-        angleLabel.setText(String.valueOf(aux.getValue()));
-        angleLabel.setVisible(true);
+        angulo.setText(String.valueOf(aux.getValue()));
+        angulo.setVisible(true);
         }
         if(aux.getName().contains("ohes")){
-        cohesionLabel.setText(String.valueOf(aux.getValue()));
-        cohesionLabel.setVisible(true);
+        cohesionn.setText(String.valueOf(aux.getValue()));
+        cohesionn.setVisible(true);
         }
         if(aux.getName().contains("eso")){
-        weightValue.setText(String.valueOf(aux.getValue()));
-        weightValue.setVisible(true);
+        pesoo.setText(String.valueOf(aux.getValue()));
+        pesoo.setVisible(true);
         }
     }
 

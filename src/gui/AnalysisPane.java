@@ -2,10 +2,12 @@ package gui;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.LinkedList;
+import java.util.List;
 
 import javax.xml.parsers.ParserConfigurationException;
 
+import javafx.scene.Node;
+import javafx.scene.layout.Pane;
 import org.xml.sax.SAXException;
 
 import dto.ValueDTO;
@@ -34,7 +36,7 @@ public class AnalysisPane {
 
     private ArrayList<ValueDTO> l;
 
-    public static AnalysisPane getWindow() {
+    public static AnalysisPane getInstance() {
         return window;
     }
 
@@ -75,5 +77,8 @@ public class AnalysisPane {
 
     public void cancelBtn(){
         securityFactorPane.getInstance().getAnchorSFP().getChildren().remove(analysisAnchor);
+    }
+    public List<Node> getSonsAnalysisPane(){
+        return analysisAnchor.getChildren();
     }
 }

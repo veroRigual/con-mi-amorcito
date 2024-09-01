@@ -1,5 +1,8 @@
 import java.io.File;
 import java.io.IOException;
+import java.util.Properties;
+import java.util.Locale;
+import java.util.ResourceBundle;
 import exception.ErrorFieldException;
 import gui.LoadingPane;
 import javafx.application.Application;
@@ -16,6 +19,7 @@ import logic.DamSystem;
 public class App extends Application{
     public static void main(String[] args) throws Exception {
         launch(args);
+
     }
 
     @Override
@@ -26,6 +30,8 @@ public class App extends Application{
         loadingStage.setResizable(false);
         loadingStage.setTitle("DamGuard");
         loadingStage.show();
+
+
         new Thread(() -> {
             // Init.init();
               FilesManagement.CargandoFormulas(DamSystem.getInstance().getFormulasFile(), DamSystem.getInstance().getFormList());
