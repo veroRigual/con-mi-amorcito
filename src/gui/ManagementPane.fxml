@@ -25,7 +25,7 @@
           <TableColumn fx:id="Expresion" maxWidth="712.0" minWidth="-1.0" prefWidth="658.0" text="Expresión" />
         </columns>
       </TableView>
-      <Button  fx:id="Salir" layoutX="1101.0" layoutY="722.0" mnemonicParsing="false" onAction="#exitBtn" text="Salir" visible="false" />
+      <Button fx:id="Salir" layoutX="1101.0" layoutY="722.0" mnemonicParsing="false" onAction="#exitBtn" text="Salir" visible="false" />
       <Button fx:id="Agregar" layoutX="797.0" layoutY="722.0" mnemonicParsing="false" onAction="#InsertBtn" text="Agregar" />
       <Button fx:id="Modificar" disable="true" layoutX="899.0" layoutY="722.0" mnemonicParsing="false" onAction="#ModifyBtn" text="Modificar" />
       <Button fx:id="Eliminar" disable="true" layoutX="1000.0" layoutY="722.0" mnemonicParsing="false" onAction="#deleteBtn" text="Eliminar" />
@@ -33,8 +33,8 @@
       <Label fx:id="Expresion_con_dos_puntos" layoutX="486.0" layoutY="61.0" text="Expresión:" />
       <TextField fx:id="funtionNameText" disable="true" layoutX="206.0" layoutY="56.0" onKeyTyped="#checkFilds" prefHeight="28.0" prefWidth="200.0" />
       <TextField fx:id="functionLabel" disable="true" layoutX="556.0" layoutY="56.0" onKeyTyped="#updateVariableTable" prefHeight="28.0" prefWidth="475.0" />
-      <TextArea fx:id="descriptionText" disable="true" layoutX="461.0" layoutY="168.0" onKeyTyped="#insertData" prefHeight="123.0" prefWidth="625.0" />
-      <TextField fx:id="variableNameText" disable="true" layoutX="461.0" layoutY="126.0" onKeyTyped="#insertData" prefHeight="28.0" prefWidth="200.0" />
+      <TextArea fx:id="descriptionText" disable="true" layoutX="461.0" layoutY="168.0" onKeyReleased="#insertData" prefHeight="123.0" prefWidth="625.0" />
+      <TextField fx:id="variableNameText" disable="true" layoutX="461.0" layoutY="126.0" onKeyReleased="#insertData" prefHeight="28.0" prefWidth="200.0" />
       <Label fx:id="Nombre_con_dos_puntos" layoutX="379.0" layoutY="131.0" text="Nombre:" />
       <Separator layoutX="54.0" layoutY="396.0" prefHeight="3.0" prefWidth="1053.0" />
       <Button fx:id="Aceptar" disable="true" layoutX="461.0" layoutY="359.0" mnemonicParsing="false" onAction="#AceptBtn" text="Aceptar" />
@@ -51,10 +51,11 @@
       <Label fx:id="Limites_de_los_valores_que_puede_tomar" layoutX="373.0" layoutY="313.0" text="Límites de los valores que puede tomar:" />
       <Label fx:id="Superior" layoutX="904.0" layoutY="313.0" text="Superior:" />
       <Label fx:id="Inferior" layoutX="661.0" layoutY="313.0" text="Inferior:" />
-      <Spinner fx:id="downLimitSpinner" disable="true" layoutX="720.0" layoutY="308.0" onMouseClicked="#loadUpLimitSpinner" prefHeight="28.0" prefWidth="117.0" />
-      <Spinner fx:id="upLimitSpinner" disable="true" layoutX="970.0" layoutY="308.0" prefHeight="28.0" prefWidth="117.0" />
+      <Spinner fx:id="downLimitSpinner" disable="true" layoutX="720.0" layoutY="308.0"  prefHeight="28.0" prefWidth="117.0" />
+      <Spinner fx:id="upLimitSpinner" disable="true" layoutX="970.0" layoutY="308.0"  prefHeight="28.0" prefWidth="117.0" />
       <Separator layoutX="1103.0" layoutY="107.0" orientation="VERTICAL" prefHeight="242.0" prefWidth="6.0" />
       <Label fx:id="Datos_de_la_variable" layoutX="398.0" layoutY="100.0" text="Datos de la variable:" />
       <Label fx:id="Descripcion_con_dos_puntos" layoutX="379.0" layoutY="169.0" text="Descripción:" />
+      <Label fx:id="mensajeError" layoutX="42.0" layoutY="384.0" prefHeight="18.0" prefWidth="388.0" text="Solo puede insertar números" textFill="RED" visible="false" />
    </children>
 </AnchorPane>

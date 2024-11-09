@@ -7,15 +7,19 @@ public class Variable {
     private String name;
     private String nomenclature;
     private String description;
-    private double downLimit;
-    private double upLimit;
+    public double downLimit =0;
+    public double upLimit =0;
+    public Double dwnlimit =0.0;
+    public Double uplimit=0.0;
 
-    public Variable(String name, String nomenclature, String description,double downLimit, double upLimit) throws ErrorFieldException {
+    public Variable(String name, String nomenclature, String description,double downLimit, double upLimit,Double dwnlimit,Double uplimit) throws ErrorFieldException {
         this.name = name;
         this.nomenclature = nomenclature;
         this.description = description;
-        setDownLimit(downLimit);
         setUpLimit(upLimit);
+        setDownLimit(downLimit);
+        setDwnlimit(dwnlimit);
+        setuplimit(uplimit);
     }
     public String getName() {
         return name;
@@ -39,19 +43,39 @@ public class Variable {
         return downLimit;
     }
     public void setDownLimit(double downLimit) throws ErrorFieldException {
-       // if(downLimit < upLimit)
+        if(downLimit <= upLimit)
         this.downLimit = downLimit;
-        // else
-        // throw new ErrorFieldException("El valor del limite inferior debe ser menor que el valor del limite superior");
+        else
+         throw new ErrorFieldException("El valor del limite inferior debe ser menor que el valor del limite superior");
+    }
+    public void setDwnlimit(Double dwnlimit) throws ErrorFieldException {
+        if(dwnlimit <= upLimit)
+            this.dwnlimit = dwnlimit;
+        else
+            throw new ErrorFieldException("El valor del limite inferior debe ser menor que el valor del limite superior");
     }
     public double getUpLimit() {
         return upLimit;
 
     }
     public void setUpLimit(double upLimit) throws ErrorFieldException {
-        // if(upLimit > downLimit)
+         if(upLimit >= downLimit)
         this.upLimit = upLimit;
-        // else
-        // throw new ErrorFieldException("El valor del limite superior debe ser mayor al valor del limite inferior");
+        else
+        throw new ErrorFieldException("El valor del limite superior debe ser mayor al valor del limite inferior");
+    }
+
+    public Double getDwnLimit() {
+        return  dwnlimit;
+    }
+    public Double getupLimit() {
+        return uplimit;
+    }
+
+    public void setuplimit(Double uplimit) throws ErrorFieldException {
+        if(uplimit >= dwnlimit)
+            this.uplimit = uplimit;
+        else
+            throw new ErrorFieldException("El valor del limite superior debe ser mayor al valor del limite inferior");
     }
 }

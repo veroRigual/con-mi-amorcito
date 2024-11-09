@@ -1,8 +1,7 @@
 import java.io.File;
 import java.io.IOException;
-import java.util.Properties;
-import java.util.Locale;
-import java.util.ResourceBundle;
+import java.util.ArrayList;
+
 import exception.ErrorFieldException;
 import gui.LoadingPane;
 import javafx.application.Application;
@@ -12,7 +11,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import util.Init;
+import logic.Formula;
 import util.FilesManagement;
 import logic.DamSystem;
 
@@ -34,8 +33,12 @@ public class App extends Application{
 
         new Thread(() -> {
             // Init.init();
+            //prueba esto
+            FilesManagement.CargandoFormulasEng(DamSystem.getInstance().getFormulasFileEng(), DamSystem.getInstance().getFormListEng());
               FilesManagement.CargandoFormulas(DamSystem.getInstance().getFormulasFile(), DamSystem.getInstance().getFormList());
-                LoadingPane.getInstance().load();
+              ArrayList<Formula> list = DamSystem.getInstance().getFormList();
+            ArrayList<Formula> listEng = DamSystem.getInstance().getFormListEng();
+              LoadingPane.getInstance().load();
                 Platform.runLater(() -> {
                     loadingStage.close();
                     try {

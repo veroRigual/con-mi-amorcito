@@ -23,18 +23,23 @@ public class DamSystem {
 
     private static DamSystem instance;
     private ArrayList<Formula> formList;
+    private ArrayList<Formula> formListEng;
     private ArrayList<Result> resultsList;
     private ArrayList<Model> modelsList;
+    private ArrayList<Model> modelsListEng;
     private File formulasFile;
+    private File formulasFileEng;
     private File variableFile;
     private File resultsFile;
 
     private DamSystem() {
         this.formList = new ArrayList<Formula>();
+        this.formListEng = new ArrayList<Formula>();
         resultsList = new ArrayList<Result>();
         modelsList = ModelLoader.loadModels();
-        resultsFile = new File("src/files/resultsFile.dvs");
-        formulasFile = new File("src/files/formulasFile.csv");
+        resultsFile = new File("./resultsFile.dvs");
+        formulasFile = new File("./formulasFile.csv");
+        formulasFileEng = new File("./formulasFileEng.csv");
     }
 
     public static DamSystem getInstance(){
@@ -45,6 +50,11 @@ public class DamSystem {
 
     public ArrayList<Formula> getFormList() {
         return formList;
+    }
+
+    //prueba
+    public ArrayList<Formula> getFormListEng() {
+        return formListEng;
     }
 
     public ArrayList<Model> getModelsList() {
@@ -59,6 +69,20 @@ public class DamSystem {
         }
         return list;
     }
+    //prueba
+    public ArrayList<Model> getModelsListEng() {
+        return modelsListEng;
+    }
+
+    public ArrayList<Model> getDesemModelsListEng() {
+        ArrayList<Model> listEng = new ArrayList<Model>();
+        for(Model l: modelsList){
+            if(l.getPhenomenon().equalsIgnoreCase("desembalse"))
+                listEng.add(l);
+        }
+        return listEng;
+    }
+
 
     public ArrayList<Model> getPreciModelsList() {
         ArrayList<Model> list = new ArrayList<Model>();
@@ -78,6 +102,12 @@ public class DamSystem {
         formList.add(formula);
     }
 
+    //pruebapara la lista de formulas en inlg'es
+    public void addFormulaEng(String name, String function, ArrayList<Variable> listEng){
+        Formula formula = new Formula(name, function,listEng);
+        formListEng.add(formula);
+    }
+
     public void modifyFormula(int pos, String name, String function, ArrayList<Variable> list){
         formList.get(pos).setName(name);
         formList.get(pos).setFunction(function);
@@ -86,6 +116,17 @@ public class DamSystem {
 
     public void deleteFormula(int index){
         formList.remove(index);
+    }
+
+    //prueba
+    public void modifyFormulaEng(int pos, String name, String function, ArrayList<Variable> listEng){
+        formListEng.get(pos).setName(name);
+        formListEng.get(pos).setFunction(function);
+        formListEng.get(pos).setVariables(listEng);
+    }
+
+    public void deleteFormulaEng(int index){
+        formListEng.remove(index);
     }
 
     /**
@@ -119,7 +160,7 @@ public class DamSystem {
         if(auxF != null)
             value = auxF.evaluate(list);
         else
-            throw new ActionNotPermitted("La formula solicitada no se encuentra en el sistema");
+            throw new ActionNotPermitted("La fórmula solicitada no se encuentra en el sistema");
         }else
             throw new ActionNotPermitted("Para calcular el Factor de Seguridad debe los valores de las variables los datos a las variables");
         return value;
@@ -131,7 +172,7 @@ public class DamSystem {
             double value = o instanceof Model ? ((Model) o).evaluate(list) : ((Formula) o).evaluate(list);
             return value;
             }else
-                throw new ActionNotPermitted("Debe escoger algun metodo para realizar el FS");
+                throw new ActionNotPermitted("Debe escoger algun método para realizar el FS");
         }else
             throw new ActionNotPermitted("Para predecir el Factor de Seguridad debe los valores de las variables los datos a las variables");
     }
@@ -157,7 +198,7 @@ public class DamSystem {
         }
         }
         else
-            throw new ActionNotPermitted("La formula solicitada no se encuentra en el sistema");
+            throw new ActionNotPermitted("La fórmula solicitada no se encuentra en el sistema");
         }else
             throw new ActionNotPermitted("Para calcular el Factor de Seguridad debe los valores de las variables los datos a las variables");
         return values;
@@ -214,7 +255,7 @@ public class DamSystem {
         }
         list.get(pos).setValue(aux1);
         }else
-            throw new ActionNotPermitted("Para calcular el Factor de Seguridad debe los valores de las variables los datos a las variables");
+            throw new ActionNotPermitted("Para calcular el Factor de Seguridad debe darle valor a las variables");
         return values;
     }
 
@@ -247,4 +288,8 @@ public class DamSystem {
     public File getFormulasFile() {
       return formulasFile;
     }
+    public File getFormulasFileEng() {
+        return formulasFileEng;
+    }
+
 }

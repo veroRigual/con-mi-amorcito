@@ -5,9 +5,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="loadingPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="341.0" prefWidth="491.0" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.LoadingPane">
+<AnchorPane id="loadingPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="341.0" prefWidth="491.0" stylesheets="@../style/style.css" xmlns="http://javafx.com/javafx/8.0.141" xmlns:fx="http://javafx.com/fxml/1" fx:controller="gui.LoadingPane">
    <children>
-      <ProgressBar id="loadingBar" fx:id="loading" layoutX="-6.0" layoutY="320.0" prefHeight="26.0" prefWidth="503.0" progress="0.0" />
+      <ProgressBar id="loadingBar" fx:id="loading" layoutY="320.0" prefHeight="26.0" prefWidth="500.0" progress="0.0" />
       <Label layoutX="165.0" layoutY="14.0" text="DamGuard">
          <font>
             <Font name="System Bold" size="32.0" />

@@ -14,21 +14,21 @@ public class Init {
     public static void init() throws ErrorFieldException{
 
         //Variable v1 = new Variable("altura de terraplén", "H", "prueba1",0,100);
-        Variable v11 = new Variable("Altura del terraplén", "H", "Altura desde el centro de la corona hasta el límite inferior del terraplén, medida en metros.",15,40);
+        Variable v11 = new Variable("Altura del terraplén", "H", "Altura desde el centro de la corona hasta el límite inferior del terraplén, medida en metros.",15,40,15.0,40.0);
         //Variable v2 = new Variable("peso", "B", "prueba2",0,100);
-        Variable v12 = new Variable("Peso específico húmedo del suelo", "B", "Obtenido a partir del ensayo Proctor Estándar o de las relaciones volumétricas y gravimétricas de los suelos, es el peso de suelo por volumen unitario.",16.6,19.4);
+        Variable v12 = new Variable("Peso específico húmedo del suelo", "B", "Obtenido a partir del ensayo Proctor Estándar o de las relaciones volumétricas y gravimétricas de los suelos, es el peso de suelo por volumen unitario.",16.6,19.4,16.6,19.4);
         //Variable v3 = new Variable("cohesión", "C", "prueba2",0,100);
-        Variable v13 = new Variable("Cohesión", "C", "Es la propiedad básica de los suelos finos que ofrece resistencia a los cambios de forma, típica de suelos finos. Es uno de los parámetros que determina la resistencia al corte de los suelos",13.8,67.5);
+            Variable v13 = new Variable("Cohesión", "C", "Es la propiedad básica de los suelos finos que ofrece resistencia a los cambios de forma, típica de suelos finos. Es uno de los parámetros que determina la resistencia al corte de los suelos",13.8,67.5,13.8,67.5);
         //Variable v4 = new Variable("ángulo", "L", "prueba2",0,100);
-        Variable v14 = new Variable("Ángulo de fricción interna del suelo", "L", "Es la propiedad del suelo que relaciona el máximo ángulo posible para la pendiente de un conjunto de suelo, típico de suelos granulares. Es uno de los parámetros que determina la resistencia al corte de los suelos.",12.6,29.5);
+        Variable v14 = new Variable("Ángulo de fricción interna del suelo", "L", "Es la propiedad del suelo que relaciona el máximo ángulo posible para la pendiente de un conjunto de suelo, típico de suelos granulares. Es uno de los parámetros que determina la resistencia al corte de los suelos.",12.6,29.5,12.6,29.5);
         
         //Variable v5 = new Variable("permeabilidad", "k", "prueba2",0,100);
         // Variable v6 = new Variable("contenido volumétrico", "V", "prueba2",0,100);
         // Variable v7 = new Variable("compresibilidad", "m", "prueba2",0,100);
         // Variable v8 = new Variable("velocidad", "V", "prueba2",0,100);
-        Variable v18 = new Variable("Velocidad de desembalse", "V", "Velocidad a la que desciende el agua contenida en la presa, tanto por el posible efecto de la sequía como por el vertimiento en las obras de toma.",0.1,0.3);
+        Variable v18 = new Variable("Velocidad de desembalse", "V", "Velocidad a la que desciende el agua contenida en la presa, tanto por el posible efecto de la sequía como por el vertimiento en las obras de toma.",0.1,0.3,0.1,0.3);
         // Variable v9 = new Variable("tiempo", "t", "prueba2",0,100);
-        Variable v19 = new Variable("Tiempo", "t", "",0,100);
+        Variable v19 = new Variable("Tiempo", "t", "",0,100,0.0,100.0);
         // ArrayList<Variable> list = new ArrayList<Variable>();
         ArrayList<Variable> list1 = new ArrayList<Variable>();
         // list.add(v1);

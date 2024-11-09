@@ -10,31 +10,31 @@
     <DataField name="Ancho de corona" optype="continuous" dataType="double">
       <Interval closure="closedClosed" leftMargin="4.0" rightMargin="6.0"/>
     </DataField>
-    <DataField name="Peso específico" optype="continuous" dataType="double">
+    <DataField name="Peso especifico" optype="continuous" dataType="double">
       <Interval closure="closedClosed" leftMargin="16.5823" rightMargin="19.3898"/>
     </DataField>
-    <DataField name="Cohesión" optype="continuous" dataType="double">
+    <DataField name="Cohesion" optype="continuous" dataType="double">
       <Interval closure="closedClosed" leftMargin="13.8418" rightMargin="67.4528"/>
     </DataField>
-    <DataField name="Ángulo de fricción interna" optype="continuous" dataType="double">
+    <DataField name="Angulo de friccion interna" optype="continuous" dataType="double">
       <Interval closure="closedClosed" leftMargin="12.5548" rightMargin="29.4595"/>
     </DataField>
     <DataField name="Pemeabilidad saturada" optype="continuous" dataType="double">
       <Interval closure="closedClosed" leftMargin="4.28574E-8" rightMargin="7.74547E-6"/>
     </DataField>
-    <DataField name="Contenido volumétrico de agua" optype="continuous" dataType="double">
+    <DataField name="Contenido volumetrico de agua" optype="continuous" dataType="double">
       <Interval closure="closedClosed" leftMargin="0.378381604073838" rightMargin="0.553114568018197"/>
     </DataField>
-    <DataField name="Índice de compresibilidad volumétrica" optype="continuous" dataType="double">
+    <DataField name="Indice de compresibilidad volumetrica" optype="continuous" dataType="double">
       <Interval closure="closedClosed" leftMargin="3.99675463523619E-5" rightMargin="1.89886998247343E-4"/>
     </DataField>
-    <DataField name="Diámetro efectivo para el 60%" optype="continuous" dataType="double">
+    <DataField name="Diametro efectivo para el 60%" optype="continuous" dataType="double">
       <Interval closure="closedClosed" leftMargin="0.0075" rightMargin="0.25"/>
     </DataField>
-    <DataField name="Diámetro efectivo para el 10%" optype="continuous" dataType="double">
+    <DataField name="Diametro efectivo para el 10%" optype="continuous" dataType="double">
       <Interval closure="closedClosed" leftMargin="0.0025" rightMargin="0.027"/>
     </DataField>
-    <DataField name="Límite líquido" optype="continuous" dataType="double">
+    <DataField name="Limite liquido" optype="continuous" dataType="double">
       <Interval closure="closedClosed" leftMargin="33.2495" rightMargin="72.0452"/>
     </DataField>
     <DataField name="Intensidad" optype="continuous" dataType="double">
@@ -51,15 +51,15 @@
     <MiningSchema>
       <MiningField name="Altura de cortina" invalidValueTreatment="asIs"/>
       <MiningField name="Ancho de corona" invalidValueTreatment="asIs"/>
-      <MiningField name="Peso específico" invalidValueTreatment="asIs"/>
-      <MiningField name="Cohesión" invalidValueTreatment="asIs"/>
-      <MiningField name="Ángulo de fricción interna" invalidValueTreatment="asIs"/>
+      <MiningField name="Peso especifico" invalidValueTreatment="asIs"/>
+      <MiningField name="Cohesion" invalidValueTreatment="asIs"/>
+      <MiningField name="Angulo de friccion interna" invalidValueTreatment="asIs"/>
       <MiningField name="Pemeabilidad saturada" invalidValueTreatment="asIs"/>
-      <MiningField name="Contenido volumétrico de agua" invalidValueTreatment="asIs"/>
-      <MiningField name="Índice de compresibilidad volumétrica" invalidValueTreatment="asIs"/>
-      <MiningField name="Diámetro efectivo para el 60%" invalidValueTreatment="asIs"/>
-      <MiningField name="Diámetro efectivo para el 10%" invalidValueTreatment="asIs"/>
-      <MiningField name="Límite líquido" invalidValueTreatment="asIs"/>
+      <MiningField name="Contenido volumetrico de agua" invalidValueTreatment="asIs"/>
+      <MiningField name="Indice de compresibilidad volumetrica" invalidValueTreatment="asIs"/>
+      <MiningField name="Diametro efectivo para el 60%" invalidValueTreatment="asIs"/>
+      <MiningField name="Diametro efectivo para el 10%" invalidValueTreatment="asIs"/>
+      <MiningField name="Limite liquido" invalidValueTreatment="asIs"/>
       <MiningField name="Intensidad" invalidValueTreatment="asIs"/>
       <MiningField name="Tiempo" invalidValueTreatment="asIs"/>
       <MiningField name="FS" invalidValueTreatment="asIs" usageType="target"/>
@@ -77,17 +77,17 @@
       </NeuralInput>
       <NeuralInput id="0,2">
         <DerivedField optype="continuous" dataType="double">
-          <FieldRef field="Peso específico"/>
+          <FieldRef field="Peso especifico"/>
         </DerivedField>
       </NeuralInput>
       <NeuralInput id="0,3">
         <DerivedField optype="continuous" dataType="double">
-          <FieldRef field="Cohesión"/>
+          <FieldRef field="Cohesion"/>
         </DerivedField>
       </NeuralInput>
       <NeuralInput id="0,4">
         <DerivedField optype="continuous" dataType="double">
-          <FieldRef field="Ángulo de fricción interna"/>
+          <FieldRef field="Angulo de friccion interna"/>
         </DerivedField>
       </NeuralInput>
       <NeuralInput id="0,5">
@@ -97,27 +97,27 @@
       </NeuralInput>
       <NeuralInput id="0,6">
         <DerivedField optype="continuous" dataType="double">
-          <FieldRef field="Contenido volumétrico de agua"/>
+          <FieldRef field="Contenido volumetrico de agua"/>
         </DerivedField>
       </NeuralInput>
       <NeuralInput id="0,7">
         <DerivedField optype="continuous" dataType="double">
-          <FieldRef field="Índice de compresibilidad volumétrica"/>
+          <FieldRef field="Indice de compresibilidad volumetrica"/>
         </DerivedField>
       </NeuralInput>
       <NeuralInput id="0,8">
         <DerivedField optype="continuous" dataType="double">
-          <FieldRef field="Diámetro efectivo para el 60%"/>
+          <FieldRef field="Diametro efectivo para el 60%"/>
         </DerivedField>
       </NeuralInput>
       <NeuralInput id="0,9">
         <DerivedField optype="continuous" dataType="double">
-          <FieldRef field="Diámetro efectivo para el 10%"/>
+          <FieldRef field="Diametro efectivo para el 10%"/>
         </DerivedField>
       </NeuralInput>
       <NeuralInput id="0,10">
         <DerivedField optype="continuous" dataType="double">
-          <FieldRef field="Límite líquido"/>
+          <FieldRef field="Limite liquido"/>
         </DerivedField>
       </NeuralInput>
       <NeuralInput id="0,11">

@@ -55,7 +55,7 @@
             </Pane>
             <Pane fx:id="ManagementButton" layoutY="311.0" onMouseClicked="#showManagementPane" prefHeight="59.0" prefWidth="200.0" styleClass="buttonsBar">
                <children>
-                  <Label fx:id="GESTIONAR" layoutX="58.0" layoutY="19.0" text="GESTIONAR">
+                  <Label fx:id="GESTIONAR" layoutX="20.0" layoutY="19.0" text="GESTIONAR FÓRMULAS">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -88,7 +88,7 @@
             <Pane layoutX="1.0" layoutY="14.0" prefHeight="131.0" prefWidth="200.0" styleClass="logo" />
             <Pane id="ChangingLanguage" fx:id="LanguageButton" layoutX="10.0" layoutY="730.0" prefHeight="30.0" prefWidth="74.0" styleClass="LanguageButtonsBar">
                <children>
-                  <Label fx:id="changingLanguageButton" layoutX="23.0" layoutY="4.0" onMouseClicked="#showLangPane" prefHeight="20.0" prefWidth="41.0" text="ENG" textFill="#000000f3">
+                  <Label fx:id="changingLanguageButton" layoutX="23.0" layoutY="4.0" onMouseClicked="#showLangPane" prefHeight="20.0" prefWidth="41.0" text="ESP" textFill="#000000f3">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -99,7 +99,7 @@
                <children>
                   <SplitPane dividerPositions="0.5" orientation="VERTICAL" prefHeight="87.0" prefWidth="189.0">
                      <items>
-                        <AnchorPane id="EngLanguage" minHeight="0.0" minWidth="0.0" onMouseClicked="#HacerCambio" prefHeight="55.0" prefWidth="203.0" styleClass="buttonsBar">
+                        <AnchorPane fx:id="EngLanguage" id="EngLanguage" minHeight="0.0" minWidth="0.0"  prefHeight="55.0" prefWidth="203.0" styleClass="buttonsBar">
                            <children>
                               <Label fx:id="btn_eng" layoutX="8.0" prefHeight="30.0" prefWidth="179.0" text="ENG   Inglés(Estados Unidos)" textAlignment="CENTER" />
                            </children>
@@ -107,7 +107,7 @@
                               <Insets bottom="8.0" />
                            </opaqueInsets>
                         </AnchorPane>
-                        <AnchorPane id="EspLanguage" minHeight="0.0" minWidth="0.0" onMouseClicked="#HacerCambio" prefHeight="55.0" prefWidth="187.0" styleClass="buttonsBar">
+                        <AnchorPane fx:id="EspLanguage" id="EspLanguage" minHeight="0.0" minWidth="0.0" prefHeight="55.0" prefWidth="187.0" styleClass="buttonsBar">
                            <children>
                               <Label fx:id="btn_esp" layoutX="8.0" prefHeight="39.0" prefWidth="179.0" text="ESP  Español (España)" />
                            </children>

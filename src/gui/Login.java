@@ -8,6 +8,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 
+import static util.FilesManagement.SetearTextos;
+
 public class Login {
     static Login window;
     @FXML Label Para_acceder_a_esta_parte_de_la_aplicacion_necesita_credenciales;
@@ -44,6 +46,7 @@ public class Login {
 
     public void initialize() {
         window = this;
+        SetearTextos(this.anchorLogin.getChildren(),Menu.getIdioma_actual());
 
     }
 

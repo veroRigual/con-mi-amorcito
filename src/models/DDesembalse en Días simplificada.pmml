@@ -4,16 +4,16 @@
     <Application name="KNIME" version="4.7.1"/>
   </Header>
   <DataDictionary numberOfFields="7">
-    <DataField name="Altura de terraplén" optype="continuous" dataType="double">
+    <DataField name="Altura de terraplen" optype="continuous" dataType="double">
       <Interval closure="closedClosed" leftMargin="15.0" rightMargin="40.0"/>
     </DataField>
-    <DataField name="Peso específico" optype="continuous" dataType="double">
+    <DataField name="Peso especifico" optype="continuous" dataType="double">
       <Interval closure="closedClosed" leftMargin="16.5823" rightMargin="19.3898"/>
     </DataField>
-    <DataField name="Cohesión" optype="continuous" dataType="double">
+    <DataField name="Cohesion" optype="continuous" dataType="double">
       <Interval closure="closedClosed" leftMargin="13.8418" rightMargin="67.4528"/>
     </DataField>
-    <DataField name="Ángulo de fricción interna" optype="continuous" dataType="double">
+    <DataField name="Angulo de friccion interna" optype="continuous" dataType="double">
       <Interval closure="closedClosed" leftMargin="12.5548" rightMargin="29.4595"/>
     </DataField>
     <DataField name="Velocidad" optype="continuous" dataType="double">
@@ -28,10 +28,10 @@
   </DataDictionary>
   <NeuralNetwork functionName="regression" algorithmName="RProp" activationFunction="logistic" normalizationMethod="none" width="0.0" numberOfLayers="3">
     <MiningSchema>
-      <MiningField name="Altura de terraplén" invalidValueTreatment="asIs"/>
-      <MiningField name="Peso específico" invalidValueTreatment="asIs"/>
-      <MiningField name="Cohesión" invalidValueTreatment="asIs"/>
-      <MiningField name="Ángulo de fricción interna" invalidValueTreatment="asIs"/>
+      <MiningField name="Altura de terraplen" invalidValueTreatment="asIs"/>
+      <MiningField name="Peso especifico" invalidValueTreatment="asIs"/>
+      <MiningField name="Cohesion" invalidValueTreatment="asIs"/>
+      <MiningField name="Angulo de friccion interna" invalidValueTreatment="asIs"/>
       <MiningField name="Velocidad" invalidValueTreatment="asIs"/>
       <MiningField name="Tiempo" invalidValueTreatment="asIs"/>
       <MiningField name="FS" invalidValueTreatment="asIs" usageType="target"/>
@@ -39,22 +39,22 @@
     <NeuralInputs numberOfInputs="6">
       <NeuralInput id="0,0">
         <DerivedField optype="continuous" dataType="double">
-          <FieldRef field="Altura de terraplén"/>
+          <FieldRef field="Altura de terraplen"/>
         </DerivedField>
       </NeuralInput>
       <NeuralInput id="0,1">
         <DerivedField optype="continuous" dataType="double">
-          <FieldRef field="Peso específico"/>
+          <FieldRef field="Peso especifico"/>
         </DerivedField>
       </NeuralInput>
       <NeuralInput id="0,2">
         <DerivedField optype="continuous" dataType="double">
-          <FieldRef field="Cohesión"/>
+          <FieldRef field="Cohesion"/>
         </DerivedField>
       </NeuralInput>
       <NeuralInput id="0,3">
         <DerivedField optype="continuous" dataType="double">
-          <FieldRef field="Ángulo de fricción interna"/>
+          <FieldRef field="Angulo de friccion interna"/>
         </DerivedField>
       </NeuralInput>
       <NeuralInput id="0,4">

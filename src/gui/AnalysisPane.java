@@ -24,15 +24,17 @@ import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.layout.AnchorPane;
 import util.Phenomenon;
 
+import static util.FilesManagement.SetearTextos;
+
 public class AnalysisPane {
-    
+
     private static AnalysisPane window;
 
     @FXML private AnchorPane analysisAnchor;
-    @FXML private ComboBox<String> comboVariable;
+    @FXML  ComboBox<String> comboVariable;
     @FXML private Spinner<Double> passedSpinner;
 
-    @FXML Button acept;
+    @FXML Button Aceptar;
 
     private ArrayList<ValueDTO> l;
 
@@ -41,8 +43,13 @@ public class AnalysisPane {
     }
 
     public void initialize(){
+        window = this;
         l = new ArrayList<>(securityFactorPane.getInstance().getTable().getItems());
         loadCombo();
+        SetearTextos(this.analysisAnchor.getChildren(),Menu.getIdioma_actual());
+        if(Menu.getIdioma_actual().equalsIgnoreCase("ESPAÑOL"))
+            AnalysisPane.getInstance().comboVariable.setPromptText("Seleccionar");
+        else AnalysisPane.getInstance().comboVariable.setPromptText("Select");
     }
 
     public void loadCombo(){
@@ -57,7 +64,7 @@ public class AnalysisPane {
 
     public void selectCombo(){
         loadSpinner();
-        acept.setDisable(false);
+        Aceptar.setDisable(false);
         passedSpinner.setDisable(false);
     }
 
@@ -72,12 +79,17 @@ public class AnalysisPane {
         securityFactorPane.getInstance().setVariableAnalysis(aux);
         securityFactorPane.getInstance().loadSpinnerSpeed(aux, passedSpinner.getValue());
         securityFactorPane.getInstance().getAnchorSFP().getChildren().remove(analysisAnchor);
-        securityFactorPane.getInstance().getCleanBtn().setDisable(false);
+        securityFactorPane.getInstance().getLimpiar_grafico().setDisable(false);
     }
 
     public void cancelBtn(){
         securityFactorPane.getInstance().getAnchorSFP().getChildren().remove(analysisAnchor);
     }
+
+    public Pane getAnalysisAnchor() {
+        return analysisAnchor;
+    }
+
     public List<Node> getSonsAnalysisPane(){
         return analysisAnchor.getChildren();
     }

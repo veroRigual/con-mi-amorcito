@@ -6,6 +6,8 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import util.FilesManagement;
 
+import static util.FilesManagement.SetearTextos;
+
 public class AboutPane {
     static AboutPane helpSFP;
     @FXML  AnchorPane anchorSFP;
@@ -18,7 +20,7 @@ public class AboutPane {
 
     public void initialize() {
         helpSFP = this;
-
+SetearTextos(this.anchorSFP.getChildren(),Menu.getIdioma_actual());
     }
 
 }

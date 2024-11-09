@@ -10,7 +10,7 @@ public class ModelLoader {
     public static ArrayList<Model> loadModels(){
         LinkedList<Model> list = new LinkedList<Model>();
 
-        File folder = new File(new File("").getAbsolutePath()+ "/src/models");
+        File folder = new File(new File("")+ "./models");
         File[] files = folder.listFiles();
 
         if (files != null) {

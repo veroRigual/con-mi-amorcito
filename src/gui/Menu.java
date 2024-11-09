@@ -28,7 +28,7 @@ import logic.DamSystem;
 import static util.FilesManagement.*;
 
 public class Menu {
-
+private static String idioma_actual ="ESPAÑOL";
     static Menu window;
     @FXML Pane panel_opciones;
 
@@ -45,11 +45,26 @@ public class Menu {
     @FXML Label AYUDA;
     @FXML Label SALIR;
     @FXML Label changingLanguageButton;
+    @FXML AnchorPane EspLanguage;
+    @FXML AnchorPane EngLanguage;
+
 
     public void initialize(){
         window = this;
         showHelpPane();
+        EspLanguage.onMouseClickedProperty().set((MouseEvent event)->{
+           idioma_actual= "ESPAÑOL";
+            HacerCambio(idioma_actual);
+        });
+        EngLanguage.onMouseClickedProperty().set((MouseEvent event)->{
+            idioma_actual= "ENGLISH";
+            HacerCambio(idioma_actual);
+        });
         //showSecurityFactorPane();
+    }
+
+    public static String getIdioma_actual() {
+        return idioma_actual;
     }
 
     public static Menu getWindow(){
@@ -136,26 +151,61 @@ public class Menu {
     public void hideLangPane(){
         languageOptionsPane.setVisible(false);
     }
-    public  void HacerCambio(){
+    public  void HacerCambio(String idioma){
         hideLangPane();
       if(AboutPane.getInstance()!= null){
-      SetearTextos(AboutPane.getInstance().anchorSFP.getChildren(), "ENGLISH");
-          SetearTextosIndependiente(this.FACTOR_DE_SEGURIDAD,"ENGLISH");
-          SetearTextosIndependiente(this.GESTIONAR,"ENGLISH");
-          SetearTextosIndependiente(this.AYUDA,"ENGLISH");
-          SetearTextosIndependiente(this.SALIR,"ENGLISH");}
-        SetearTextosIndependiente(this.changingLanguageButton,"ENGLISH");
+      SetearTextos(AboutPane.getInstance().anchorSFP.getChildren(), idioma);
+          SetearTextosIndependiente(this.FACTOR_DE_SEGURIDAD,idioma);
+          SetearTextosIndependiente(this.GESTIONAR,idioma);
+          SetearTextosIndependiente(this.AYUDA,idioma);
+          SetearTextosIndependiente(this.SALIR,idioma);}
+        SetearTextosIndependiente(this.changingLanguageButton,idioma);
        if(Login.getInstance()!= null) {
-            SetearTextos(Login.getInstance().anchorLogin.getChildren(), "ENGLISH");}
+            SetearTextos(Login.getInstance().anchorLogin.getChildren(), idioma);}
         if(ManagementPane.getInstance()!= null) {
-        SetearTextos(ManagementPane.getInstance().getSonsManagementPane(), "ENGLISH");
+        SetearTextos(ManagementPane.getInstance().getSonsManagementPane(), idioma);
+
+        if(idioma.equalsIgnoreCase("ESPAÑOL")){
+        ManagementPane.getInstance().Nombre.setText("Nombre");
+        ManagementPane.getInstance().Expresion.setText("Expresión");
+        ManagementPane.getInstance().variableTable.setPlaceholder(new Label("Tabla sin contenido"));
+
+        ManagementPane.getInstance().update();
         }
+        else {
+            ManagementPane.getInstance().Nombre.setText("Name");
+            ManagementPane.getInstance().Expresion.setText("Expression");
+            ManagementPane.getInstance().variableTable.setPlaceholder(new Label("No content in table"));
+            ManagementPane.getInstance().updateEng();}
+        }
+
       if(securityFactorPane.getInstance()!= null) {
-           SetearTextos (securityFactorPane.getInstance().getAnchorSFP().getChildren(), "ENGLISH");
-        }
+           SetearTextos (securityFactorPane.getInstance().getAnchorSFP().getChildren(), idioma);
+          if(idioma.equalsIgnoreCase("ESPAÑOL")){
+             securityFactorPane.getInstance().valueColumn.setText("Valor");
+              securityFactorPane.getInstance().valueTable.setPlaceholder(new Label("Tabla sin contenido"));
+              securityFactorPane.getInstance().seleccionarr.setPromptText("Seleccionar");
+              securityFactorPane.getInstance().seleccionar.setPromptText("Seleccionar");
+              securityFactorPane.getInstance().formulaBox.setPromptText("Seleccionar");
+              securityFactorPane.getInstance().update();
+              securityFactorPane.getInstance().loadComboBoxes();
+          }
+          else {
+              securityFactorPane.getInstance().valueColumn.setText("Value");
+              securityFactorPane.getInstance().valueTable.setPlaceholder(new Label("No content in table"));
+              securityFactorPane.getInstance().seleccionar.setPromptText("Select");
+              securityFactorPane.getInstance().seleccionarr.setPromptText("Select");
+              securityFactorPane.getInstance().formulaBox.setPromptText("Select");
+              securityFactorPane.getInstance().updateEng();
+          securityFactorPane.getInstance().loadComboBoxes();}
+      }
+
        if(AnalysisPane.getInstance()!= null) {
-            SetearTextos (AnalysisPane.getInstance().getSonsAnalysisPane(), "ENGLISH");
-        }
+            SetearTextos (AnalysisPane.getInstance().getSonsAnalysisPane(), idioma);
+           if(Menu.getIdioma_actual().equalsIgnoreCase("ESPAÑOL"))
+               AnalysisPane.getInstance().comboVariable.setPromptText("Seleccionar");
+           else AnalysisPane.getInstance().comboVariable.setPromptText("Select");
+       }
     }}
 
     //REVISAR
